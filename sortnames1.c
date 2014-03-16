@@ -3,8 +3,8 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (ue1_names.txt), to be found in the textfiles directory on the github repository)
-        line by line; lines can be at most 256 characters long, line break and '\0' included.
+    -   Reads from a specific file (ue1_names.txt) line by line;
+        lines can be at most 256 characters long, line break and '\0' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
     -   Does Bubble Sort:
@@ -21,12 +21,11 @@ What needs to be implemented:
     -   Reading the sorted list into the file
     -   Menu for chosing which file to read from/to
     -   (More) Test cases
-    -   Generalising the loops used for readding letters 2-end to work on whole word
-    -   Cleaning up code; moving things into functions, reducing repetitive code etc;
-        This is not a priority per se (!), but the code is hard to parse the way it is now.
+    -   Lower priority: cleaning up code; moving things into functions, reducing repetitive code etc;
     -   Optimise Bubble Sort (see slides on sorting alg. from first semester)
+    -   I'm getting warning about using MS-DOS style paths, need look into that, test program on
+        other computer
     -   ...
-
 */
 
 #include <stdio.h>
@@ -39,6 +38,22 @@ struct node{
     struct node *next;
 };
 
+/*
+    Gave the struct pointers the same names in the function as the ones in main
+    because anything else would just get confusing.
+*/
+void swap_head_and_next(struct node *down_move, struct node *up_move)
+{
+    down_move->next=up_move->next;
+    up_move->next=down_move;
+}
+
+void swap_any_other_two(struct node *before_swap, struct node *down_move, struct node *up_move)
+{
+    before_swap->next=up_move;
+    down_move->next=up_move->next;
+    up_move->next=down_move;
+}
 
 
 int main()
@@ -87,9 +102,9 @@ int main()
     (meaning, the next element is downwards, not to the right).
 */
 
-    struct node *before_swap;   // The node before the two that might get swapped
-    struct node *down_move;     // The node that will be moved down the list if there's a swap
-    struct node *up_move;       // The node that will be moved up the list if there's a swap
+    struct node *before_swap;   // Will be the node before the two that might get swapped
+    struct node *down_move;     // Will be the the node that gets moved down the list if there's a swap
+    struct node *up_move;       // Will be the the node that gets moved up the list if there's a swap
 
 
         /*
@@ -105,35 +120,23 @@ int main()
         down_move=head;
         up_move=head->next;
 
-        if ((down_move->name[0]) >= (up_move->name[0]))
+        for(int i=0; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
         {
-            if( (down_move->name[0]) > (up_move->name[0]) )
+            if ((down_move->name[i]) >= (up_move->name[i]))
             {
-                down_move->next=up_move->next;
-                up_move->next=down_move;
-                head=up_move;
-            }
-            else    //if the first letters are the same, look at the next letter
-            {
-                for(int i=1; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
-                {
-                    if( (down_move->name[i]) == (up_move->name[i]) )
-                    {
-                        i++;
-                    }
-                    else
-                        if ((down_move->name[i]) > (up_move->name[i]))
-                        {
-                            down_move->next=up_move->next;
-                            up_move->next=down_move;
-                            head=up_move;
-                            break;
-                        }
-                        else break;
+				if( (down_move->name[i]) == (up_move->name[i]) )
+				{
+					i++;
+				}
+                else
+				{
+					swap_head_and_next(down_move,up_move); // function that swaps the pointers around
+					head=up_move;
+					break;
                 }
             }
+            else break;
         }
-
         // Now for comparisons of elements after the head:
         before_swap=head;
         down_move=head->next;
@@ -143,41 +146,28 @@ int main()
 
         while (up_move != NULL) // once up_move has reached NULL we're done
         {
-        if ((down_move->name[0]) >= (up_move->name[0]))
-        {
-            if( (down_move->name[0]) > (up_move->name[0]) )
+            for(int i=0; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
             {
-                before_swap->next=up_move;
-                down_move->next=up_move->next;
-                up_move->next=down_move;
-            }
-            else    //if the first letters are the same, look at the next letter
-            {
-                for(int i=1; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
+                if ((down_move->name[i]) >= (up_move->name[i]))
                 {
                     if( (down_move->name[i]) == (up_move->name[i]) )
                     {
                         i++;
                     }
                     else
-                        if ((down_move->name[i]) > (up_move->name[i]))
-                        {
-                            before_swap->next=up_move;
-                            down_move->next=up_move->next;
-                            up_move->next=down_move;
-                            break;
-                        }
-                        else break;
-                }
+					{
+						swap_any_other_two(before_swap,down_move,up_move);
+						break;
+					}
+				}
+                else break;
             }
-        }
             /* Now everything gets moved one node down*/
             up_move=before_swap->next->next->next;
             down_move=before_swap->next->next;
             before_swap=before_swap->next;
-        }
-    }
-
+		}
+	}
 
 // Printing the list
 // This is just for checking if the created list looks as expected

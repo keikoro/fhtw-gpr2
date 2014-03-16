@@ -3,27 +3,26 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (ue1_names3.txt, to be found in the textfiles directory on the github repository)
+    -   Reads from a specific file (ue1_namesSameFirstLetter.txt), to be found in the textfiles directory on the github repository)
         line by line; lines can be at most 256 characters long, line break and '\0' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
-    -   Does a first run of Bubble Sort:
-            By first letter only
+    -   Does Bubble Sort:
+            By first and second letter only, manually (not loop for sorting by second letter after the first)
             By ASCII code number only
-            Irgnores first and last word of list
     -   Prints the list onto the screen
 
 What needs to be implemented:
-    -   Next runs of Bubble Sort (unless we want to use a different sorting method, which might be better;
-            I explained why I picked this one in the program)
-    -   Taking the first and last line on the list into account while sorting
-    -   Sorting by second, third etc letter
+    -   Sorting by all letters; automatising jumping to the next letter
+            if the previous letters are the same
+    -   Case where the list is shorther than 3 elements
     -   Taking into account upper and lower case (see exercice instructions)
     -   Taking into account line lenght (all other things being equal short word before longer word)
     -   Error cases
     -   Reading the sorted list into the file
     -   Menu for chosing which file to read from/to
     -   Test cases
+    -   Lower priority: move things from main into function, reduce repetitive code, etc.
     -   ...
 
 */
@@ -39,13 +38,14 @@ struct node{
 };
 
 
+
 int main()
 {
 
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_names.txt", "r");
+    F1 = fopen("ue1_namesSameFirstLetter.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -76,9 +76,9 @@ int main()
 
 
 
-/*  Implementing Bubble Sort
-    (picked Bubble Sort because there's not as much going through the whole list,
-    we only ever look at the next element).
+/*  Implementing Bubble Sort.
+    (Picked Bubble Sort because there's not as much going through the whole list,
+    we only ever look at the next element.)
 
     Note about the vocabulary I use in the comments (and variable names):
     I'm going to assume the list goes top to bottom rather than left to right
@@ -93,12 +93,9 @@ int main()
         /*
             Bubble Sort.
             Doesn't work if list doesn't have at least 3 elements.
-            Doesn't work for the last two elements.
         */
-
     for(;node_counter > 0; node_counter--)
     {
-        int first_run = 1;
         /* The following is only for the swap of head and head->mext
             Ideally, harmonizse this somehow later so the distinction is
             only necessary for a small part of the program or not at all
@@ -106,41 +103,58 @@ int main()
         down_move=head;
         up_move=head->next;
 
-        if ((down_move->name[0]) > (up_move->name[0]))
+        if ((down_move->name[0]) >= (up_move->name[0]))
         {
-            down_move->next=up_move->next;
-            up_move->next=down_move;
-            head=up_move;
+            if( (down_move->name[0]) > (up_move->name[0]) )
+            {
+                down_move->next=up_move->next;
+                up_move->next=down_move;
+                head=up_move;
+            }
+            else    //if the first letters are the same, look at the next letter
+            {
+                if( (down_move->name[1]) > (up_move->name[1]) )
+                {
+                    down_move->next=up_move->next;
+                    up_move->next=down_move;
+                    head=up_move;
+                }
+            }
         }
 
         // Now for comparisons of elements after the head:
         before_swap=head;
         down_move=head->next;
         up_move=down_move->next;
-            /* move_down and move_up are the next two element of
+            /* move_down and move_up are the next two elements of
                 the list after the head*/
 
         while (up_move != NULL) // once up_move has reached NULL we're done
         {
-            if ((down_move->name[0]) > (up_move->name[0]))
-                /* Comparing only the first letter for now. Will have
-                    to implement loop for going through whole word
-                    later.
-                */
+        if ((down_move->name[0]) >= (up_move->name[0]))
+        {
+            if( (down_move->name[0]) > (up_move->name[0]) )
             {
                 before_swap->next=up_move;
                 down_move->next=up_move->next;
                 up_move->next=down_move;
             }
+            else
+            {
+                if((down_move->name[1]) > (up_move->name[1]))
+                {
+                    before_swap->next=up_move;
+                    down_move->next=up_move->next;
+                    up_move->next=down_move;
+                }
+            }
+        }
             /* Now everything gets moved one node down*/
             up_move=before_swap->next->next->next;
             down_move=before_swap->next->next;
             before_swap=before_swap->next;
         }
     }
-
-
-
 
 
 // Printing the list

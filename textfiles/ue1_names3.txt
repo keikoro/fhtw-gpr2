@@ -1,4 +1,3 @@
-_last list element
 Isabella
 Dala
 Anna
@@ -8,4 +7,3 @@ Bert
 Caroline
 Elisabth
 Gabriel
-_first list element

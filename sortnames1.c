@@ -1,5 +1,31 @@
 /*
-Reads from file ue1_names.txt, prints the content on the screen.
+
+GPR2, Aufgabe 1.
+
+What the programm does right now:
+    -   Reads from a specific file (ue1_names3.txt, to be found in the textfiles directory on the github repository)
+        line by line; lines can be at most 256 characters long, line break and '\0' included.
+    -   Puts every line into the node of a linked list (new elements are added at the start of the list)
+    -   Counts the number of elements in the list
+    -   Does a first run of Bubble Sort:
+            By first letter only
+            By ASCII code number only
+            Irgnores first and last word of list
+    -   Print the list onto the screen
+
+What needs to be implemented:
+    -   Next runs of Bubble Sort (unless we want to use a different sorting method, which might be better;
+            I explained why I picked this one in the program)
+    -   Taking the first and last line on the list into account while sorting
+    -   Sorting by second, third etc letter
+    -   Taking into account upper and lower case (see exercice instructions)
+    -   Taking into account line lenght (all other things being equal short word before longer word)
+    -   Error cases
+    -   Reading the sorted list into the file
+    -   Menu for chosing which file to read from/to
+    -   Test cases
+    -   ...
+
 */
 
 #include <stdio.h>
@@ -19,10 +45,15 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_names.txt", "r");
+    F1 = fopen("ue1_names3.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
+        /*  Do not forget to return the counter to zero for
+            every new document once we want to sort
+            several documents in one run of the programm!
+            Btw, would love to do this without a counter, but no idea if it's possible and how.
+        */
 
     while (fgets(current_line, NAMENSLAENGE, F1))  /*   reads each line, including the linebreak
                                                         into the string*/
@@ -31,18 +62,73 @@ int main()
         strcpy(node_for_one_name->name, current_line); // copy the current line into a list node
 
     // Add the current node at the start of the list
-        if (head!=NULL)
+        if (head != NULL)
         {
             node_for_one_name->next=head;
         }
         head=node_for_one_name;
+
     }
     fclose(F1);
 
-// Printing the current list (should probably remove this before reading in a _really_ long file)
-// This is just for easy checking if the created list looks as expected
-// Should move this into a function
-    struct node *traversenode1;
+
+
+
+/*  Implementing Bubble Sort
+    (picked Bubble Sort because there's not as much going through the whole list,
+    we only ever look at the next element).
+
+    Note about the vocabulary I use in the comments (and variable names):
+    I'm going to assume the list goes top to bottom rather than left to right
+    (meaning, the next element is downwards, not to the right).
+*/
+
+    struct node *before_swap;   // The node before the two that might get swapped
+    struct node *down_move;     // The node that will be moved down the list if there's a swap
+    struct node *up_move;       // The node that will be moved up the list if there's a swap
+
+
+// The following is the first run of Bubble Sort.
+        /* for the first run, I define the node before the two to be swapped
+            (node 2 & 3 on the first run) to be the start of the list.
+            I'll have to create a special case for swapping
+            node 1 & 2.
+            Doesn't work if list doesn't have at least 3 elements.
+        */
+    before_swap=head;
+    down_move=head->next;
+    up_move=down_move->next;
+        /* move_down and move_up are the next two element of
+            the list after the head*/
+
+        while (up_move->next != NULL) // Will have to deal with the end of the list later
+                                        // as this stop the loop early
+        {
+            if ((down_move->name[0]) > (up_move->name[0]))
+                /* Comparing only the first letter for now. Will have
+                    to implement loop for going through whole word
+                    later.
+                */
+            {
+                before_swap->next=up_move;
+                down_move->next=up_move->next;
+                up_move->next=down_move;
+            }
+            /* Now everything gets moved one node down*/
+            up_move=before_swap->next->next->next;
+            down_move=before_swap->next->next;
+            before_swap=before_swap->next;
+        }
+
+
+
+
+
+// Printing the list
+// This is just for checking if the created list looks as expected
+// Will be removed when the list is printed into another file instead
+
+struct node *traversenode1;
     traversenode1=head;
     while(traversenode1!=NULL)
     {
@@ -50,7 +136,7 @@ int main()
         traversenode1=traversenode1->next;
     }
 
-// Deleting the list; should also be moved into a function later
+// Deleting the list; should be moved into a function later
     struct node *traversenode2;
     while(head!=NULL)
     {
@@ -58,7 +144,5 @@ int main()
         head=traversenode2->next;
         free(traversenode2);
     }
-
-
     return 0;
 }

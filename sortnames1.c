@@ -3,26 +3,28 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (ue1_namesSameFirstLetter.txt), to be found in the textfiles directory on the github repository)
+    -   Reads from a specific file (ue1_names.txt), to be found in the textfiles directory on the github repository)
         line by line; lines can be at most 256 characters long, line break and '\0' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
     -   Does Bubble Sort:
-            By first and second letter only, manually (not loop for sorting by second letter after the first)
+            Seems to do it by whole word (whee!!!); still have to test this out some more
             By ASCII code number only
     -   Prints the list onto the screen
 
 What needs to be implemented:
-    -   Sorting by all letters; automatising jumping to the next letter
-            if the previous letters are the same
     -   Case where the list is shorther than 3 elements
     -   Taking into account upper and lower case (see exercice instructions)
     -   Taking into account line lenght (all other things being equal short word before longer word)
+        (actually, I think it already does that, but I didn't specifically look into it)
     -   Error cases
     -   Reading the sorted list into the file
     -   Menu for chosing which file to read from/to
-    -   Test cases
-    -   Lower priority: move things from main into function, reduce repetitive code, etc.
+    -   (More) Test cases
+    -   Generalising the loops used for readding letters 2-end to work on whole word
+    -   Cleaning up code; moving things into functions, reducing repetitive code etc;
+        This is not a priority per se (!), but the code is hard to parse the way it is now.
+    -   Optimise Bubble Sort (see slides on sorting alg. from first semester)
     -   ...
 
 */
@@ -45,7 +47,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_namesSameFirstLetter.txt", "r");
+    F1 = fopen("ue1_names.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -113,11 +115,21 @@ int main()
             }
             else    //if the first letters are the same, look at the next letter
             {
-                if( (down_move->name[1]) > (up_move->name[1]) )
+                for(int i=1; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
                 {
-                    down_move->next=up_move->next;
-                    up_move->next=down_move;
-                    head=up_move;
+                    if( (down_move->name[i]) == (up_move->name[i]) )
+                    {
+                        i++;
+                    }
+                    else
+                        if ((down_move->name[i]) > (up_move->name[i]))
+                        {
+                            down_move->next=up_move->next;
+                            up_move->next=down_move;
+                            head=up_move;
+                            break;
+                        }
+                        else break;
                 }
             }
         }
@@ -139,13 +151,23 @@ int main()
                 down_move->next=up_move->next;
                 up_move->next=down_move;
             }
-            else
+            else    //if the first letters are the same, look at the next letter
             {
-                if((down_move->name[1]) > (up_move->name[1]))
+                for(int i=1; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
                 {
-                    before_swap->next=up_move;
-                    down_move->next=up_move->next;
-                    up_move->next=down_move;
+                    if( (down_move->name[i]) == (up_move->name[i]) )
+                    {
+                        i++;
+                    }
+                    else
+                        if ((down_move->name[i]) > (up_move->name[i]))
+                        {
+                            before_swap->next=up_move;
+                            down_move->next=up_move->next;
+                            up_move->next=down_move;
+                            break;
+                        }
+                        else break;
                 }
             }
         }

@@ -11,7 +11,7 @@ What the programm does right now:
             By first letter only
             By ASCII code number only
             Irgnores first and last word of list
-    -   Print the list onto the screen
+    -   Prints the list onto the screen
 
 What needs to be implemented:
     -   Next runs of Bubble Sort (unless we want to use a different sorting method, which might be better;
@@ -49,6 +49,7 @@ int main()
 
     struct node *head = NULL;
     struct node *node_for_one_name;
+    int node_counter=0;
         /*  Do not forget to return the counter to zero for
             every new document once we want to sort
             several documents in one run of the programm!
@@ -67,6 +68,7 @@ int main()
             node_for_one_name->next=head;
         }
         head=node_for_one_name;
+        node_counter++;
 
     }
     fclose(F1);
@@ -128,13 +130,16 @@ int main()
 // This is just for checking if the created list looks as expected
 // Will be removed when the list is printed into another file instead
 
-struct node *traversenode1;
-    traversenode1=head;
-    while(traversenode1!=NULL)
-    {
-        printf("%s", traversenode1->name);
-        traversenode1=traversenode1->next;
-    }
+    struct node *traversenode1;
+        traversenode1=head;
+        while(traversenode1!=NULL)
+        {
+            printf("%s", traversenode1->name);
+            traversenode1=traversenode1->next;
+        }
+
+    printf ("Number of elements in list: %d", node_counter);
+
 
 // Deleting the list; should be moved into a function later
     struct node *traversenode2;

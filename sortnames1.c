@@ -97,11 +97,14 @@ int main()
             node 1 & 2.
             Doesn't work if list doesn't have at least 3 elements.
         */
-    before_swap=head;
-    down_move=head->next;
-    up_move=down_move->next;
-        /* move_down and move_up are the next two element of
-            the list after the head*/
+
+    for(;node_counter-2 > 0; node_counter--)
+    {
+        before_swap=head;
+        down_move=head->next;
+        up_move=down_move->next;
+            /* move_down and move_up are the next two element of
+                the list after the head*/
 
         while (up_move->next != NULL) // Will have to deal with the end of the list later
                                         // as this stop the loop early
@@ -121,6 +124,7 @@ int main()
             down_move=before_swap->next->next;
             before_swap=before_swap->next;
         }
+    }
 
 
 
@@ -131,12 +135,12 @@ int main()
 // Will be removed when the list is printed into another file instead
 
     struct node *traversenode1;
-        traversenode1=head;
-        while(traversenode1!=NULL)
-        {
-            printf("%s", traversenode1->name);
-            traversenode1=traversenode1->next;
-        }
+    traversenode1=head;
+    while(traversenode1!=NULL)
+    {
+        printf("%s", traversenode1->name);
+        traversenode1=traversenode1->next;
+    }
 
     printf ("Number of elements in list: %d", node_counter);
 

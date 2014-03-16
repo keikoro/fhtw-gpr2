@@ -3,27 +3,27 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (ue1_names.txt) line by line;
+    -   Reads from a specific file (ue1_names2.txt) line by line;
         lines can be at most 256 characters long, line break and '\0' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
-    -   Does Bubble Sort:
-            Seems to do it by whole word (whee!!!); still have to test this out some more
-            By ASCII code number only
+    -   Does Bubble Sort; started dealing with lower/upper case rules into account,
+		but still some problems
     -   Prints the list onto the screen
 
-What needs to be implemented:
+What needs to be implemented/fixed:
+    -   Fix the lowercase/uppercase problem
     -   Case where the list is shorther than 3 elements
-    -   Taking into account upper and lower case (see exercice instructions)
-    -   Taking into account line lenght (all other things being equal short word before longer word)
-        (actually, I think it already does that, but I didn't specifically look into it)
-    -   Error cases
+    -   Programm only works perfectly if there's a line-break at the end of
+        the document. Fix that.
+    -   Error cases + messages
     -   Reading the sorted list into the file
     -   Menu for chosing which file to read from/to
     -   (More) Test cases
-    -   Lower priority: cleaning up code; moving things into functions, reducing repetitive code etc;
+    -   Testing, and if necessarily fixing the sorting; special cases I haven't thought of yet?
+    -   Code cleanup; moving things into functions, reducing repetitive code, simplifying loops etc
     -   Optimise Bubble Sort (see slides on sorting alg. from first semester)
-    -   I'm getting warning about using MS-DOS style paths, need look into that, test program on
+    -   I'm getting a warning about using MS-DOS style paths, need to look into that, test program on
         other computer
     -   ...
 */
@@ -31,6 +31,7 @@ What needs to be implemented:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #define NAMENSLAENGE 256
 
 struct node{
@@ -62,7 +63,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_names.txt", "r");
+    F1 = fopen("ue1_namesLowerUpper.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -122,11 +123,17 @@ int main()
 
         for(int i=0; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
         {
-            if ((down_move->name[i]) >= (up_move->name[i]))
+            if ( (tolower(down_move->name[i]) ) >= (tolower(up_move->name[i])))
             {
-				if( (down_move->name[i]) == (up_move->name[i]) )
+				if( (tolower(down_move->name[i])) == (tolower(up_move->name[i])) )
 				{
-					i++;
+					if(down_move->name[i] < up_move->name[i])
+                    {
+                        swap_head_and_next(down_move,up_move); // function that swaps the pointers around
+                        head=up_move;
+                        break;
+                    }
+                    i++;
 				}
                 else
 				{
@@ -148,10 +155,15 @@ int main()
         {
             for(int i=0; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
             {
-                if ((down_move->name[i]) >= (up_move->name[i]))
+                if ((tolower(down_move->name[i])) >= (tolower(up_move->name[i])))
                 {
-                    if( (down_move->name[i]) == (up_move->name[i]) )
+                    if( (tolower(down_move->name[i])) == (tolower(up_move->name[i])) )
                     {
+                        if(down_move->name[i] < up_move->name[i])
+                        {
+                            swap_any_other_two(before_swap,down_move,up_move);
+                            break;
+                        }
                         i++;
                     }
                     else

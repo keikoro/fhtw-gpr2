@@ -7,12 +7,10 @@ What the programm does right now:
         lines can be at most 256 characters long, line break and '\0' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
-    -   Does Bubble Sort; started dealing with lower/upper case rules into account,
-		but still some problems
+    -   Does Bubble Sort of the list
     -   Prints the list onto the screen
 
-What needs to be implemented/fixed:
-    -   Fix the lowercase/uppercase problem
+To Do/Fix/Work on:
     -   Case where the list is shorther than 3 elements
     -   Programm only works perfectly if there's a line-break at the end of
         the document. Fix that.
@@ -21,7 +19,8 @@ What needs to be implemented/fixed:
     -   Menu for chosing which file to read from/to
     -   (More) Test cases
     -   Testing, and if necessarily fixing the sorting; special cases I haven't thought of yet?
-    -   Code cleanup; moving things into functions, reducing repetitive code, simplifying loops etc
+    -   Code cleanup; moving things into functions, reducing repetitive code,
+         simplifying loops and if/else branched etc
     -   Optimise Bubble Sort (see slides on sorting alg. from first semester)
     -   I'm getting a warning about using MS-DOS style paths, need to look into that, test program on
         other computer
@@ -63,7 +62,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_namesLowerUpper.txt", "r");
+    F1 = fopen("ue1_names2.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -115,7 +114,7 @@ int main()
     for(;node_counter > 0; node_counter--)
     {
         /* The following is only for the swap of head and head->mext
-            Ideally, harmonizse this somehow later so the distinction is
+            Ideally, harmonizse this later so the distinction is
             only necessary for a small part of the program or not at all
         */
         down_move=head;
@@ -126,6 +125,8 @@ int main()
             if ( (tolower(down_move->name[i]) ) >= (tolower(up_move->name[i])))
             {
 				if( (tolower(down_move->name[i])) == (tolower(up_move->name[i])) )
+                /* Only if the letters are the some, check if only of them is uppercase and the
+                    other lowercase*/
 				{
 					if(down_move->name[i] < up_move->name[i])
                     {
@@ -133,7 +134,11 @@ int main()
                         head=up_move;
                         break;
                     }
-                    i++;
+                    else
+                        if(down_move->name[i] > up_move->name[i]) break;
+
+                        else i++; // Later just put this into the for instruction
+
 				}
                 else
 				{
@@ -144,7 +149,7 @@ int main()
             }
             else break;
         }
-        // Now for comparisons of elements after the head:
+        // Now for comparisons of elements after the head
         before_swap=head;
         down_move=head->next;
         up_move=down_move->next;
@@ -155,7 +160,7 @@ int main()
         {
             for(int i=0; (down_move->name[i] != '\0') && (up_move->name[i] != '\0');)
             {
-                if ((tolower(down_move->name[i])) >= (tolower(up_move->name[i])))
+                if ((tolower(down_move->name[i])) >= (tolower(up_move->name[i]))) // Compare the letters independently of case
                 {
                     if( (tolower(down_move->name[i])) == (tolower(up_move->name[i])) )
                     {
@@ -164,7 +169,10 @@ int main()
                             swap_any_other_two(before_swap,down_move,up_move);
                             break;
                         }
-                        i++;
+                        else
+                            if(down_move->name[i] > up_move->name[i]) break;
+
+                            else i++; // Later just put the for instruction
                     }
                     else
 					{

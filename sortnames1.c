@@ -45,7 +45,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_names3.txt", "r");
+    F1 = fopen("ue1_names.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -90,24 +90,37 @@ int main()
     struct node *up_move;       // The node that will be moved up the list if there's a swap
 
 
-// The following is the first run of Bubble Sort.
-        /* for the first run, I define the node before the two to be swapped
-            (node 2 & 3 on the first run) to be the start of the list.
-            I'll have to create a special case for swapping
-            node 1 & 2.
+        /*
+            Bubble Sort.
             Doesn't work if list doesn't have at least 3 elements.
+            Doesn't work for the last two elements.
         */
 
-    for(;node_counter-2 > 0; node_counter--)
+    for(;node_counter > 0; node_counter--)
     {
+        int first_run = 1;
+        /* The following is only for the swap of head and head->mext
+            Ideally, harmonizse this somehow later so the distinction is
+            only necessary for a small part of the program or not at all
+        */
+        down_move=head;
+        up_move=head->next;
+
+        if ((down_move->name[0]) > (up_move->name[0]))
+        {
+            down_move->next=up_move->next;
+            up_move->next=down_move;
+            head=up_move;
+        }
+
+        // Now for comparisons of elements after the head:
         before_swap=head;
         down_move=head->next;
         up_move=down_move->next;
             /* move_down and move_up are the next two element of
                 the list after the head*/
 
-        while (up_move->next != NULL) // Will have to deal with the end of the list later
-                                        // as this stop the loop early
+        while (up_move != NULL) // once up_move has reached NULL we're done
         {
             if ((down_move->name[0]) > (up_move->name[0]))
                 /* Comparing only the first letter for now. Will have

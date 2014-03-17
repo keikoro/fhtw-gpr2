@@ -63,12 +63,12 @@ int readfiles(int argc, char *argv[])
                 /*  print out printable flags */
                 if (isprint(optopt))
                 {
-                    printf("%s: wrong option %c\n", argv[0], optopt);
+                    printf("sortnames: wrong option %c\n", optopt);
                 }
                 /*  for non-printable characters */
                 else
                 {
-                    printf("%s: wrong option %#x\n", argv[0], optopt);
+                    printf("sortnames: wrong option %#x\n", optopt);
                 }
                 return 1;
                 break;
@@ -108,21 +108,21 @@ int readfiles(int argc, char *argv[])
             }
             else
             {
-                printf("%s: cannot open output file: %s\n", argv[0], outputfile);
+                printf("sortnames: cannot open output file: %s\n", outputfile);
                 fclose(input);
                 return 1;
             }
         }
         else
         {
-            printf("%s: cannot open input file: %s\n", argv[0], inputfile);
+            printf("sortnames: cannot open input file: %s\n", inputfile);
             return 1;
         }
     }
     /*  if there aren't enough filenames */
     else
     {
-        printf("%s: wrong number of input or output files\n", argv[0]);
+        printf("sortnames: wrong number of input or output files\n");
         return 1;
     }
     return 0; // TODO check if this return is even necessary

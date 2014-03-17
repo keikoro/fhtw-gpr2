@@ -7,32 +7,58 @@ If the output file does not exist yet, create a new file with the given name. If
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 #include <unistd.h>
-#define NAMENSLAENGE 256
-
 
 int readfiles(int argc, char *argv[])
 {
+    int getflags = 0;
+    int recursive = 0;
+    int flagcount = 0;
     int i = 0;
 
-    /*  not enough arguments given at program start
-        (argc always includes program name as well!)
-    */
-    if (argc < 3)
+
+    while ((getflags = getopt(argc, argv, "r")) != -1)
     {
-        printf("sortnames: wrong number of input or output files\n");
-        return 1;
+        switch (getflags)
+        {
+            case 'r':
+                flagcount++;
+                recursive = 1;
+                break;
+            /*  if some other option was given */
+            case '?':
+                flagcount++;
+                /*  print out printable characters */
+                if (isprint(optopt))
+                {
+                    printf("sortnames: wrong option %c\n", optopt);
+                }
+                /*  non-printable characters */
+                else
+                {
+                    printf("sortnames: wrong option %#x\n", optopt);
+                }
+                break;
+        }
+
+    for (i = optind; i < argc; i++)
+    {
+         printf ("Non-option argument %s\n", argv[i]);
     }
-    else
-    {
+
+
+    }
+
+        // char inputfile = argv[1];
+        // char outputfile = argv[2];
+
+
         for(; i<argc; i++)
         {
             printf("argv is %s\n", argv[i]);
         }
         return 0;
-    }
 
 }
 

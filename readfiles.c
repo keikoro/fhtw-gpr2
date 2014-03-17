@@ -14,23 +14,23 @@ sortnames: cannot open input file: <NAME> (name being the typed name)
 sortnames: wrong input format
 - if the output file cannot be opened, print:
 sortnames: cannot open output file <NAME>
+
+Return 1 in main() on any of these errors.
 */
 
 
 /*
 TODO:
-- check if input file exists (if not: print msg)
-- check if input file contains names (if not: print mgs)
-- check if output file can be opened (if not: print msg)
-- return 0 or 1 in main function, depending on input
-
+- check if input file contains names (if not: print mgs, return 1)
 
 DONE:
 - separation of flags from other input (which is interpreted as file names)
 attn: atm, only flags in front of a first file name are considered (unclear)
 e.g. -t -p name name name
 not: -t name name name -p
-- print message on input of wrong flags
+- check for wrong flags (if there are: print msg, return 1)
+- check if input file exists (if not: print msg, return 1)
+- check if output file can be opened (if not: print msg, return 1)
 */
 
 #include <stdio.h>

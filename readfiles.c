@@ -42,7 +42,8 @@ int readfiles(int argc, char *argv[])
 {
     int getflags = 0;
     int reverse = 0;
-    int flagcount = 0;
+    char *inputfile;
+    char *outputfile;
     int i = 0, j = 0;
 
     while ((getflags = getopt(argc, argv, "r")) != -1)
@@ -53,12 +54,10 @@ int readfiles(int argc, char *argv[])
         switch (getflags)
         {
             case 'r':
-                flagcount++;
                 reverse = 1;
                 break;
             /*  if unknown flags were given */
             case '?':
-                flagcount++;
                 /*  print out printable flags */
                 if (isprint(optopt))
                 {
@@ -71,48 +70,42 @@ int readfiles(int argc, char *argv[])
                 }
                 break;
         }
-
     }
 
-    /*  go through filenames */
+    /*  loop through file names */
     for (i = optind; i < argc; i++)
     {
-         printf ("%s\n", argv[i]);
+        // TODO remove print statement
+         // printf ("%s\n", argv[i]);
          j++;
     }
 
+    if (j >= 2)
+    {
+        inputfile = argv[optind];
+        outputfile = argv[optind+1];
+        // TODO remove later on
+        printf("alles passt\n");
+
+        if (reverse == 1)
+        {
+            printf("reverse, go!\n");
+        }
+
+    }
     /*  if there aren't enough filenames */
-    if (j <  2) {
+    else
+    {
         printf("%s: wrong number of input or output files\n", argv[0]);
+        return 1;
     }
 
-
-        // char inputfile = argv[1];
-        // char outputfile = argv[2];
-
-
-        for(; i<argc; i++)
-        {
-            printf("argv is %s\n", argv[i]);
-        }
-        return 0;
+    return 0;
 
 }
 
 int main(int argc, char *argv[])
 {
-
     readfiles(argc, argv);
-    // getopt (int argc, char *const *argv, const char *options)
-
-
-    // printf("%s", inputfile);
-    // printf("%s", outputfile);
-
-
-    // printf("Welcome to sortname - a program that allows you to sort a list of names stored in a file and save this sorted list to another file! \nTo start the program, Please enter the names of the originating file and the one you want to save the sorted list to (if the latter does not exist yet, a new file with your desired name will be created).
-
-    //     %s\n", );
-
     return 0;
 }

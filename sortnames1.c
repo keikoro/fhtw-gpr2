@@ -62,7 +62,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_names2.txt", "r");
+    F1 = fopen("textfiles/ue1_names2.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;

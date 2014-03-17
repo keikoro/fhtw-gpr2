@@ -3,11 +3,11 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (ue1_names2.txt) line by line;
+    -   Reads from a specific file (textfiles/ue1_names2.txt) line by line;
         lines can be at most 256 characters long, line break and '\0' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
-    -   Does Bubble Sort of the list
+    -   Does Bubble Sort on the list
     -   Prints the list onto the screen
 
 To Do/Fix/Work on:
@@ -58,7 +58,6 @@ void swap_any_other_two(struct node *before_swap, struct node *down_move, struct
 
 int main()
 {
-
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
@@ -73,11 +72,12 @@ int main()
             Btw, would love to do this without a counter, but no idea if it's possible and how.
         */
 
-    while (fgets(current_line, NAMENSLAENGE, F1))  /*   reads each line, including the linebreak
-                                                        into the string*/
+    /*   reads each line, including the linebreak into the string*/
+    while (fgets(current_line, NAMENSLAENGE, F1))
     {
         node_for_one_name=malloc(sizeof(struct node));
-        strcpy(node_for_one_name->name, current_line); // copy the current line into a list node
+        /*  copy the current line into a list node */
+        strcpy(node_for_one_name->name, current_line);
 
     // Add the current node at the start of the list
         if (head != NULL)
@@ -90,9 +90,6 @@ int main()
     }
     fclose(F1);
 
-
-
-
 /*  Implementing Bubble Sort.
     (Picked Bubble Sort because there's not as much going through the whole list,
     we only ever look at the next element.)
@@ -103,8 +100,8 @@ int main()
 */
 
     struct node *before_swap;   // Will be the node before the two that might get swapped
-    struct node *down_move;     // Will be the the node that gets moved down the list if there's a swap
-    struct node *up_move;       // Will be the the node that gets moved up the list if there's a swap
+    struct node *down_move;     // Will be the node that gets moved down the list if there's a swap
+    struct node *up_move;       // Will be the node that gets moved up the list if there's a swap
 
 
         /*
@@ -153,7 +150,9 @@ int main()
         before_swap=head;
         down_move=head->next;
         up_move=down_move->next;
-            /* move_down and move_up are the next two elements of
+            // where does the below comment belong to?
+            // (changed variable names from move_* to *_move)
+            /* down_move and up_move are the next two elements of
                 the list after the head*/
 
         while (up_move != NULL) // once up_move has reached NULL we're done

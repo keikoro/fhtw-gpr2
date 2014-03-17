@@ -1,9 +1,37 @@
 /*
-User is supposed to enter names for an input file (needs to exist) and an output file, which may or may not exist.
+A user is supposed to enter two file names: one for an input file from which a list of names should be read, one for an output file to which this list of names should be written after it's been sorted.
 
-If the output file does not exist yet, create a new file with the given name. If it already exists: use it and overwrite it.
+The user can choose to use the option/flag "-r" which sorts the list in reverse order.
+
+Caveats:
+- if other flags than -r are used, print:
+sortnames: wrong option <OPTION> (with option being the wrong flag w/o -)
+- if one or both of the two file names are missing, print:
+sortnames: wrong number of input or output files
+- if the input file cannot be found, print:
+sortnames: cannot open input file: <NAME> (name being the typed name)
+- if the input file contains other values than names, print:
+sortnames: wrong input format
+- if the output file cannot be opened, print:
+sortnames: cannot open output file <NAME>
 */
 
+
+/*
+TODO:
+- check if input file exists (if not: print msg)
+- check if input file contains names (if not: print mgs)
+- check if output file can be opened (if not: print msg)
+- return 0 or 1 in main function, depending on input
+
+
+DONE:
+- separation of flags from other input (which is interpreted as file names)
+attn: atm, only flags in front of a first file name are considered (unclear)
+e.g. -t -p name name name
+not: -t name name name -p
+- print message on input of wrong flags
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,42 +41,51 @@ If the output file does not exist yet, create a new file with the given name. If
 int readfiles(int argc, char *argv[])
 {
     int getflags = 0;
-    int recursive = 0;
+    int reverse = 0;
     int flagcount = 0;
-    int i = 0;
-
+    int i = 0, j = 0;
 
     while ((getflags = getopt(argc, argv, "r")) != -1)
     {
+        /*  suppress auto system error msgs on wrong flags */
+        opterr = 0;
+
         switch (getflags)
         {
             case 'r':
                 flagcount++;
-                recursive = 1;
+                reverse = 1;
                 break;
-            /*  if some other option was given */
+            /*  if unknown flags were given */
             case '?':
                 flagcount++;
-                /*  print out printable characters */
+                /*  print out printable flags */
                 if (isprint(optopt))
                 {
-                    printf("sortnames: wrong option %c\n", optopt);
+                    printf("%s: wrong option %c\n", argv[0], optopt);
                 }
-                /*  non-printable characters */
+                /*  for non-printable characters */
                 else
                 {
-                    printf("sortnames: wrong option %#x\n", optopt);
+                    printf("%s: wrong option %#x\n", argv[0], optopt);
                 }
                 break;
         }
 
+    }
+
+    /*  go through filenames */
     for (i = optind; i < argc; i++)
     {
-         printf ("Non-option argument %s\n", argv[i]);
+         printf ("%s\n", argv[i]);
+         j++;
     }
 
-
+    /*  if there aren't enough filenames */
+    if (j <  2) {
+        printf("%s: wrong number of input or output files\n", argv[0]);
     }
+
 
         // char inputfile = argv[1];
         // char outputfile = argv[2];

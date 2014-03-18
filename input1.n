@@ -522,7 +522,6 @@ Munch Eric
 Dolohov Antonin
 Deverill Philbert
 Riddle FirstName
-
 Radford Mnemone
 Violet
 Stump Grogan

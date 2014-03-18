@@ -3,7 +3,7 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (textfiles/ue1_names.txt) line by line;
+    -   Reads from a specific file (textfiles/ue1_names1.txt) line by line;
         lines can be at most 256 characters long, line break and '\n' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
@@ -130,7 +130,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("textfiles/ue1_names.txt", "r");
+    F1 = fopen("textfiles/ue1_names1.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;

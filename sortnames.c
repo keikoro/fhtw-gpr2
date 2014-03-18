@@ -27,14 +27,15 @@ int main(int argc, char *argv[])
     */
     head = read_and_sort(input);
 
-    // Printing the list
-    // This is just for checking if the created list looks as expected
-    // Will be removed when the list is printed into another file instead
     struct node *traversenode1;
     traversenode1=head;
+
+    char *outputname = "bla.c";
+    output = fopen(outputname, "w");
+
     while(traversenode1!=NULL)
     {
-        printf("%s", traversenode1->name);
+        fprintf(output, "%s", traversenode1->name);
         traversenode1=traversenode1->next;
     }
 
@@ -46,8 +47,6 @@ int main(int argc, char *argv[])
         head=traversenode2->next;
         free(traversenode2);
     }
-
-    writefiles(argc, argv);
 
     return 0;
 }

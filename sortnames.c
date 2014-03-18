@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     int *reverse = (int*)malloc(sizeof(int));
 
     char *outputfilename = "testoutputfile.c";
-    char *filename = "input3.n";
+    char *filename = "input2.n";
 
     if(checkstdin(argc, argv, inputfile, outputfile, reverse) == 1) {
         return 1;

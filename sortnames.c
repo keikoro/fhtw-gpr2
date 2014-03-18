@@ -4,9 +4,9 @@
 #include <ctype.h>
 #include <unistd.h>
 #define NAMENSLAENGE 257
-#include "writefiles.c"
-#include "readfiles.c"
+#include "choosefiles.c"
 #include "sortinput.c"
+#include "writefiles.c"
 
 
 int main(int argc, char *argv[])

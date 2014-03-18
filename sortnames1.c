@@ -4,7 +4,7 @@ GPR2, Aufgabe 1.
 
 What the programm does right now:
     -   Reads from a specific file (textfiles/ue1_namesWrongInputFormat.txt) line by line;
-            lines can be at most 256 characters long, line break and '\n' included.
+            lines can be at most 257 characters long, line break and '\n' included.
     -   Sort them into a dynamically created linked list
     -   Prints the list onto the screen
 
@@ -18,14 +18,14 @@ To Do/Fix/Work on:
     -   Testing, and if necessarily fixing the sorting; special cases I haven't thought of yet etc
     -   Code cleanup? (moving things into functions, reducing repetitive code,
          simplifying loops and if/else branched etc)
-    -   ...
+jn j     -   ...
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#define NAMENSLAENGE 256
+#define NAMENSLAENGE 257
 
 struct node{
     char name[NAMENSLAENGE];
@@ -103,15 +103,11 @@ int compare_strings (char *s1, char *s2)
     return (comes_first);
 }
 
-
-int main()
+struct node* read_and_sort(FILE *F1)
 {
-    FILE *F1;
+    struct node* head=NULL;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("textfiles/ue1_namesWrongInputFormat.txt", "r");
-
-    struct node *head = NULL;
     struct node *to_be_inserted;
     struct node *before_insertion;  // Will be the node after which the new node might get inserted
     struct node *compared_with;     // Will be the node after which the new node might get inserted
@@ -153,7 +149,9 @@ int main()
     if (wrong_input_format == 1)
     {
         printf ("sortnames: wrong input format");
-        return (1);
+        break;//return (1);
+        /* TODO: Test this (= test wrong input format!)
+        */
     }
     /*Find right spot to insert the new node into: */
         if (head == NULL)
@@ -195,7 +193,24 @@ int main()
         }
     }
     fclose(F1);
+    return (head);
+}
 
+
+int main()
+{
+    FILE *input;
+
+    struct node *head;
+    /*
+        input will later be determined by the readfiles programm; for now it's statically set to textfiles/ue1_names.txt
+    */
+    input = fopen("textfiles/ue1_names.txt", "r");
+
+    /*  read_and_sort needs a file pointer as an argument, and returns a pointer to a "struct node".
+        In practice, it returns what will then become the start (head) of the list.
+    */
+    head = read_and_sort(input);
 
 // Printing the list
 // This is just for checking if the created list looks as expected

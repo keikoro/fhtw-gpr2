@@ -1,9 +1,9 @@
 /*
-TODO:
-- ALL 5 test cases
-- more testing of correct sort order
-- use user-defined input & output files
-- exit program on return 1 - generate return 1 in main if wrong input format
+GPR2 Hausuebung 1
+
+Gruppenarbeit:
+if13b076 - Linda Spindler
+if13b070 - K Kollmann
 */
 
 #include <stdio.h>
@@ -19,33 +19,37 @@ TODO:
 int main(int argc, char *argv[])
 {
     char *inputfile = (char*)malloc(256*sizeof(char));
-
     char *outputfile = (char*)malloc(256*sizeof(char));
     int *reverse = (int*)malloc(sizeof(int));
     int *stopthis = (int*)malloc(sizeof(int));
     char *outputstring = (char*)malloc(256*sizeof(char));
-    int k = 0;
-    // int l = 0;
+    int k=0, l=0, m=0;
     char separator[2] = "|";
 
     outputstring = checkstdin(argc, argv, reverse, stopthis);
 
+    /*  loop through concatenated outputstring
+        (contains input file name, output filename) */
     while (*outputstring)
     {
         if (strchr(separator, *outputstring))
         {
-            break;
+            m = 1;
         }
-        else
+        // get the input string
+        else if (m != 1)
         {
             inputfile[k] = *outputstring;
+            k++;
         }
-        k++;
+        // get the output string
+        else
+        {
+            outputfile[l] = *outputstring;
+            l++;
+        }
         outputstring++;
     }
-
-    // inputfile[k+1] = "\0";
-    // printf("inputfile: %s\n", inputfile);
 
     struct node *head;
 

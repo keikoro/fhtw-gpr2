@@ -31,23 +31,6 @@ struct node{
     struct node *next;
 };
 
-/*
-    Gave the struct pointers the same names in the function as the ones in main
-    because anything else would just get confusing.
-*/
-void swap_head_and_next(struct node *down_move, struct node *up_move)
-{
-    down_move->next=up_move->next;
-    up_move->next=down_move;
-}
-
-void swap_any_other_two(struct node *before_swap, struct node *down_move, struct node *up_move)
-{
-    before_swap->next=up_move;
-    down_move->next=up_move->next;
-    up_move->next=down_move;
-}
-
 
 int compare_strings (char *s1, char *s2)
 /*  Returns 1 if s1 should be placed first by the established rules (or if the two strings are exactly the same).

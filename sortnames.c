@@ -12,7 +12,9 @@ int main(int argc, char *argv[])
 {
 
     FILE *input;
-    FILE *output;
+    // FILE *output;
+    char *outputname = "testoutputfile.c";
+    // char *outputname2 = "haha.c";
 
     readfiles(argc, argv);
 
@@ -20,26 +22,20 @@ int main(int argc, char *argv[])
     /*
         input will later be determined by the readfiles programm; for now it's statically set to textfiles/ue1_names.txt
     */
-    input = fopen("textfiles/ue1_names1.txt", "r");
+    input = fopen("input3.n", "r");
 
     /*  read_and_sort needs a file pointer as an argument, and returns a pointer to a "struct node".
         In practice, it returns what will then become the start (head) of the list.
     */
     head = read_and_sort(input);
 
-    struct node *traversenode1;
-    traversenode1=head;
+    struct node *myoutputlist;
+    myoutputlist=head;
 
-    char *outputname = "bla.c";
-    output = fopen(outputname, "w");
+    writefiles(outputname, myoutputlist);
 
-    while(traversenode1!=NULL)
-    {
-        fprintf(output, "%s", traversenode1->name);
-        traversenode1=traversenode1->next;
-    }
 
-    // Deleting the list; should be moved into a function later
+    // Deleting the list; should be moved into writefiles.c later
     struct node *traversenode2;
     while(head!=NULL)
     {

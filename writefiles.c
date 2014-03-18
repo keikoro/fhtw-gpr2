@@ -2,18 +2,18 @@
 write data into a file
 */
 
-int writefiles(int argc, char *argv[])
+int writefiles(char *outputfilename, struct node *traversenode)
 {
-    int i = 0;
-    int max = 10;
-    char *outputname = "testoutput.c";
+    char *outputname = outputfilename;
+    struct node *outputlist = traversenode;
 
     FILE *output;
     output = fopen(outputname, "w");
 
-    for (; i<=max; ++i)
+    while(outputlist!=NULL)
     {
-        fprintf(output, "Das ist die %d. Zeile Text.\n", i);
+        fprintf(output, "%s", outputlist->name);
+        outputlist=outputlist->next;
     }
 
     return 0;

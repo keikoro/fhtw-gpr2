@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #define NAMENSLAENGE 257
-#include "choosefiles.c"
+#include "checkstdin.c"
 #include "readandsort.c"
 #include "writefiles.c"
 
@@ -12,9 +12,16 @@ int main(int argc, char *argv[])
 {
 
     FILE *input;
+    char *inputfile = "\0";
+    char *outputfile = "\0";
+    int *reverse = (int*)malloc(sizeof(int));
+
     char *outputfilename = "testoutputfile.c";
 
-    checkstdin(argc, argv);
+    checkstdin(argc, argv, inputfile, outputfile, reverse);
+
+    // TODO remove later on
+    printf("%d\n", *reverse);
 
     struct node *head;
     /*

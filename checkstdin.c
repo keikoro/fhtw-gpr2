@@ -34,12 +34,12 @@ not: -t name name name -p
 */
 
 
-int checkstdin(int argc, char *argv[])
+int checkstdin(int argc, char *argv[], char *infilename, char *outfilename, int *reverseflag)
 {
     int getflags = 0;
-    int reverse = 0;
-    char *inputfile;
-    char *outputfile;
+    int *reverse = reverseflag;
+    char *inputfile = infilename;
+    char *outputfile = outfilename;
     int i = 0, j = 0;
 
     FILE *input;
@@ -52,7 +52,7 @@ int checkstdin(int argc, char *argv[])
         switch (getflags)
         {
             case 'r':
-                reverse = 1;
+                *reverse = 1;
                 break;
             /*  if unknown flags were given */
             case '?':
@@ -94,7 +94,7 @@ int checkstdin(int argc, char *argv[])
                 // blabalbalaaaaaa
                 // continue with program...
 
-                if (reverse == 1)
+                if (*reverse == 1)
                 {
                     // sort list in reverse order
                 }

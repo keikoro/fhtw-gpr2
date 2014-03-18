@@ -34,12 +34,12 @@ not: -t name name name -p
 */
 
 
-int checkstdin(int argc, char *argv[], char *infilename, char *outfilename, int *reverseflag)
+int checkstdin(int argc, char *argv[], char *namein, char *nameout, int *reverseflag)
 {
     int getflags = 0;
     int *reverse = reverseflag;
-    char *inputfile = infilename;
-    char *outputfile = outfilename;
+    char *inputfilename = namein;
+    char *outputfilename = nameout;
     int i = 0, j = 0;
 
     FILE *input;
@@ -79,16 +79,16 @@ int checkstdin(int argc, char *argv[], char *infilename, char *outfilename, int 
 
     if (j >= 2)
     {
-        inputfile = argv[optind];
-        outputfile = argv[optind+1];
+        inputfilename = argv[optind];
+        outputfilename = argv[optind+1];
 
-        /*  check for existence of inputfile */
-        if((input=fopen(inputfile, "r")) != NULL)
+        /*  check for existence of inputfilename */
+        if((input=fopen(inputfilename, "r")) != NULL)
         {
-            /*  check for writability of outputfile
+            /*  check for writability of outputfilename
                 (file might only be writeable by certain users)
             */
-            if((output=fopen(outputfile, "w")) != NULL)
+            if((output=fopen(outputfilename, "w")) != NULL)
             {
 
                 // blabalbalaaaaaa
@@ -104,14 +104,14 @@ int checkstdin(int argc, char *argv[], char *infilename, char *outfilename, int 
             }
             else
             {
-                printf("sortnames: cannot open output file: %s\n", outputfile);
+                printf("sortnames: cannot open output file: %s\n", outputfilename);
                 fclose(input);
                 return 1;
             }
         }
         else
         {
-            printf("sortnames: cannot open input file: %s\n", inputfile);
+            printf("sortnames: cannot open input file: %s\n", inputfilename);
             return 1;
         }
     }

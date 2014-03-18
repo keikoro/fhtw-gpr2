@@ -12,13 +12,9 @@
 int main(int argc, char *argv[])
 {
 
-    // FILE *fp;
-    // int i;
-
     readfiles(argc, argv);
 
     FILE *input;
-
     struct node *head;
     /*
         input will later be determined by the readfiles programm; for now it's statically set to textfiles/ue1_names.txt
@@ -50,7 +46,7 @@ int main(int argc, char *argv[])
         free(traversenode2);
     }
 
-    // writefiles(argc, argv);
+    writefiles(argc, argv);
 
     return 0;
 }

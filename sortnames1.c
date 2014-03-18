@@ -9,6 +9,7 @@ What the programm does right now:
     -   Prints the list onto the screen
 
 To Do/Fix/Work on:
+    -   Check for wrong input character
     -   Programm only works perfectly if there's a line-break at the end of the document (after the last element). Fix that.
     -   Linking with other .c file (and everything related to that)
     -   Reading the sorted list into the file
@@ -122,6 +123,11 @@ int main()
 
         /*  copy the current line into a list node: */
         strcpy(to_be_inserted->name, current_line);
+        if (to_be_inserted->name[strlen(to_be_inserted->name)-1] != '\n')
+        {
+            to_be_inserted->name[strlen(to_be_inserted->name)-1] = '\n';
+            to_be_inserted->name[strlen(to_be_inserted->name)] = '\0';
+        }
 
     /*Find right spot to insert the new node into: */
         if (head == NULL)

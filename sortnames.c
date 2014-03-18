@@ -1,3 +1,11 @@
+/*
+TODO:
+- Reverse sorting
+- ALL 5 test cases - more testing of correct sort order
+- use user-defined input & output files
+- exit program on return 1
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,6 +30,7 @@ int main(int argc, char *argv[])
 
     // TODO remove later on
     printf("%d\n", *reverse);
+    printf("%c\n", *inputfile);
 
     struct node *head;
     /*

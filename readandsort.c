@@ -1,32 +1,13 @@
 /*
-
-GPR2, Aufgabe 1.
-
-What the programm does right now:
-    -   Reads from a specific file (textfiles/ue1_namesWrongInputFormat.txt) line by line;
-            lines can be at most 257 characters long, line break and '\n' included.
-    -   Sort them into a dynamically created linked list
-    -   Prints the list onto the screen
-
-To Do/Fix/Work on:
-    -   Check for wrong input character
-    -   Programm only works perfectly if there's a line-break at the end of the document (after the last element). Fix that.
-    -   Linking with other .c file (and everything related to that)
-    -   Reading the sorted list into the file
-    -   Reverse sorting
-    -   (More) Test cases; creating 5 input/output files
-    -   Testing, and if necessarily fixing the sorting; special cases I haven't thought of yet etc
-    -   Code cleanup? (moving things into functions, reducing repetitive code,
-         simplifying loops and if/else branched etc)
-jn j     -   ...
+- read a file line by line
+- sort all lines (see instruction sheet ...... tbd)
+- output data into linked list
 */
-
 
 struct node{
     char name[NAMENSLAENGE];
     struct node *next;
 };
-
 
 int compare_strings (char *s1, char *s2)
 /*  Returns 1 if s1 should be placed first by the established rules (or if the two strings are exactly the same).

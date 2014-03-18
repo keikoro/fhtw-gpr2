@@ -59,7 +59,14 @@ int compare_strings (char *s1, char *s2)
                         }
                         else if ((s1[j]) == (s2[j]))
                         {
+                            if((s1[j+1] == '\n') && (s2[j+1] == '\n'))
+                            {
+                                comes_first = 1;
+                                leave_the_do_while_loop = 1;
+                                break;
+                            }
                             // incrementation of j as per loop instruction
+
                         }
                         else
                         {

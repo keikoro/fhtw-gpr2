@@ -33,10 +33,6 @@ not: -t name name name -p
 - check if output file can be opened (if not: print msg, return 1)
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <unistd.h>
 
 int readfiles(int argc, char *argv[])
 {
@@ -126,10 +122,4 @@ int readfiles(int argc, char *argv[])
         return 1;
     }
     return 0; // TODO check if this return is even necessary
-}
-
-int main(int argc, char *argv[])
-{
-    readfiles(argc, argv);
-    return 0;
 }

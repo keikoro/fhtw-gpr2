@@ -3,7 +3,7 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (textfiles/ue1_names2.txt) line by line;
+    -   Reads from a specific file (textfiles/ue1_names.txt) line by line;
         lines can be at most 256 characters long, line break and '\n' included.
     -   Puts every line into the node of a linked list (new elements are added at the start of the list)
     -   Counts the number of elements in the list
@@ -57,12 +57,80 @@ void swap_any_other_two(struct node *before_swap, struct node *down_move, struct
 }
 
 
+int compare_strings (char *s1, char *s2)
+{
+    int i=0;
+    int comes_first=1;
+    while( (s1[i] != '\n') && (s2[i] != '\n' ))
+    {
+        if ( tolower (s1[i]) < tolower (s2[i]))
+        {
+            comes_first=1;
+            break;
+        }
+        else if ( tolower(s1[i]) > tolower(s2[i]) )
+        {
+            comes_first=2;
+            break;
+        }
+            else
+            // The case where taken tolower, the current 2 letter are the same:
+            {
+                if ( (s1[i+1] != '\n') && (s2[i+1] != '\n') )
+                    // The two letters are the some (lowercase), so compare the next letters
+                    i++;
+                else
+                {
+                    if ( (s1[i+1] == '\n') && (s2[i+1] != '\n') )
+                    {
+                        comes_first=1;
+                        break;
+                    }
+                    if ( (s1[i+1] != '\n') && (s2[i+1] == '\n') )
+                    {
+                        comes_first=2;
+                        break;
+                    }
+                    if ( (s1[i+1] == '\n') && (s2[i+1] == '\n') )
+                    {
+                        int leave_the_do_while_loop=0;
+                        for(int j=0; j<=i; j++)
+                        {
+                            if ((s1[j]) > (s2[j]))
+                            {
+                                leave_the_do_while_loop = 1;
+                                comes_first=1;
+                                break;
+                            }
+                            else if ((s1[j]) == (s2[j]))
+                            {
+                                // incrementation of j as per loop instruction
+                            }
+                            else
+                            {
+                                comes_first=2;
+                                leave_the_do_while_loop = 1;
+                                break;
+                            }
+                        }
+                        if(leave_the_do_while_loop == 1)
+                            break;
+                    }
+
+                }
+
+            }
+    }
+    return (comes_first);
+}
+
+
 int main()
 {
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("ue1_names.txt", "r");
+    F1 = fopen("textfiles/ue1_names.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -91,6 +159,7 @@ int main()
     }
     fclose(F1);
 
+
 /*  Implementing Bubble Sort.
     (Picked Bubble Sort because there's not as much going through the whole list,
     we only ever look at the next element.)
@@ -117,70 +186,10 @@ int main()
         down_move=head;
         up_move=head->next;
 
-        for(int i=0; (down_move->name[i] != '\n') && (up_move->name[i] != '\n');)
+        if (compare_strings(down_move->name,up_move->name)==2)
         {
-            if ( tolower (down_move->name[i]) < tolower (up_move->name[i]))
-            {
-                break;
-            }
-            else if ( tolower(down_move->name[i]) > tolower(up_move->name[i]) )
-            {
-                swap_head_and_next(down_move,up_move);
-                head=up_move;
-                break;
-            }
-                else
-                /* The case where, when ignoring upper/lowercase distinction
-                    the current 2 letter are the same:*/
-                {
-                    if ( (down_move->name[i+1] != '\n') && (up_move->name[i+1] != '\n'))
-                        // The two letters are the some (lowercase), so compare the next letters
-                        i++;
-                    else
-                    {
-                        if ( (down_move->name[i+1] == '\n') && (up_move->name[i+1] != '\n') )
-                                break;
-                        if ( (down_move->name[i+1] != '\n') && (up_move->name[i+1] == '\n') )
-                        {
-                            swap_head_and_next(down_move,up_move);
-                            head=up_move;
-                            break;
-                        }
-                        if ( (down_move->name[i+1] == '\n') && (up_move->name[i+1] == '\n') )
-                        /* In this case are - in lowercase - are exactly the same, length included. */
-                        {
-                            int leave_the_while_loop = 0;
-                            /* This ^ isn't a very elegant way of getting out of a loop in a loop, but
-                                it works for now. (The while loop is the one that loops goes the nodes; if
-                                this is set to one.) */
-                            for(int j=0; j<=i; j++)
-                            /* Comparing the words letter by letter again, this time without
-                                ignoring lower/uppercase */
-                            {
-                                if ((down_move->name[j]) > (up_move->name[j]))
-                                {
-                                    leave_the_while_loop = 1;
-                                    break;
-                                }
-                                else if ((down_move->name[j]) == (up_move->name[j]))
-                                {
-                                    //j++;
-                                }
-                                else
-                                {
-                                    swap_head_and_next(down_move,up_move);
-                                    head=up_move;
-                                    leave_the_while_loop = 1;
-                                    break;
-                                }
-                            }
-                            if(leave_the_while_loop == 1)
-                                break;
-                        }
-
-                    }
-
-                }
+            swap_head_and_next(down_move,up_move);
+            head=up_move;
         }
         // Now for the elements after head; there's a lot of repeated code here.
         before_swap=head;
@@ -189,63 +198,8 @@ int main()
 
         while (up_move != NULL) // once up_move has reached NULL we're done
         {
-            int i=0;
-            while( (down_move->name[i] != '\n') && (up_move->name[i] != '\n' ))
-            {
-                if ( tolower (down_move->name[i]) < tolower (up_move->name[i]))
-                {
-                    break;
-                }
-                else if ( tolower(down_move->name[i]) > tolower(up_move->name[i]) )
-                {
-                    swap_any_other_two(before_swap,down_move,up_move);
-                    break;
-                }
-                    else
-                    // The case where taken tolower, the current 2 letter are the same:
-                    {
-                        if ( (down_move->name[i+1] != '\n') && (up_move->name[i+1] != '\n') )
-                            // The two letters are the some (lowercase), so compare the next letters
-                            i++;
-                        else
-                        {
-                            if ( (down_move->name[i+1] == '\n') && (up_move->name[i+1] != '\n') )
-                                    break;
-                            if ( (down_move->name[i+1] != '\n') && (up_move->name[i+1] == '\n') )
-                            {
-                                swap_any_other_two(before_swap,down_move,up_move);
-                                break;
-                            }
-                            if ( (down_move->name[i+1] == '\n') && (up_move->name[i+1] == '\n') )
-                            {
-                                int leave_the_do_while_loop=0;
-                                for(int j=0; j<=i; j++)
-                                {
-                                    if ((down_move->name[j]) > (up_move->name[j]))
-                                    {
-                                        leave_the_do_while_loop = 1;
-                                        break;
-                                    }
-                                    else if ((down_move->name[j]) == (up_move->name[j]))
-                                    {
-                                        //j++;
-                                    }
-                                    else
-                                    {
-                                        swap_any_other_two(before_swap,down_move,up_move);
-                                        leave_the_do_while_loop = 1;
-                                        break;
-                                    }
-                                }
-                                if(leave_the_do_while_loop == 1)
-                                    break;
-                            }
-
-                        }
-
-                    }
-            }
-
+            if(compare_strings(down_move->name,up_move->name)==2)
+                swap_any_other_two(before_swap,down_move,up_move);
             /* Now everything gets moved one node down*/
             up_move=before_swap->next->next->next;
             down_move=before_swap->next->next;

@@ -62,7 +62,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("textfiles/ue1_names2.txt", "r");
+    F1 = fopen("ue1_names.txt", "r");
 
     struct node *head = NULL;
     struct node *node_for_one_name;
@@ -126,6 +126,7 @@ int main()
             else if ( tolower(down_move->name[i]) > tolower(up_move->name[i]) )
             {
                 swap_head_and_next(down_move,up_move);
+                head=up_move;
                 break;
             }
                 else
@@ -142,6 +143,7 @@ int main()
                         if ( (down_move->name[i+1] != '\n') && (up_move->name[i+1] == '\n') )
                         {
                             swap_head_and_next(down_move,up_move);
+                            head=up_move;
                             break;
                         }
                         if ( (down_move->name[i+1] == '\n') && (up_move->name[i+1] == '\n') )
@@ -167,6 +169,7 @@ int main()
                                 else
                                 {
                                     swap_head_and_next(down_move,up_move);
+                                    head=up_move;
                                     leave_the_while_loop = 1;
                                     break;
                                 }

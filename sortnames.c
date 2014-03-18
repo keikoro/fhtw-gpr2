@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     int *reverse = (int*)malloc(sizeof(int));
 
     char *outputfilename = "testoutputfile.c";
-    char *filename = "input2.n";
+    char *filename = "input3.n";
 
     if(checkstdin(argc, argv, inputfile, outputfile, reverse) == 1) {
         return 1;
@@ -44,7 +44,9 @@ int main(int argc, char *argv[])
     /*  read_and_sort needs a file pointer as an argument, and returns a pointer to a "struct node".
         In practice, it returns what will then become the start (head) of the list.
     */
-    head = read_and_sort(filename);
+    if(*reverse == 0)
+        head = read_and_sort(filename);
+    else head = read_and_sort_reverse(filename);
 
     struct node *myoutputlist;
     myoutputlist=head;

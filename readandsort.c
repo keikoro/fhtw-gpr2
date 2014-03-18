@@ -79,8 +79,10 @@ int compare_strings (char *s1, char *s2)
     return (comes_first);
 }
 
-struct node* read_and_sort(FILE *F1)
+struct node* read_and_sort(char *inputname)
 {
+    FILE *input;
+    char *filename = inputname;
     struct node* head=NULL;
     char current_line [NAMENSLAENGE];
 
@@ -88,8 +90,11 @@ struct node* read_and_sort(FILE *F1)
     struct node *before_insertion;  // Will be the node after which the new node might get inserted
     struct node *compared_with;     // Will be the node after which the new node might get inserted
 
+    input = fopen(filename, "r");
+
+
     /*   reads each line, including the linebreak into the string*/
-    while (fgets(current_line, NAMENSLAENGE, F1))
+    while (fgets(current_line, NAMENSLAENGE, input))
     {
         to_be_inserted=malloc(sizeof(struct node));
 
@@ -167,6 +172,6 @@ struct node* read_and_sort(FILE *F1)
             }
         }
     }
-    fclose(F1);
+    fclose(input);
     return (head);
 }

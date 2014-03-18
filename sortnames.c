@@ -21,30 +21,28 @@ TODO:
 
 int main(int argc, char *argv[])
 {
-
-    FILE *input;
     char *inputfile = "\0";
     char *outputfile = "\0";
     int *reverse = (int*)malloc(sizeof(int));
-
     char *outputfilename = "testoutputfile.c";
+    char *filename = "input3.n";
 
-    checkstdin(argc, argv, inputfile, outputfile, reverse);
+    if(checkstdin(argc, argv, inputfile, outputfile, reverse) == 1) {
+        return 1;
+    }
 
     // TODO remove later on
     printf("%d\n", *reverse);
     printf("%c\n", *inputfile);
 
     struct node *head;
-    /*
-        input will later be determined by the readfiles programm; for now it's statically set to textfiles/ue1_names.txt
-    */
-    input = fopen("input3.n", "r");
+
+    // the input file to read from
 
     /*  read_and_sort needs a file pointer as an argument, and returns a pointer to a "struct node".
         In practice, it returns what will then become the start (head) of the list.
     */
-    head = read_and_sort(input);
+    head = read_and_sort(filename);
 
     struct node *myoutputlist;
     myoutputlist=head;
@@ -60,6 +58,8 @@ int main(int argc, char *argv[])
         head=traversenode2->next;
         free(traversenode2);
     }
+
+    printf("hallo\n");
 
     return 0;
 }

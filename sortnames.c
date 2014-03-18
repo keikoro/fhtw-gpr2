@@ -5,7 +5,7 @@
 #include <unistd.h>
 #define NAMENSLAENGE 257
 #include "choosefiles.c"
-#include "sortinput.c"
+#include "readandsort.c"
 #include "writefiles.c"
 
 

@@ -29,22 +29,12 @@ int main(int argc, char *argv[])
     char *outputfilename = "testoutputfile.c";
     char *filename = "input3.n";
 
-
     outputstring = checkstdin(argc, argv, reverse, stopthis);
     printf("outputstring: %s\n", outputstring);
 
-    // strcat
-
-
     // TODO remove later on
-    // printf("reverse: %d\n", *stopthis);
-    // printf("stopthis: %d\n", *reverse);
+    // printf("reverse: %d\n", *reverse);
 
-    // int strncmp(char *string1, char *string2, int n);
-
-    // TODO remove later on
-    // printf("reverse %d\n", *reverse);
-    // printf("inputfile %d\n", *inputfile);
 
     struct node *head;
 

@@ -143,9 +143,9 @@ struct node* read_and_sort(FILE *F1)
 
     if (wrong_input_format == 1)
     {
-        printf ("sortnames: wrong input format");
+        printf("sortnames: wrong input format\n");
         head=NULL;
-        return (head);
+        return(head);
     }
     /*Find right spot to insert the new node into: */
         if (head == NULL)

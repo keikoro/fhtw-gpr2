@@ -6,7 +6,7 @@ Yaxley Lysandra
 Proudfoot
 MacDougal Morag
 Hokey
-Dunstan,
+Dunstan
 McLaggen Cormac
 Cuffe Barabas
 Herpo the Foul
@@ -319,7 +319,7 @@ Urquhart
 Carrow Amycus
 Golpalott
 Bayliss Hetty
-Warrington,
+Warrington
 Midget Eloise
 Boardman Stubby
 Crabbe Vincent

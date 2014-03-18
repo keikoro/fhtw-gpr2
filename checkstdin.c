@@ -34,7 +34,7 @@ not: -t name name name -p
 */
 
 
-int readfiles(int argc, char *argv[])
+int checkstdin(int argc, char *argv[])
 {
     int getflags = 0;
     int reverse = 0;

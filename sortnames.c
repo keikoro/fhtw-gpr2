@@ -12,9 +12,7 @@ int main(int argc, char *argv[])
 {
 
     FILE *input;
-    // FILE *output;
-    char *outputname = "testoutputfile.c";
-    // char *outputname2 = "haha.c";
+    char *outputfilename = "testoutputfile.c";
 
     readfiles(argc, argv);
 
@@ -32,8 +30,8 @@ int main(int argc, char *argv[])
     struct node *myoutputlist;
     myoutputlist=head;
 
-    writefiles(outputname, myoutputlist);
-
+    /*  start function to write list into a file */
+    writefiles(outputfilename, myoutputlist);
 
     // Deleting the list; should be moved into writefiles.c later
     struct node *traversenode2;

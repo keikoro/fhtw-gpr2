@@ -3,28 +3,20 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (textfiles/ue1_names1.txt) line by line;
-        lines can be at most 256 characters long, line break and '\n' included.
-    -   Puts every line into the node of a linked list (new elements are added at the start of the list)
-    -   Counts the number of elements in the list
-    -   Does Bubble Sort on the list; now taakes the length and uppercase/lowercase rules into account
+    -   Reads from a specific file (textfiles/ue1_names2.txt) line by line;
+            lines can be at most 256 characters long, line break and '\n' included.
+    -   Sort them into a dynamically created linked list
     -   Prints the list onto the screen
 
 To Do/Fix/Work on:
-    -   Case where the list is shorther than 3 elements
-    -   Programm only works perfectly if there's a line-break at the end of
-        the document. Fix that.
-    -   Error cases + messages
+    -   Programm only works perfectly if there's a line-break at the end of the document (after the last element). Fix that.
+    -   Linking with other .c file (and everything related to that)
     -   Reading the sorted list into the file
-    -   Menu for chosing which file to read from/to
-    -   (More) Test cases
-    -   Testing, and if necessarily fixing the sorting; special cases I haven't thought of yet?
-    -   Code cleanup; moving things into functions, reducing repetitive code,
-         simplifying loops and if/else branched etc
-    -   If possible, switch to sorting as file is read into the list, through Insertion Sort
-    -   Else Optimise Bubble Sort (see slides on sorting alg. for Bubble Sort opsitimisation method)
-    -   I'm getting a warning about using MS-DOS style paths, need to look into that, test program on
-        other computer
+    -   Reverse sorting
+    -   (More) Test cases; creating 5 input/output files
+    -   Testing, and if necessarily fixing the sorting; special cases I haven't thought of yet etc
+    -   Code cleanup? (moving things into functions, reducing repetitive code,
+         simplifying loops and if/else branched etc)
     -   ...
 */
 
@@ -58,6 +50,9 @@ void swap_any_other_two(struct node *before_swap, struct node *down_move, struct
 
 
 int compare_strings (char *s1, char *s2)
+/*  Returns 1 if s1 should be placed first by the established rules (or if the two strings are exactly the same).
+    Returns 2 if s2 sshould be placed first.
+*/
 {
     int i=0;
     int comes_first=1;
@@ -130,82 +125,62 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("textfiles/ue1_names1.txt", "r");
+    F1 = fopen("textfiles/ue1_names2.txt", "r");
 
     struct node *head = NULL;
-    struct node *node_for_one_name;
-    int node_counter=0;
-        /*  Do not forget to return the counter to zero for
-            every new document once we want to sort
-            several documents in one run of the programm!
-            Btw, would love to do this without a counter, but no idea if it's possible and how.
-        */
+    struct node *to_be_inserted;
+    struct node *before_insertion;  // Will be the node after which the new node might get inserted
+    struct node *compared_with;     // Will be the node after which the new node might get inserted
 
     /*   reads each line, including the linebreak into the string*/
     while (fgets(current_line, NAMENSLAENGE, F1))
     {
-        node_for_one_name=malloc(sizeof(struct node));
-        /*  copy the current line into a list node */
-        strcpy(node_for_one_name->name, current_line);
+        to_be_inserted=malloc(sizeof(struct node));
 
-    // Add the current node at the start of the list
-        if (head != NULL)
+        /*  copy the current line into a list node: */
+        strcpy(to_be_inserted->name, current_line);
+
+    /*Find right spot to insert the new node into: */
+        if (head == NULL)
         {
-            node_for_one_name->next=head;
+            head=to_be_inserted;
         }
-        head=node_for_one_name;
-        node_counter++;
-
+        else
+        {
+            if(compare_strings(head->name, to_be_inserted->name)==2)
+            {
+                to_be_inserted->next=head;
+                head=to_be_inserted;
+            }
+            else
+            {
+                before_insertion=head;
+                compared_with=head->next;
+                while (compared_with != NULL)
+                {
+                    if(compare_strings(to_be_inserted->name,compared_with->name)==1)
+                    {
+                        before_insertion->next=to_be_inserted;
+                        to_be_inserted->next=compared_with;
+                        break;
+                    }
+                    else
+                    {
+                        before_insertion=before_insertion->next;
+                        compared_with=compared_with->next;
+                    }
+                }
+                if (compared_with==NULL)
+                /* If the new node has to be placed at the end of the current list
+                */
+                {
+                    before_insertion->next=to_be_inserted;
+                }
+            }
+        }
     }
     fclose(F1);
 
-
-/*  Implementing Bubble Sort.
-    (Picked Bubble Sort because there's not as much going through the whole list,
-    we only ever look at the next element.)
-
-    Note about the vocabulary I use in the comments (and variable names):
-    I'm going to assume the list goes top to bottom rather than left to right
-    (meaning, the next element is downwards, not to the right).
-*/
-
-    struct node *before_swap;   // Will be the node before the two that might get swapped
-    struct node *down_move;     // Will be the node that gets moved down the list if there's a swap
-    struct node *up_move;       // Will be the node that gets moved up the list if there's a swap
-
-
-        /*
-            Bubble Sort.
-            Doesn't work if list doesn't have at least 3 elements.
-            Need to either define special cases for fewer elements, change the
-            struct pointers, or switch to other sorting method.
-        */
-    for(;node_counter > 0; node_counter--)
-    {
-
-        down_move=head;
-        up_move=head->next;
-
-        if (compare_strings(down_move->name,up_move->name)==2)
-        {
-            swap_head_and_next(down_move,up_move);
-            head=up_move;
-        }
-        // Now for the elements after head; there's a lot of repeated code here.
-        before_swap=head;
-        down_move=head->next;
-        up_move=down_move->next;
-
-        while (up_move != NULL) // once up_move has reached NULL we're done
-        {
-            if(compare_strings(down_move->name,up_move->name)==2)
-                swap_any_other_two(before_swap,down_move,up_move);
-            /* Now everything gets moved one node down*/
-            up_move=before_swap->next->next->next;
-            down_move=before_swap->next->next;
-            before_swap=before_swap->next;
-        }
-    }
 
 // Printing the list
 // This is just for checking if the created list looks as expected
@@ -218,9 +193,6 @@ int main()
         printf("%s", traversenode1->name);
         traversenode1=traversenode1->next;
     }
-
-    printf ("Number of elements in list: %d", node_counter);
-
 
 // Deleting the list; should be moved into a function later
     struct node *traversenode2;

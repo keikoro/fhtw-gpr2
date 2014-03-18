@@ -26,12 +26,25 @@ int main(int argc, char *argv[])
     char *outputstring = (char*)malloc(256*sizeof(char));
 
 
-    char *outputfilename = "testoutputfile.c";
-    char *filename = "input3.n";
-
     outputstring = checkstdin(argc, argv, reverse, stopthis);
     printf("outputstring: %s\n", outputstring);
 
+    char *input_file_name = (char*)malloc(256*sizeof(char));
+    char *output_file_name = (char*)malloc(256*sizeof(char));
+
+    printf("Length: %d", strlen(outputstring));
+/*    for(int i=0; outputstring[i]!='\0'; i++)
+    {
+        while(outputstring[i] != '|')
+        {
+            input_file_name[i] = outputstring[i];
+        }
+        i++;
+        output_file_name[i] = outputstring[i];
+    }
+
+    printf ("%s\n", input_file_name);
+    printf ("s\n", output_file_name);*/
     // TODO remove later on
     // printf("reverse: %d\n", *reverse);
 
@@ -45,18 +58,18 @@ int main(int argc, char *argv[])
     */
     if(*reverse == 0)
     {
-        head = read_and_sort(filename);
+        head = read_and_sort(input_file_name);
     }
     else
     {
-        head = read_and_sort_reverse(filename);
+        head = read_and_sort_reverse(input_file_name);
     }
 
     struct node *myoutputlist;
     myoutputlist=head;
 
     /*  start function to write list into a file */
-    writefiles(outputfilename, myoutputlist);
+    writefiles(input_file_name, myoutputlist);
 
     // Deleting the list; should be moved into writefiles.c later
     struct node *traversenode2;

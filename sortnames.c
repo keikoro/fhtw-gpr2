@@ -8,13 +8,14 @@
 #include "readandsort.c"
 #include "writefiles.c"
 
-
 int main(int argc, char *argv[])
 {
 
+    FILE *input;
+    FILE *output;
+
     readfiles(argc, argv);
 
-    FILE *input;
     struct node *head;
     /*
         input will later be determined by the readfiles programm; for now it's statically set to textfiles/ue1_names.txt

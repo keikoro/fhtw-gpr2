@@ -42,7 +42,7 @@ char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)
     int *reverse = reverseflag;
     int *stopthis = stopflag;
 
-    char separator[1] = "|";
+    char separator[2] = "|";
     char *inputfilename;
     char *outputfilename;
     char *outputstring = (char*)malloc(256*sizeof(char));
@@ -97,17 +97,14 @@ char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)
             */
             if((output=fopen(outputfilename, "w")) != NULL)
             {
-
-                // blabalbalaaaaaa
-                // continue with program...
                 if (*reverse == 1)
                 {
                     // sort list in reverse order
                 }
-
-                // guter outputstring
-
-                outputstring = strcat(inputfilename, separator);
+                /*  name of input file, name of output file
+                    split by separator */
+                outputstring = strcat(outputstring, inputfilename);
+                outputstring = strcat(outputstring, separator);
                 outputstring = strcat(outputstring, outputfilename);
                 return outputstring;
 

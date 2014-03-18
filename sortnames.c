@@ -19,16 +19,28 @@ TODO:
 
 int main(int argc, char *argv[])
 {
-    char *inputfile = (char*)malloc(256*sizeof(char));
-    char *outputfile = (char*)malloc(256*sizeof(char));
+    // char *inputfile = (char*)malloc(256*sizeof(char));
+    // char *outputfile = (char*)malloc(256*sizeof(char));
     int *reverse = (int*)malloc(sizeof(int));
+    int *stopthis = (int*)malloc(sizeof(int));
+    char *outputstring = (char*)malloc(256*sizeof(char));
+
 
     char *outputfilename = "testoutputfile.c";
     char *filename = "input3.n";
 
-    if(checkstdin(argc, argv, inputfile, outputfile, reverse) == 1) {
-        return 1;
-    }
+
+    outputstring = checkstdin(argc, argv, reverse, stopthis);
+    printf("outputstring: %s\n", outputstring);
+
+    // strcat
+
+
+    // TODO remove later on
+    // printf("reverse: %d\n", *stopthis);
+    // printf("stopthis: %d\n", *reverse);
+
+    // int strncmp(char *string1, char *string2, int n);
 
     // TODO remove later on
     // printf("reverse %d\n", *reverse);
@@ -42,8 +54,13 @@ int main(int argc, char *argv[])
         In practice, it returns what will then become the start (head) of the list.
     */
     if(*reverse == 0)
+    {
         head = read_and_sort(filename);
-    else head = read_and_sort_reverse(filename);
+    }
+    else
+    {
+        head = read_and_sort_reverse(filename);
+    }
 
     struct node *myoutputlist;
     myoutputlist=head;

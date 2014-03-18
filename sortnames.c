@@ -1,7 +1,10 @@
 /*
 TODO:
 - Reverse sorting
-- ALL 5 test cases - more testing of correct sort order
+- ALL 5 test cases
+- check for faults in input1.n
+- check for faults in input2.n
+- more testing of correct sort order
 - use user-defined input & output files
 - exit program on return 1
 */

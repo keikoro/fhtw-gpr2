@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     FILE *input;
     char *outputfilename = "testoutputfile.c";
 
-    readfiles(argc, argv);
+    checkstdin(argc, argv);
 
     struct node *head;
     /*

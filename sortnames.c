@@ -15,15 +15,17 @@ TODO:
 #include <ctype.h>
 #include <unistd.h>
 #define NAMENSLAENGE 257
-#include "checkstdin.c"
 #include "readandsort.c"
+#include "checkstdin.c"
+
 #include "writefiles.c"
 
 int main(int argc, char *argv[])
 {
-    char *inputfile = "\0";
-    char *outputfile = "\0";
+    char *inputfile = (char*)malloc(256*sizeof(char));
+    char *outputfile = (char*)malloc(256*sizeof(char));
     int *reverse = (int*)malloc(sizeof(int));
+
     char *outputfilename = "testoutputfile.c";
     char *filename = "input3.n";
 
@@ -32,8 +34,8 @@ int main(int argc, char *argv[])
     }
 
     // TODO remove later on
-    printf("%d\n", *reverse);
-    printf("%c\n", *inputfile);
+    // printf("reverse %d\n", *reverse);
+    // printf("inputfile %d\n", *inputfile);
 
     struct node *head;
 
@@ -58,8 +60,6 @@ int main(int argc, char *argv[])
         head=traversenode2->next;
         free(traversenode2);
     }
-
-    printf("hallo\n");
 
     return 0;
 }

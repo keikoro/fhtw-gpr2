@@ -16,12 +16,11 @@ sortnames: wrong input format
 sortnames: cannot open output file <NAME>
 
 Return 1 in main() on any of these errors.
-*/
 
 
-/*
 TODO:
 - check if input file contains names (if not: print mgs, return 1)
+-> happens in another function
 
 DONE:
 - separation of flags from other input (which is interpreted as file names)
@@ -32,7 +31,6 @@ not: -t name name name -p
 - check if input file exists (if not: print msg, return 1)
 - check if output file can be opened (if not: print msg, return 1)
 */
-
 
 int checkstdin(int argc, char *argv[], char *namein, char *nameout, int *reverseflag)
 {
@@ -93,6 +91,13 @@ int checkstdin(int argc, char *argv[], char *namein, char *nameout, int *reverse
 
                 // blabalbalaaaaaa
                 // continue with program...
+
+                struct node *head;
+                head = read_and_sort(inputfilename);
+
+                struct node *myoutputlist;
+                myoutputlist=head;
+
 
                 if (*reverse == 1)
                 {

@@ -1,9 +1,9 @@
 RaIsTlIn
 albert
-jon 
+jon
 isidor
 alBert
-_karoline
+ karoline
 Jon
 RaIsTlIn MaJeRe
 franz joseph
@@ -13,11 +13,19 @@ rAiStLiN mAjeRe
 ANNA
 isidor Meier
 Bert meier
+-anna
 rAiStLiN
+ann
+Ann
+aNn
+-karoline
 Bert Meier-Schulz
+isodormeier
 franz-joseph
 Anna Elena Knut
 bert Meier
 Anna
+RAISTlin
+raisTlin
 anna
-_anna
+ anna

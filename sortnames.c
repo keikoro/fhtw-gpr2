@@ -12,64 +12,57 @@ TODO:
 #include <ctype.h>
 #include <unistd.h>
 #define NAMENSLAENGE 257
-#include "readandsort.c"
 #include "checkstdin.c"
-
+#include "readandsort.c"
 #include "writefiles.c"
 
 int main(int argc, char *argv[])
 {
-    // char *inputfile = (char*)malloc(256*sizeof(char));
-    // char *outputfile = (char*)malloc(256*sizeof(char));
+    char *inputfile = (char*)malloc(256*sizeof(char));
+
+    char *outputfile = (char*)malloc(256*sizeof(char));
     int *reverse = (int*)malloc(sizeof(int));
     int *stopthis = (int*)malloc(sizeof(int));
     char *outputstring = (char*)malloc(256*sizeof(char));
-
+    int k = 0;
+    // int l = 0;
+    char separator[2] = "|";
 
     outputstring = checkstdin(argc, argv, reverse, stopthis);
-    printf("outputstring: %s\n", outputstring);
 
-    char *input_file_name = (char*)malloc(256*sizeof(char));
-    char *output_file_name = (char*)malloc(256*sizeof(char));
-
-    printf("Length: %d", strlen(outputstring));
-/*    for(int i=0; outputstring[i]!='\0'; i++)
+    while (*outputstring)
     {
-        while(outputstring[i] != '|')
+        if (strchr(separator, *outputstring))
         {
-            input_file_name[i] = outputstring[i];
+            break;
         }
-        i++;
-        output_file_name[i] = outputstring[i];
+        else
+        {
+            inputfile[k] = *outputstring;
+        }
+        k++;
+        outputstring++;
     }
 
-    printf ("%s\n", input_file_name);
-    printf ("s\n", output_file_name);*/
-    // TODO remove later on
-    // printf("reverse: %d\n", *reverse);
-
+    // inputfile[k+1] = "\0";
+    // printf("inputfile: %s\n", inputfile);
 
     struct node *head;
 
-    // the input file to read from
-
-    /*  read_and_sort needs a file pointer as an argument, and returns a pointer to a "struct node".
-        In practice, it returns what will then become the start (head) of the list.
-    */
     if(*reverse == 0)
     {
-        head = read_and_sort(input_file_name);
+        head = read_and_sort(inputfile);
     }
     else
     {
-        head = read_and_sort_reverse(input_file_name);
+        head = read_and_sort_reverse(inputfile);
     }
 
     struct node *myoutputlist;
     myoutputlist=head;
 
     /*  start function to write list into a file */
-    writefiles(input_file_name, myoutputlist);
+    writefiles(outputfile, myoutputlist);
 
     // Deleting the list; should be moved into writefiles.c later
     struct node *traversenode2;

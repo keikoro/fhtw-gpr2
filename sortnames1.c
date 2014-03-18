@@ -3,7 +3,7 @@
 GPR2, Aufgabe 1.
 
 What the programm does right now:
-    -   Reads from a specific file (textfiles/ue1_names2.txt) line by line;
+    -   Reads from a specific file (textfiles/ue1_namesWrongInputFormat.txt) line by line;
             lines can be at most 256 characters long, line break and '\n' included.
     -   Sort them into a dynamically created linked list
     -   Prints the list onto the screen
@@ -109,7 +109,7 @@ int main()
     FILE *F1;
     char current_line [NAMENSLAENGE];
 
-    F1 = fopen("textfiles/ue1_names2.txt", "r");
+    F1 = fopen("textfiles/ue1_namesWrongInputFormat.txt", "r");
 
     struct node *head = NULL;
     struct node *to_be_inserted;
@@ -123,12 +123,38 @@ int main()
 
         /*  copy the current line into a list node: */
         strcpy(to_be_inserted->name, current_line);
+        /* Checking if line ends with a linebreak, add one if not */
         if (to_be_inserted->name[strlen(to_be_inserted->name)-1] != '\n')
         {
             to_be_inserted->name[strlen(to_be_inserted->name)-1] = '\n';
             to_be_inserted->name[strlen(to_be_inserted->name)] = '\0';
         }
 
+        int wrong_input_format = 0;
+        for(int i=0; i<=strlen(to_be_inserted->name)-2; i++)
+        /* Check for wrong input format;
+            Character is neither A-Z, nor a-z, nor a dash, nor a space
+        */
+        {
+            if(
+               !(
+                (   (to_be_inserted->name[i] >= 'A') && (to_be_inserted->name[i] <= 'Z') )
+                    ||
+                (   (to_be_inserted->name[i] >= 'a') && (to_be_inserted->name[i] <= 'z') )
+                    ||
+                    ( isspace(to_be_inserted->name[i]) )
+                    ||
+                    (to_be_inserted->name[i] == '-')
+                )
+            )
+                wrong_input_format = 1;
+        }
+
+    if (wrong_input_format == 1)
+    {
+        printf ("sortnames: wrong input format");
+        return (1);
+    }
     /*Find right spot to insert the new node into: */
         if (head == NULL)
         {

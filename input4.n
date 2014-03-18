@@ -1111,7 +1111,7 @@ Agatha
 Sigfrit
 Sinikka
 Monty
-B-St. John
+B-St John
 Anneliese
 Liu
 Archie
@@ -5736,7 +5736,7 @@ Victor Laplace
 Nabila
 Bettye
 Saun
-Anton Ivanovitch Ha1old
+Anton Ivanovitch Harold
 Loretta
 Byran
 Dimitris

@@ -11,6 +11,7 @@ if13b070 - K Kollmann
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <getopt.h>
 #define NAMENSLAENGE 257
 #include "checkstdin.c"
 #include "readandsort.c"

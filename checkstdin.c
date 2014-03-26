@@ -73,6 +73,7 @@ char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)
                     printf("sortnames: wrong option %#x\n", optopt);
                 }
                 *stopthis = 1;
+                exit(1);
                 return outputstring;
                 break;
         }
@@ -88,6 +89,10 @@ char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)
     {
         inputfilename = argv[optind];
         outputfilename = argv[optind+1];
+
+        // test if -r flag works as expected with getopt included
+        // result: test successful! \o/
+        //printf("optind = %d\n, reverse = %d\n", optind, *reverse);
 
         /*  check for existence of inputfilename */
         if((input=fopen(inputfilename, "r")) != NULL)
@@ -126,6 +131,7 @@ char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)
             printf("sortnames: cannot open input file: %s\n", inputfilename);
 
             *stopthis = 1;
+            exit(1);
             outputstring = "\0";
             return outputstring;
         }
@@ -136,6 +142,7 @@ char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)
         printf("sortnames: wrong number of input or output files\n");
 
         *stopthis = 1;
+        exit(1);
         outputstring = "\0";
         return outputstring;
     }

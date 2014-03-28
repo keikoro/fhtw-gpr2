@@ -1,39 +1,16 @@
 /*
-A user is supposed to enter two file names: one for an input file from which a list of names should be read, one for an output file to which this list of names should be written after it's been sorted.
+GPR2 UE1, UE2
 
-The user can choose to use the option/flag "-r" which sorts the list in reverse order.
-
-Caveats:
-- if other flags than -r are used, print:
-sortnames: wrong option <OPTION> (with option being the wrong flag w/o -)
-- if one or both of the two file names are missing, print:
-sortnames: wrong number of input or output files
-- if the input file cannot be found, print:
-sortnames: cannot open input file: <NAME> (name being the typed name)
-- if the input file contains other values than names, print:
-sortnames: wrong input format
-- if the output file cannot be opened, print:
-sortnames: cannot open output file <NAME>
-
-Return 1 in main() on any of these errors.
+if13b076 - Linda Spindler
+if13b070 - K Kollmann
 
 
-TODO:
-- check if input file contains names (if not: print mgs, *stopthis = 1;
-)
--> happens in another function
+***
+CHECKSTDIN
 
-DONE:
-- separation of flags from other input (which is interpreted as file names)
-attn: atm, only flags in front of a first file name are considered (unclear)
-e.g. -t -p name name name
-not: -t name name name -p
-- check for wrong flags (if there are: print msg, *stopthis = 1;
-)
-- check if input file exists (if not: print msg, *stopthis = 1;
-)
-- check if output file can be opened (if not: print msg, *stopthis = 1;
-)
+function to
+- check user input on standard input
+
 */
 
 char *checkstdin(int argc, char *argv[], int *reverseflag, int *stopflag)

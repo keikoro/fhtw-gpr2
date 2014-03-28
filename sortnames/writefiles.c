@@ -1,5 +1,16 @@
 /*
-write data into a file
+GPR2 UE1, UE2
+
+if13b076 - Linda Spindler
+if13b070 - K Kollmann
+
+
+***
+WRITEFILES
+
+function to
+- write data into a file
+
 */
 
 int writefiles(char *outputfilename, struct node *myoutputlist)

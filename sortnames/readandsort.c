@@ -1,7 +1,18 @@
 /*
+GPR2 UE1, UE2
+
+if13b076 - Linda Spindler
+if13b070 - K Kollmann
+
+
+***
+READANDSORT
+
+function to
 - read a file line by line
-- sort all lines (see instruction sheet ...... tbd)
+- sort all lines
 - output data into linked list
+
 */
 
 struct node{

@@ -69,13 +69,13 @@ int main(int argc, char *argv[])
     writefiles(outputfile, myoutputlist);
 
     // Deleting the list; should be moved into writefiles.c later
-    //struct node *traversenode2;
-    //while(head!=NULL)
-    //{
-        //traversenode2=head;
-        //head=traversenode2->next;
-        //free(traversenode2);
-    //}
+    struct node *traversenode2;
+    while(head!=NULL)
+    {
+        traversenode2=head;
+        head=traversenode2->next;
+        free(traversenode2);
+    }
 
     return 0;
 }

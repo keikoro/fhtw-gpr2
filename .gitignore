@@ -4,5 +4,5 @@
 !*.n
 !*.txt
 !.gitignore
-*test*.*
+!*test*.*
 !*boese*

@@ -109,7 +109,7 @@ struct node* read_and_sort(char *inputname)
     struct node *compared_with;     // Will be the node after which the new node might get inserted
 
     input = fopen(filename, "r");
-
+    
 
     /*   reads each line, including the linebreak into the string*/
     while (fgets(current_line, NAMENSLAENGE, input))
@@ -149,6 +149,8 @@ struct node* read_and_sort(char *inputname)
     {
         printf("sortnames: wrong input format\n");
         head=NULL;
+        fclose(input);
+        exit(1);
         return(head);
     }
     /*Find right spot to insert the new node into: */
@@ -249,6 +251,8 @@ struct node* read_and_sort_reverse(char *inputname)
     {
         printf("sortnames: wrong input format\n");
         head=NULL;
+        fclose(input);
+        exit(1);
         return(head);
     }
     /*Find right spot to insert the new node into: */

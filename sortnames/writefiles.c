@@ -26,7 +26,8 @@ int writefiles(char *outputfilename, struct node *myoutputlist)
         fprintf(output, "%s", outputlist->name);
         outputlist=outputlist->next;
     }
-
+	
+	fclose(output);
     return 0;
 }
 

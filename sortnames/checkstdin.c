@@ -13,11 +13,9 @@ function to
 
 */
 
-void checkstdin(int argc, char *argv[], char **a, char **b, int *r)
+void checkstdin(int argc, char *argv[], char **inputfilename, char **outputfilename, int *r)
 {
 	int getflags = 0;
-    char *inputfilename;
-    char *outputfilename;
     int i = 0, j = 0;
     *r = 0;
 
@@ -58,29 +56,29 @@ void checkstdin(int argc, char *argv[], char **a, char **b, int *r)
 
     if (j >= 2)
     {
-        inputfilename = argv[optind];
-        outputfilename = argv[optind+1];
+        *inputfilename = argv[optind];
+        *outputfilename = argv[optind+1];
 
         /*  check for existence of inputfilename */
-        if((input=fopen(inputfilename, "r")) != NULL)
+        if((input=fopen(*inputfilename, "r")) != NULL)
         {
             /*  check for writability of outputfilename
                 (file might only be writeable by certain users)
             */
-            if((output=fopen(outputfilename, "w")) != NULL)
+            if((output=fopen(*outputfilename, "w")) != NULL)
             {
-                fclose(input);				
+                fclose(input);
             }
             else
             {
-                printf("sortnames: cannot open output file: %s\n", outputfilename);
+                printf("sortnames: cannot open output file: %s\n", *outputfilename);
                 fclose(input);
 				exit(1);
             }
         }
         else
         {
-            printf("sortnames: cannot open input file: %s\n", inputfilename);
+            printf("sortnames: cannot open input file: %s\n", *inputfilename);
             exit(1);
         }
     }

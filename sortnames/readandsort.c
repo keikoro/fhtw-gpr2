@@ -97,9 +97,10 @@ int compare_strings (char *s1, char *s2)
     return (comes_first);
 }
 
-struct node* read_and_sort(char *inputname)
+struct node* read_and_sort(char *programfile, char *inputname)
 {
     FILE *input;
+    char *programname = programfile;
     char *filename = inputname;
     struct node* head=NULL;
     char current_line [NAMENSLAENGE];
@@ -147,7 +148,7 @@ struct node* read_and_sort(char *inputname)
 
     if (wrong_input_format == 1)
     {
-        printf("sortnames: wrong input format\n");
+        fprintf(stderr, "%s: wrong input format\n", programname);
         head=NULL;
         fclose(input);
         exit(1);
@@ -197,10 +198,11 @@ struct node* read_and_sort(char *inputname)
 }
 
 
-struct node* read_and_sort_reverse(char *inputname)
+struct node* read_and_sort_reverse(char *programfile, char *inputname)
 {
     FILE *input;
     char *filename = inputname;
+    char *programname = programfile;
     struct node* head=NULL;
     char current_line [NAMENSLAENGE];
 
@@ -249,7 +251,7 @@ struct node* read_and_sort_reverse(char *inputname)
     /*Needs to end the whole programm, not just this function as it does now.*/
 
     {
-        printf("sortnames: wrong input format\n");
+        fprintf(stderr, "%s: wrong input format\n", programname);
         head=NULL;
         fclose(input);
         exit(1);

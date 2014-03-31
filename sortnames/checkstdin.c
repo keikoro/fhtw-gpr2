@@ -13,7 +13,7 @@ function to
 
 */
 
-void checkstdin(int argc, char *argv[], char **inputfilename, char **outputfilename, int *r)
+void checkstdin(int argc, char *argv[], char **programfilename, char **inputfilename, char **outputfilename, int *r)
 {
 	int getflags = 0;
     int i = 0, j = 0;
@@ -36,12 +36,12 @@ void checkstdin(int argc, char *argv[], char **inputfilename, char **outputfilen
                 /*  print out printable flags */
                 if (isprint(optopt))
                 {
-                    printf("sortnames: wrong option %c\n", optopt);
+                    fprintf(stderr, "%s: wrong option %c\n", argv[0], optopt);
                 }
                 /*  for non-printable characters */
                 else
                 {
-                    printf("sortnames: wrong option %#x\n", optopt);
+                    fprintf(stderr, "%s: wrong option %c\n", argv[0], optopt);
                 }
                 exit(1);
                 break;
@@ -56,6 +56,7 @@ void checkstdin(int argc, char *argv[], char **inputfilename, char **outputfilen
 
     if (j >= 2)
     {
+		*programfilename = argv[0];
         *inputfilename = argv[optind];
         *outputfilename = argv[optind+1];
 
@@ -71,21 +72,21 @@ void checkstdin(int argc, char *argv[], char **inputfilename, char **outputfilen
             }
             else
             {
-                printf("sortnames: cannot open output file: %s\n", *outputfilename);
+                fprintf(stderr, "%s: cannot open output file: %s\n", *programfilename, *outputfilename);
                 fclose(input);
 				exit(1);
             }
         }
         else
         {
-            printf("sortnames: cannot open input file: %s\n", *inputfilename);
+            fprintf(stderr, "%s: cannot open input file: %s\n", argv[0], *inputfilename);
             exit(1);
         }
     }
     /*  if there aren't enough filenames */
     else
     {
-        printf("sortnames: wrong number of input or output files\n");
+		fprintf(stderr, "%s: wrong number of input or output files\n", argv[0]);
         exit(1);
     }
 }

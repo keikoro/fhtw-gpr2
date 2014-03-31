@@ -47,19 +47,21 @@ int main(int argc, char *argv[])
 {
     char *inputfile = (char*)malloc(256*sizeof(char));
     char *outputfile = (char*)malloc(256*sizeof(char));
+    char *programfile = (char*)malloc(256*sizeof(char));    
     int r = 0;
 
-    checkstdin(argc, argv, &inputfile, &outputfile, &r);
-
+    checkstdin(argc, argv, &programfile, &inputfile, &outputfile, &r);
+	
+	
     struct node *head;
 
     if(r == 0)
     {
-        head = read_and_sort(inputfile);
+        head = read_and_sort(programfile, inputfile);
     }
     else
     {
-        head = read_and_sort_reverse(inputfile);
+        head = read_and_sort_reverse(programfile, inputfile);
     }
 
     struct node *myoutputlist;

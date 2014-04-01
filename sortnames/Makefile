@@ -20,8 +20,9 @@ dist:
 	cp *.c sortnames-1.1/
 	cp *.n sortnames-1.1/
 	cp Makefile sortnames-1.1/
-	tar -cvzf $sortnames-1.1.tgz sortnames-1.1
+	tar -cvzf sortnames-1.1.tgz sortnames-1.1
 distclean:
-	rmdir sortnames-1.1.tgz
+	rm sortnames-1.1.tgz
+	rm -r  sortnames-1.1
 clean:
 	rm -f sortnames.o sortnames

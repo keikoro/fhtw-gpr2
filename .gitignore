@@ -1,11 +1,5 @@
-*
-!.README
-!*.c
-!*.n
-!*.txt
-!.gitignore
-!*test*.*
-!*boese*
-!sortnames
-!Makefile
-!*.tgz
+*.zip
+*.txt
+*.o
+*.s
+sortnames-1.1

@@ -7,11 +7,21 @@
 # ... name of tool and version no. + all programs and files (sortnames-1.1)
 # make distclean -> delete all files that aren't needed anymore
 #
+CC=gcc
+CFLAGS = -g -Wall -Werror -O -std=c99
 
 all: sortnames
-sortnames: sortnames.c
-	gcc -g -Wall -Werror -O -o sortnames sortnames.c
+sortnames: sortnames.o
+	${CC} ${CFLAGS} -o sortnames sortnames.c
+sortnames.o: sortnames.c readandsort.c writefiles.c checkstdin.c
+	${CC} ${CFLAGS} -c sortnames.c
 dist:
+	mkdir sortnames-1.1
+	cp *.c sortnames-1.1/
+	cp *.n sortnames-1.1/
+	cp Makefile sortnames-1.1/
+	tar -cvf ${CC}.tar sortnames-1.1
 distclean:
+	rmdir *.tar
 clean:
-	rm -f sortnames sortnames-1.1
+	rm -f sortnames.o sortnames

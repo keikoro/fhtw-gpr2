@@ -3,3 +3,5 @@
 *.o
 *.s
 sortnames-1.1
+sortnames
+a.out

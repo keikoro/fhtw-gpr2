@@ -23,6 +23,6 @@ dist:
 	tar -cvzf sortnames-1.1.tgz sortnames-1.1
 distclean:
 	rm sortnames-1.1.tgz
-	rm -r  sortnames-1.1
+	rm -r sortnames-1.1
 clean:
 	rm -f sortnames.o sortnames

@@ -1,19 +1,22 @@
-/*
-# gridsever for vehicle_grid_server program
-#
-# GPR2 UE4
+/*  vehicle_grid_server program
+    gridserver.c
+
+    GPR2 UE4
+
+    if13b070 - K Kollmann
+    if13b076 - Linda Spindler
 
 
 Status
- - No implementation of message queues and named pipes yet (so everything
-	happens in this program)
- - height and width of the grid are entered (by scanf), the grid is 
-	calculated and drawn
- - a two-dimensinal 26x2 array is created and filled with '0'
- - the user is asked to enter a letter twice. The letter is given fixed coordinates
-	both times, they're saved in the 26x2 array. If the second letter is the same as the first
-	there is an error message.
- - I've been writing 'car' instead of 'vehicle'
+ -  No implementation of message queues and named pipes yet (so everything
+    happens in this program)
+ -  height and width of the grid are entered (by scanf), the grid is
+    calculated and drawn
+ -  a two-dimensinal 26x2 array is created and filled with '0'
+ -  the user is asked to enter a letter twice. The letter is given fixed
+    coordinates both times, they're saved in the 26x2 array. If the second
+    letter is the same as the first there is an error message.
+ -  I've been writing 'car' instead of 'vehicle'
 */
 
 
@@ -21,21 +24,25 @@ Status
 
 int main()
 {
-
-    // Creating the grid; reaidng in the numbers if done with scanf instead of getop for now.
+    /*  Creating the grid; reading in the numbers if done with scanf
+        instead of getop for now.
+    */
     int grid_horizontal, grid_vertical;
     printf("Number of rows? ");
     scanf("%d", &grid_horizontal);
     printf("Number of columns? ");
     scanf("%d", &grid_vertical);
-/*
- The actual matrix, borders included, is thus grid_horizontal+2 x grid_vertical+2
- The index of the matrix goes from 0 to grid_horizontal+1 and from 0 to grid_vertical+1
- The index of for the field the cars can travel through goes from 1 to grid_horizonzal, and from 1 to grid_vertical
-*/
+
+    /*
+        The actual matrix, borders included, is thus
+        grid_horizontal+2 x grid_vertical+2. The index of the matrix goes
+        from 0 to grid_horizontal+1 and from 0 to grid_vertical+1.
+        The index of for the field the cars can travel through goes
+        from 1 to grid_horizonzal, and from 1 to grid_vertical.
+    */
     char grid [grid_horizontal+2][grid_vertical+2];
 
-// The following two for loops are for drawing the borders
+    // The following two for loops are for drawing the borders
     for(int i=0; i<=grid_vertical+1; i++)
     {
         grid[0][i]='#';
@@ -47,16 +54,15 @@ int main()
         grid[i][grid_vertical+1]='#';
     }
 
-// The following loop fills the rest of the grid with '.' (I don't think you can do this without a loop?)
+    /*  The following loop fills the rest of the grid with '.'
+        (I don't think you can do this without a loop?) */
     for(int i=1; i<=grid_horizontal; i++)
     {
         for(int j=1; j<=grid_vertical; j++)
             grid[i][j] = '.';
     }
 
-/*
-    Printing the grid
-*/
+    // Printing the grid
     for(int i=0; i<=grid_horizontal+1; i++)
     {
         for(int j=0; j<=grid_vertical+1; j++)
@@ -64,11 +70,9 @@ int main()
         printf("\n");
     }
 
-
-/*
- Matrix for saving the coordinates of the (up to) 26 cars
- 2 rows, 26 cols.
-*/
+    /*  Matrix for saving the coordinates of the (up to) 26 cars.
+        2 rows, 26 cols.
+    */
     int cars [2][26];
     for(int i=0; i<=1; i++)
     {
@@ -84,20 +88,18 @@ int main()
         printf("\n");
     }
 
-
-    // Starting a car by chosing its letter (A-Z); user is asked to enter a letter
+    /*  Starting a car by chosing its letter (A-Z);
+        user is asked to enter a letter */
     char car_letter;
     printf("Which car? (A-Z)?\n");
     scanf(" %c", &car_letter);
 
-
-
-/*
- The initial coordinates for the car (here just fixed at [2][2], needs to be randomised)
- are saved at the index corresponding to the letter (0 for A, 1 for B etc)
- by calculating the ASCII-number - 65
- This information should be entered by the client, then sent to the server
-*/
+    /*
+     The initial coordinates for the car (here just fixed at [2][2], needs to be randomised)
+     are saved at the index corresponding to the letter (0 for A, 1 for B etc)
+     by calculating the ASCII-number - 65
+     This information should be entered by the client, then sent to the server
+    */
     cars[0][car_letter-65] = 2;
     cars[1][car_letter-65] = 2;
 
@@ -109,16 +111,17 @@ int main()
     }
 
 
-    // Starting a car by chosing its letter (A-Z), again, user entry
-    // needs to come from the client later 
+    /*  Starting a car by chosing its letter (A-Z), again, user entry
+        needs to come from the client later */
     printf("Which car? (A-Z)?\n");
     scanf(" %c", &car_letter);
 
 
-// Checks if this letter is already in use, prints message acordingly
+    /*  Checks if this letter is already in use, prints message acordingly */
     if( (cars[0][car_letter-65] == 0) && (cars[1][car_letter-65]==0) )
     {
-        printf("Registration OK. Start position: 3,3.\n"); // Start position just set at '3', needs to be randomised
+        // Start position just set at '3', needs to be randomised
+        printf("Registration OK. Start position: 3,3.\n");
             cars[0][car_letter-65] = 3;
             cars[1][car_letter-65] = 3;
     }
@@ -131,14 +134,16 @@ int main()
         printf("\n");
     }
 
-/*
- For loop goes through the cars matrix, seaches for coordinates that are not [0][0], and writes the corresponding letter
- into the grid matrix.
- The conversion back from index (which is an int from 0 to 25) back to the corresponding letter
- is done with a switch statement, because I don't think there's another sure way of doing it.
- Posive effect is never having to search for a letter in a list. We're going through the whole 26 long
- array though.
-*/
+    /*
+        For loop goes through the cars matrix, seaches for coordinates that
+        are not [0][0], and writes the corresponding letter into the
+        grid matrix.
+        The conversion back from index (which is an int from 0 to 25)
+        back to the corresponding letter is done with a switch statement,
+        because I don't think there's another sure way of doing it.
+        Posive effect is never having to search for a letter in a list.
+        We're going through the whole 26 long array though.
+    */
     for(int i=0; i<26; i++)
     {
         if( !((cars[0][i] == 0) && (cars[1][i]==0)) )
@@ -175,10 +180,7 @@ int main()
             }
     }
 
-
-/*
-    Printing the grid
-*/
+    // Printing the grid
     for(int i=0; i<=grid_horizontal+1; i++)
     {
         for(int j=0; j<=grid_vertical+1; j++)
@@ -186,8 +188,5 @@ int main()
         printf("\n");
     }
 
-
-
     return 0;
 }
-

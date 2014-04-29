@@ -12,18 +12,20 @@ Status
     and queues are not automatically deleted when the program ends.
 	This means that there's an error message if the program is run
 	twice in a row, because the queue already exists.
-    
- -  First implementation of a message queue: a client enters a letter (A-Z),
-    the message is sent to the server, who saves the letter in a local 
-    variable, saves the coordinates of the
-    letter (at this time always [2,2]), and waits for new input.
-    The client program ends after that one message
+
  -  Height and width of the grid are entered (now with getopt), 
     the grid is calculated and drawn
- -  a two-dimensional 2x26 array is created and filled with '0's
- -  ATM the letter sent by the client is always saved at the same spot (2,2);
-	if the
-	same letter is sent twice, there is an error message
+ -  A two-dimensional 2x26 array is created and filled with '0's
+ -  First implementation of a message queue: the server starts, 
+	a client enters a letter (A-Z),
+    the message is sent to the server, who saves the letter in a local 
+    variable, saves the coordinates of the letter, and waits for new input.
+    The client program ends after that one message
+ -  Doesn't deal with collision: the coordinates are random, if there is
+	already a letter on the random spot, the current letter gets overwritten
+ -	If the same letter if is sent twice by the client,
+	there is an error message; at this time, the message is desplayed on
+	the gridserver terminal, it needs to be moved to the client.
  -  2x26 array and grid are printed a few times on the gridserver.c terminal
  -  I've been writing 'car' instead of 'vehicle'
  -  Error messages are blindly copied from the lecture notes
@@ -120,6 +122,65 @@ int main(int argc, char *argv[])
 //   return EXIT_SUCCESS; (This was in the example program, is this necessary?
 
 
+	/*  Matrix for saving the coordinates of the (up to) 26 cars.
+		2 rows, 26 cols.
+	*/
+	int cars [2][26];
+	for(int i=0; i<=1; i++)
+	{
+		for(int j=0; j<=25; j++)
+			cars[i][j]= 0;
+	}
+        /*  Creating the grid
+        */
+        int grid_horizontal, grid_vertical;
+        grid_horizontal = (int)strtol(x_axis, NULL, 10);
+        grid_vertical = (int)strtol(y_axis, NULL, 10);
+     /* Conversion from string to long int with strtol, converstion from
+        long int to int by cast
+     */
+        
+	printf("\n%d %d\n", grid_horizontal, grid_vertical);
+	
+	/*
+		The actual matrix, borders included, is thus
+		grid_horizontal+2 x grid_vertical+2. The index of the matrix goes
+		from 0 to grid_horizontal+1 and from 0 to grid_vertical+1.
+		The index of for the field the cars can travel through goes
+		from 1 to grid_horizonzal, and from 1 to grid_vertical.
+	*/
+	char grid [grid_horizontal+2][grid_vertical+2];
+
+	// The following two for loops are for drawing the borders;
+	// The drawing of the grid itself needs to be moved to the grid
+	// client later
+	for(int i=0; i<=grid_vertical+1; i++)
+	{
+		grid[0][i]='#';
+		grid[grid_horizontal+1][i]='#';
+	}
+	for(int i=1; i<=grid_horizontal+1; i++)
+	{
+		grid[i][0]='#';
+		grid[i][grid_vertical+1]='#';
+	}
+
+	/*  The following loop fills the rest of the grid with '.'
+		(I don't think you can do this without a loop?) */
+	for(int i=1; i<=grid_horizontal; i++)
+	{
+		for(int j=1; j<=grid_vertical; j++)
+			grid[i][j] = '.';
+	}
+
+	// Printing the grid
+	for(int i=0; i<=grid_horizontal+1; i++)
+	{
+		for(int j=0; j<=grid_vertical+1; j++)
+			printf("%c", grid[i][j]);
+		printf("\n");
+	}
+
     
     message_t msg;  /* Buffer */
     int msgid = -1; /* Message Queue ID */
@@ -145,68 +206,6 @@ int main(int argc, char *argv[])
         char car_letter = msg.mText[0];
         printf("Letter from the last message: %c\n", car_letter);
 
-        /*  Creating the grid
-        */
-        int grid_horizontal, grid_vertical;
-        grid_horizontal = (int)strtol(x_axis, NULL, 10);
-        grid_vertical = (int)strtol(y_axis, NULL, 10);
-     /* Conversion from string to long int with strtol, converstion from
-        long int to int by cast
-     */
-        
-        printf("\n%d %d\n", grid_horizontal, grid_vertical);
-        
-        /*
-            The actual matrix, borders included, is thus
-            grid_horizontal+2 x grid_vertical+2. The index of the matrix goes
-            from 0 to grid_horizontal+1 and from 0 to grid_vertical+1.
-            The index of for the field the cars can travel through goes
-            from 1 to grid_horizonzal, and from 1 to grid_vertical.
-        */
-        char grid [grid_horizontal+2][grid_vertical+2];
-
-        // The following two for loops are for drawing the borders;
-        // The drawing of the grid itself needs to be moved to the grid
-        // client later
-        for(int i=0; i<=grid_vertical+1; i++)
-        {
-            grid[0][i]='#';
-            grid[grid_horizontal+1][i]='#';
-        }
-        for(int i=1; i<=grid_horizontal+1; i++)
-        {
-            grid[i][0]='#';
-            grid[i][grid_vertical+1]='#';
-        }
-
-        /*  The following loop fills the rest of the grid with '.'
-            (I don't think you can do this without a loop?) */
-        for(int i=1; i<=grid_horizontal; i++)
-        {
-            for(int j=1; j<=grid_vertical; j++)
-                grid[i][j] = '.';
-        }
-
-        // Printing the grid
-        for(int i=0; i<=grid_horizontal+1; i++)
-        {
-            for(int j=0; j<=grid_vertical+1; j++)
-                printf("%c", grid[i][j]);
-            printf("\n");
-        }
-
-
-
-
-        /*  Matrix for saving the coordinates of the (up to) 26 cars.
-            2 rows, 26 cols.
-        */
-        int cars [2][26];
-        for(int i=0; i<=1; i++)
-        {
-            for(int j=0; j<=25; j++)
-                cars[i][j]= 0;
-        }
 
         printf("Current Matrix:\n");
         for(int i=0; i<=1; i++)
@@ -223,11 +222,14 @@ int main(int argc, char *argv[])
         Checks if a letter is already in use, prints message acordingly
         These messages need to be moved to the client
     */
+		int x_start, y_start;
+		x_start = (rand() % (grid_horizontal))+1;
+		y_start = (rand() % (grid_vertical))+1;
         if( (cars[0][car_letter-65] == 0) && (cars[1][car_letter-65]==0) )
         {
-            printf("Registration OK. Start position: 2,2.\n");
-                cars[0][car_letter-65] = 2;
-                cars[1][car_letter-65] = 2;
+            printf("Registration OK. Start position: %d,%d\n", x_start-1, y_start-1);
+                cars[0][car_letter-65] = x_start;
+                cars[1][car_letter-65] = y_start;
         }
         else printf("Registration FAILED (letter already exists)\n");
 

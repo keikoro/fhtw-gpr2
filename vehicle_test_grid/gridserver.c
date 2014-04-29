@@ -10,29 +10,95 @@
 Status
  -  No implementation of message queues and named pipes yet (so everything
     happens in this program)
- -  height and width of the grid are entered (by scanf), the grid is
-    calculated and drawn
- -  a two-dimensinal 26x2 array is created and filled with '0'
+ -  height and width of the grid are entered (now with getopt), 
+	the grid is calculated and drawn
+ -  a two-dimensinal 2x26 array is created and filled with '0'
  -  the user is asked to enter a letter twice. The letter is given fixed
-    coordinates both times, they're saved in the 26x2 array. If the second
+    coordinates both times, they're saved in the 2x26 array. If the second
     letter is the same as the first there is an error message.
  -  I've been writing 'car' instead of 'vehicle'
 */
-
-
 #include <stdio.h>
+#include <getopt.h>
+#include <stdlib.h>
+#include <assert.h>
 
-int main()
+char *program_name=NULL; 
+
+void print_usage()
 {
-    /*  Creating the grid; reading in the numbers if done with scanf
-        instead of getop for now.
+   fprintf(stderr,"Usage: %s [-x NUM] [-y NUM]\n",program_name);
+   exit(EXIT_FAILURE);
+}
+
+int main(int argc, char *argv[])
+{
+	int c;
+	int error=0;
+	char *x_axis=NULL;
+	char *y_axis=NULL;
+	program_name=argv[0];
+
+	while( (c = getopt(argc, argv, "x:y:")) != EOF )
+	{
+		switch( c )
+		{
+			case 'x':
+				if (x_axis!=NULL) /* Argument used more than once */
+				{
+				  error=1;
+				  break;
+				}
+				x_axis=optarg;
+				printf("%s: parsing option x, argument: %s\n",program_name,x_axis);
+				break;
+			case 'y':
+				if (y_axis!=NULL)
+				{
+				  error=1;
+				  break;
+				}
+				y_axis=optarg; 
+				printf("%s: parsing option y, argument: %s\n",program_name,y_axis);
+				break;
+			case '?':
+				error=1;
+				break;
+			default:
+				assert( 0 );
+		}
+	}
+	if (error)
+	{
+		print_usage();
+	}
+	//this if should check for wrong nb of options
+	if (argc != (optind))
+	{
+		print_usage();
+	}
+
+	while (optind < argc)
+	{
+	  printf("%s: parsing argument %s\n",program_name,argv[optind]);
+	  optind++;
+   }
+//   return EXIT_SUCCESS; (This was in the example program, is this necessary?
+	
+
+
+
+    /*  Creating the grid
     */
     int grid_horizontal, grid_vertical;
-    printf("Number of rows? ");
-    scanf("%d", &grid_horizontal);
-    printf("Number of columns? ");
-    scanf("%d", &grid_vertical);
-
+	grid_horizontal = (int)strtol(x_axis, NULL, 10);
+	grid_vertical = (int)strtol(y_axis, NULL, 10);
+ /* Conversion from string to long int with strtol, converstion from
+	long int to int by cast
+ */
+	
+	printf("\n%d %d\n", grid_horizontal, grid_vertical);
+	
     /*
         The actual matrix, borders included, is thus
         grid_horizontal+2 x grid_vertical+2. The index of the matrix goes
@@ -114,7 +180,7 @@ int main()
     /*  Starting a car by chosing its letter (A-Z), again, user entry
         needs to come from the client later */
     printf("Which car? (A-Z)?\n");
-    scanf(" %c", &car_letter);
+    scanf("%c", &car_letter);
 
 
     /*  Checks if this letter is already in use, prints message acordingly */
@@ -190,3 +256,4 @@ int main()
 
     return 0;
 }
+

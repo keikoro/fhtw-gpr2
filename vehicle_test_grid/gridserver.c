@@ -22,6 +22,11 @@ Status
 #include <getopt.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/msg.h>
+#include <signal.h> 
 
 char *program_name=NULL; 
 

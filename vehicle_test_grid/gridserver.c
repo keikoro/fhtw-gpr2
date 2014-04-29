@@ -10,19 +10,21 @@
 Status
  -  IMPORTANT: right now, 'KEY' for the message queue is set 87,
     and queues are not automatically deleted when the program ends.
-    Need to fix this first.
+	This means that there's an error message if the program is run
+	twice in a row, because the queue already exists.
     
  -  First implementation of a message queue: a client enters a letter (A-Z),
     the message is sent to the server, who saves the letter in a local 
     variable, saves the coordinates of the
     letter (at this time always [2,2]), and waits for new input.
     The client program ends after that one message
- -  height and width of the grid are entered (now with getopt), 
+ -  Height and width of the grid are entered (now with getopt), 
     the grid is calculated and drawn
- -  a two-dimensinal 2x26 array is created and filled with '0's
- -  the user is asked to enter a letter twice. The letter is given fixed
-    coordinates both times, they're saved in the 2x26 array. If the second
-    letter is the same as the first there is an error message.
+ -  a two-dimensional 2x26 array is created and filled with '0's
+ -  ATM the letter sent by the client is always saved at the same spot (2,2);
+	if the
+	same letter is sent twice, there is an error message
+ -  2x26 array and grid are printed a few times on the gridserver.c terminal
  -  I've been writing 'car' instead of 'vehicle'
  -  Error messages are blindly copied from the lecture notes
     
@@ -37,11 +39,14 @@ Status
 #include <sys/msg.h>
 #include <signal.h> 
 
+
+// defines for the message queue
 #define PERM 0660
 #define KEY 87
-
 #define MAX_DATA 255
 
+
+// typedef for the structure used for messages
 typedef struct
 {
     long mType;
@@ -51,6 +56,8 @@ typedef struct
 
 char *program_name=NULL; 
 
+
+// error message to print when the parameters for main () are incorrect
 void print_usage()
 {
    fprintf(stderr,"Usage: %s [-x NUM] [-y NUM]\n",program_name);
@@ -85,6 +92,7 @@ int main(int argc, char *argv[])
                   break;
                 }
                 y_axis=optarg; 
+                // following printf to be deleted later, but useful for debugging
                 printf("%s: parsing option y, argument: %s\n",program_name,y_axis);
                 break;
             case '?':
@@ -286,7 +294,9 @@ int main(int argc, char *argv[])
             printf("\n");
         }
     }
-    msgctl (msgid, IPC_RMID, NULL);
+
+	// I think I need to delete the queue again somehow, but I have no
+	// idea how atm
     return 0;
 }
 

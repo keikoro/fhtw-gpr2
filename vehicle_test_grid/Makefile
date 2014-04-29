@@ -19,7 +19,7 @@
 # make distclean -> delete all files that aren't needed anymore
 #
 CC=gcc
-CFLAGS = -g -Wall -Werror -O -std=c99
+CFLAGS = -g -Wall -Werror -O -std=c99 -D_XOPEN_SOURCE
 
 all: gridserver vehicleclient griddisplay
 

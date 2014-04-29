@@ -13,12 +13,12 @@ Status
 	This means that there's an error message if the program is run
 	twice in a row, because the queue already exists.
 
- -  Height and width of the grid are entered (now with getopt), 
+ -  Height and width of the grid are entered (now with getopt),
     the grid is calculated and drawn
  -  A two-dimensional 2x26 array is created and filled with '0's
- -  First implementation of a message queue: the server starts, 
+ -  First implementation of a message queue: the server starts,
 	a client enters a letter (A-Z),
-    the message is sent to the server, who saves the letter in a local 
+    the message is sent to the server, who saves the letter in a local
     variable, saves the coordinates of the letter, and waits for new input.
     The client program ends after that one message
  -  Doesn't deal with collision: the coordinates are random, if there is
@@ -29,7 +29,7 @@ Status
  -  2x26 array and grid are printed a few times on the gridserver.c terminal
  -  I've been writing 'car' instead of 'vehicle'
  -  Error messages are blindly copied from the lecture notes
-    
+
 */
 #include <stdio.h>
 #include <getopt.h>
@@ -39,7 +39,7 @@ Status
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/msg.h>
-#include <signal.h> 
+#include <signal.h>
 
 
 // defines for the message queue
@@ -56,7 +56,7 @@ typedef struct
 } message_t;
 
 
-char *program_name=NULL; 
+char *program_name=NULL;
 
 
 // error message to print when the parameters for main () are incorrect
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
                   error=1;
                   break;
                 }
-                y_axis=optarg; 
+                y_axis=optarg;
                 // following printf to be deleted later, but useful for debugging
                 printf("%s: parsing option y, argument: %s\n",program_name,y_axis);
                 break;
@@ -104,7 +104,9 @@ int main(int argc, char *argv[])
                 assert( 0 );
         }
     }
-    if (error)
+
+    // print usage on error or when no options were given
+    if (error || ((x_axis==NULL) || (y_axis==NULL)) )
     {
         print_usage();
     }
@@ -139,9 +141,9 @@ int main(int argc, char *argv[])
      /* Conversion from string to long int with strtol, converstion from
         long int to int by cast
      */
-        
+
 	printf("\n%d %d\n", grid_horizontal, grid_vertical);
-	
+
 	/*
 		The actual matrix, borders included, is thus
 		grid_horizontal+2 x grid_vertical+2. The index of the matrix goes
@@ -181,7 +183,7 @@ int main(int argc, char *argv[])
 		printf("\n");
 	}
 
-    
+
     message_t msg;  /* Buffer */
     int msgid = -1; /* Message Queue ID */
 
@@ -218,7 +220,7 @@ int main(int argc, char *argv[])
          The initial coordinates for the first car (here just fixed at [2][2], needs to be randomised)
          are saved at the index corresponding to the letter (0 for A, 1 for B etc)
          by calculating the ASCII-number - 65
-        
+
         Checks if a letter is already in use, prints message acordingly
         These messages need to be moved to the client
     */
@@ -239,7 +241,7 @@ int main(int argc, char *argv[])
             for(int j=0; j<=25; j++)
                 printf("%d", cars[i][j]);
             printf("\n");
-        }       
+        }
 
 
         /*

@@ -19,7 +19,8 @@ Status
  -  First implementation of a message queue: the server starts, 
 	a client enters a letter (A-Z),
     the message is sent to the server, who saves the letter in a local 
-    variable, saves the coordinates of the letter, and waits for new input.
+    variable, saves the coordinates of the letter in the 2x26 matrix,
+    and waits for new input.
     The client program ends after that one message
  -  Doesn't deal with collision: the coordinates are random, if there is
 	already a letter on the random spot, the current letter gets overwritten
@@ -118,7 +119,7 @@ int main(int argc, char *argv[])
     {
       printf("%s: parsing argument %s\n",program_name,argv[optind]);
       optind++;
-   }
+	}
 //   return EXIT_SUCCESS; (This was in the example program, is this necessary?
 
 
@@ -146,7 +147,7 @@ int main(int argc, char *argv[])
 		The actual matrix, borders included, is thus
 		grid_horizontal+2 x grid_vertical+2. The index of the matrix goes
 		from 0 to grid_horizontal+1 and from 0 to grid_vertical+1.
-		The index of for the field the cars can travel through goes
+		The index of the field the cars can travel through goes
 		from 1 to grid_horizonzal, and from 1 to grid_vertical.
 	*/
 	char grid [grid_horizontal+2][grid_vertical+2];
@@ -215,7 +216,8 @@ int main(int argc, char *argv[])
             printf("\n");
         }
     /*
-         The initial coordinates for the first car (here just fixed at [2][2], needs to be randomised)
+         The initial coordinates for the first car 
+         (random, don't take into account collision)
          are saved at the index corresponding to the letter (0 for A, 1 for B etc)
          by calculating the ASCII-number - 65
         
@@ -246,7 +248,7 @@ int main(int argc, char *argv[])
             For loop goes through the cars matrix, seaches for coordinates that
             are not [0][0], and writes the corresponding letter into the
             grid matrix.
-            The conversion back from index (which is an int from 0 to 25)
+            The conversion from index (which is an int from 0 to 25)
             back to the corresponding letter is done with a switch statement,
             because I don't think there's another sure way of doing it.
             Posive effect is never having to search for a letter in a list.

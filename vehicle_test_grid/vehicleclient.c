@@ -25,14 +25,14 @@
 
 typedef struct
 {
-	long mType;
-	char mText[MAX_DATA];
+    long mType;
+    char mText[MAX_DATA];
 } message_t;
 
 int main(int argc, char* argv[])
 {
-   message_t msg;	/* Buffer fuer Message */
-   int msgid = -1;	/* Message Queue ID */
+   message_t msg;   /* Buffer fuer Message */
+   int msgid = -1;  /* Message Queue ID */
 
    /* Argument Handling */
    if (argc!=2)

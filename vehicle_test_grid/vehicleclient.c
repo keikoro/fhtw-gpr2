@@ -31,23 +31,23 @@ typedef struct
 
 int main(int argc, char* argv[])
 {
-   message_t msg;   /* Buffer fuer Message */
-   int msgid = -1;  /* Message Queue ID */
+	message_t msg;  
+	int msgid = -1;  /* Message Queue ID */
 
-   /* Argument Handling */
-   if (argc!=2)
-   {
-      fprintf(stderr,"Usage: %s <Message>\n",argv[0]);
-      return EXIT_FAILURE;
-   }
-   
-   /* Message Queue oeffnen */
-   if( (msgid = msgget(KEY,PERM))==-1 )
-   {
-      /* error handling */
-      fprintf(stderr,"%s: Can't access message queue\n",argv[0]);
-      return EXIT_FAILURE;
-   }
+	/* Argument Handling */
+	if (argc!=2)
+	{
+	  fprintf(stderr,"Usage: %s <Message>\n",argv[0]);
+	  return EXIT_FAILURE;
+	}
+
+	/* Message Queue oeffnen */
+	if( (msgid = msgget(KEY,PERM))==-1 )
+	{
+	  /* error handling */
+	  fprintf(stderr,"%s: Can't access message queue\n",argv[0]);
+	  return EXIT_FAILURE;
+	}
 
    /* Nachricht verschicken */
    msg.mType=1;
@@ -61,4 +61,5 @@ int main(int argc, char* argv[])
    printf("Message sent: %s\n",msg.mText);
    return EXIT_SUCCESS;
 }
+
 

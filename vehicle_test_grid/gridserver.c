@@ -223,17 +223,17 @@ int main(int argc, char *argv[])
          are saved at the index corresponding to the letter (0 for A, 1 for B etc)
          by calculating the ASCII-number - 65
 
-        Checks if a letter is already in use, prints message acordingly
+        Checks if a letter is already in use, prints message accordingly
         These messages need to be moved to the client
     */
 		int x_start, y_start;
-		x_start = (rand() % (grid_horizontal))+1;
-		y_start = (rand() % (grid_vertical))+1;
         if( (cars[0][car_letter-65] == 0) && (cars[1][car_letter-65]==0) )
         {
+			x_start = (rand() % (grid_horizontal))+1;
+			y_start = (rand() % (grid_vertical))+1;
             printf("Registration OK. Start position: %d,%d\n", x_start-1, y_start-1);
-                cars[0][car_letter-65] = x_start;
-                cars[1][car_letter-65] = y_start;
+			cars[0][car_letter-65] = x_start;
+			cars[1][car_letter-65] = y_start;
         }
         else printf("Registration FAILED (letter already exists)\n");
 
@@ -250,11 +250,6 @@ int main(int argc, char *argv[])
             For loop goes through the cars matrix, seaches for coordinates that
             are not [0][0], and writes the corresponding letter into the
             grid matrix.
-            The conversion from index (which is an int from 0 to 25)
-            back to the corresponding letter is done with a switch statement,
-            because I don't think there's another sure way of doing it.
-            Posive effect is never having to search for a letter in a list.
-            We're going through the whole 26 long array though.
         */
         for(int i=0; i<26; i++)
         {
@@ -305,4 +300,5 @@ int main(int argc, char *argv[])
 	// idea how atm
     return 0;
 }
+
 

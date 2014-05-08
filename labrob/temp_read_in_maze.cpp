@@ -1,5 +1,13 @@
-/* Small programm for reading mazes (here from "maze1_small.txt" in the
-    directory mazes) into a vector and then printing that vector
+/*  labrob program
+    labrob.cpp
+
+    GPR2 UE5
+
+    if13b070 - K Kollmann
+    if13b076 - Linda Spindler
+
+    Small programm for reading mazes into a C++ vector
+    and then printing that vector.
 
 */
 #include <iostream>
@@ -16,6 +24,8 @@ class mazes {
 public:
     string one_row;
     vector<string> v_maze;
+    // include a function that includes/refers to checkstdin (= getopt func)
+    // ... ??
 };
 
 
@@ -25,6 +35,10 @@ int main(int argc, char *argv[])
     string one_row;
     vector<string> v_maze;
 
+    // create an instance of mazes
+    // mazes mazefile;
+
+    // move the below from main to checkstdin
     std::ifstream mazefile (argv[1], std::ifstream::in);
 
     if (mazefile.is_open())
@@ -46,6 +60,12 @@ int main(int argc, char *argv[])
 
 
 void checkstdin(int argc, char *argv[], char **inputfile) {
+
+    // std::ifstream mazefile (argv[1], std::ifstream::in);
+
+    // getopt blabla...
+    // copy-pasted from gridserver program
+    // needs adaption....
 
     // int c;
     // int error=0;
@@ -83,7 +103,5 @@ void checkstdin(int argc, char *argv[], char **inputfile) {
     //             assert( 0 );
     //     }
     // }
-
-
 }
 

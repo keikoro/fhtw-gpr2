@@ -1,0 +1,20 @@
+TODO:
+
+- create 1 labyrinth class
+saves positions of all robots
+has to know its own size
+includes function to find entrance
+
+- create 1 robot class
+with 3 sub classes (for 3 different kinds of "search" behaviours/algorithms)
+
+- read maze file
+- output maze
+
+command to run program:
+labrob DATEINAME [-t1] [–t2] [–t3]...[-tN] [-h]
+
+-t1-tN is the robot type (if no type is specified, use t1)
+-h outputs a usage message
+
+Unclear: We only need to define 3 robot types; what is supposed to happen when user enters -tN?

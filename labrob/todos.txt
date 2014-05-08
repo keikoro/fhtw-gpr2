@@ -1,12 +1,19 @@
-TODO:
+﻿TODO:
 
 - create 1 labyrinth class
+contains the maze vector (?)
 saves positions of all robots
 has to know its own size
-includes function to find entrance
+includes function to find entrance (or put this into the robots search algoritm 
+instead - what if the first opening leads to a dead end?)
 
 - create 1 robot class
 with 3 sub classes (for 3 different kinds of "search" behaviours/algorithms)
+variable for saving the character used by the robot to mark its way
+function for the search algoritm (we do not need to implement functions themselves yet)
+needs to communicate with the labyrinth class to
+	a. determine whether is has a wall in front of itself
+	b. for its own position (?)
 
 - read maze file
 - output maze
@@ -18,3 +25,5 @@ labrob DATEINAME [-t1] [–t2] [–t3]...[-tN] [-h]
 -h outputs a usage message
 
 Unclear: We only need to define 3 robot types; what is supposed to happen when user enters -tN?
+
+-classes need to be put into header-files; create makefile

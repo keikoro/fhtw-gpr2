@@ -18,16 +18,16 @@
 
 using namespace std;
 
-void checkstdin(int argc, char *argv[], char **inputfile);
+// TODO: remove later, überbleibsel of original function
+// void checkuserinput(int argc, char *argv[], char **inputfile);
 
 class mazes {
 public:
     string one_row;
     vector<string> v_maze;
-    // include a function that includes/refers to checkstdin (= getopt func)
-    // ... ??
+    void checkuserinput(int, char**, char**);
+    void createmaze();
 };
-
 
 int main(int argc, char *argv[])
 {
@@ -37,8 +37,9 @@ int main(int argc, char *argv[])
 
     // create an instance of mazes
     // mazes mazefile;
+    mazes *mymaze = new mazes();
 
-    // move the below from main to checkstdin
+    // move the below from main to checkuserinput
     std::ifstream mazefile (argv[1], std::ifstream::in);
 
     if (mazefile.is_open())
@@ -58,10 +59,13 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+void mazes::checkuserinput (int argc, char *argv[], char **inputfile) {
 
-void checkstdin(int argc, char *argv[], char **inputfile) {
+    // function that includes/refers to checkuserinput (= getopt func)
+    // ... ??
 
     // std::ifstream mazefile (argv[1], std::ifstream::in);
+
 
     // getopt blabla...
     // copy-pasted from gridserver program
@@ -103,5 +107,8 @@ void checkstdin(int argc, char *argv[], char **inputfile) {
     //             assert( 0 );
     //     }
     // }
+
+
+
 }
 

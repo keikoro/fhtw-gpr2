@@ -2,43 +2,88 @@
     directory mazes) into a vector and then printing that vector
 
 */
-
-
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-
-/*class maze{
-public:
-
-
-
-
-};*/
+#include <getopt.h>
 
 using namespace std;
 
-int main()
+void checkstdin(int argc, char *argv[], char **inputfile);
 
-{
+class mazes {
+public:
     string one_row;
-    vector<string> labyrinth;
+    vector<string> v_maze;
+};
 
-    ifstream labyrinth_file;
-    labyrinth_file.open ("mazes/maze1_small.txt", ios::in);
-    if (labyrinth_file.is_open())
+
+int main(int argc, char *argv[])
+{
+
+    string one_row;
+    vector<string> v_maze;
+
+    std::ifstream mazefile (argv[1], std::ifstream::in);
+
+    if (mazefile.is_open())
     {
-        while ( getline (labyrinth_file,one_row) )
+        while ( getline (mazefile,one_row) )
         {
-            labyrinth.push_back (one_row);
+            v_maze.push_back (one_row);
         }
     }
-    labyrinth_file.close();
+    mazefile.close();
 
+    // Prints the v_maze:
+    cout << "Out current v_maze:\n";
+    for(int i=0; i<v_maze.size(); i++)
+        cout << v_maze[i] << endl;
 
-// Prints the labyrinth:
-    cout << "Out current Labyrinth:\n";
-    for(int i=0; i<labyrinth.size(); i++)
-        cout << labyrinth[i] << '\n';
+    return 0;
 }
+
+
+void checkstdin(int argc, char *argv[], char **inputfile) {
+
+    // int c;
+    // int error=0;
+    // char *x_axis=NULL;
+    // char *y_axis=NULL;
+    // program_name=argv[0];
+
+    // while( (c = getopt(argc, argv, "x:y:")) != EOF )
+    // {
+    //     switch( c )
+    //     {
+    //         case 'x':
+    //             if (x_axis!=NULL) /* Argument used more than once */
+    //             {
+    //               error=1;
+    //               break;
+    //             }
+    //             x_axis=optarg;
+    //             printf("%s: parsing option x, argument: %s\n",inputfile,x_axis);
+    //             break;
+    //         case 'y':
+    //             if (y_axis!=NULL)
+    //             {
+    //               error=1;
+    //               break;
+    //             }
+    //             y_axis=optarg;
+    //             // following printf to be deleted later, but useful for debugging
+    //             printf("%s: parsing option y, argument: %s\n",inputfile,y_axis);
+    //             break;
+    //         case '?':
+    //             error=1;
+    //             break;
+    //         default:
+    //             assert( 0 );
+    //     }
+    // }
+
+
+}
+

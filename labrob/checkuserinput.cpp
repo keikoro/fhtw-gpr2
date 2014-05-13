@@ -16,7 +16,7 @@ void checkuserinput (int argc, char *argv[]) {
 
     int getflags;
     string *robot = new string();
-    string *maze = new string();  
+    string *maze = new string();
 
     // print all arguments
     // std::cout << "argc: " << argc << std::endl;
@@ -28,7 +28,7 @@ void checkuserinput (int argc, char *argv[]) {
         switch(getflags) {
             case 'h':
                 cout << helpmsg << endl; // prints help message
-                exit(EXIT_FAILURE);                    
+                exit(EXIT_FAILURE);
                 break;
             case 't':
                     *robot = optarg;
@@ -41,5 +41,4 @@ void checkuserinput (int argc, char *argv[]) {
     *maze = argv[optind];
     // print name of maze
     // cout << "the maze name is " << *maze << endl;
-
 }

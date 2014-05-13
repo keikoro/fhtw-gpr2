@@ -5,11 +5,11 @@
 # if13b076 - Linda Spindler
 # if13b070 - K Kollmann
 #
-# make all -> create executable program 'sortnames' (use Option -g)
+# make all -> create executable cpp program 'labrob' (use Option -g)
 # make = make all
 # make clean -> delete all files created during program creation
 # make dist -> make release archive (using tar) containing a sub dir named
-# like program + version no. (sortnames-1.1) with all necessary files
+# like program + version no. with all necessary files
 # (all program files and input files etc. but no executables)
 # make distclean -> delete all files that aren't needed anymore
 #
@@ -32,3 +32,5 @@ distclean:
 	rm -r labrob-1.1
 clean:
 	rm -f labrob.o labrob
+# remove dSYM dir created on Mac due to g++ -g flag
+	@rm -f -r labrob.dSYM

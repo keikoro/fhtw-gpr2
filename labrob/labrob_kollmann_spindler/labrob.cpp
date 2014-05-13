@@ -16,7 +16,6 @@
 #include <cstdlib>
 #include "mazes.h"
 #include "robots.h"
-#include "t1.h"
 //#include "checkuserinput.cpp"
 
 using namespace std;

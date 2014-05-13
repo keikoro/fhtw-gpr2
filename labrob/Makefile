@@ -17,10 +17,10 @@ CC=g++
 CFLAGS = -g -Wall -Werror -O
 
 all: labrob
-labrob: labrob.o
+labrob: labrob.o checkuserinput.o
 	${CC} ${CFLAGS} -o labrob labrob.cpp
-labrob.o: labrob.cpp
-	${CC} ${CFLAGS} -c labrob.cpp
+labrob.o: labrob.cpp checkuserinput.cpp
+	${CC} ${CFLAGS} -c labrob.cpp checkuserinput.cpp
 dist:
 	mkdir labrob-1.1
 	cp labrob.cpp labrob-1.1/
@@ -31,6 +31,6 @@ distclean:
 	rm labrob-1.1.tgz
 	rm -r labrob-1.1
 clean:
-	rm -f labrob.o labrob
+	rm -f labrob.o labrob checkuserinput.o
 # remove dSYM dir created on Mac due to g++ -g flag
 	@rm -f -r labrob.dSYM

@@ -22,15 +22,15 @@ labrob: labrob.o
 labrob.o: labrob.cpp
 	${CC} ${CFLAGS} -c labrob.cpp
 dist:
-	mkdir labrob-1.1
-	cp labrob.cpp labrob-1.1/
-	cp labrob.cpp labrob-1.1/
-	cp *.h labrob-1.1/
-	cp Makefile labrob-1.1/
-	tar -cvzf labrob-1.1.tgz labrob-1.1
+	mkdir labrob_kollmann_spindler
+	cp labrob.cpp labrob_kollmann_spindler/
+	cp labrob.cpp labrob_kollmann_spindler/
+	cp *.h labrob_kollmann_spindler/
+	cp Makefile labrob_kollmann_spindler/
+	tar -cvzf labrob_kollmann_spindler.tgz labrob_kollmann_spindler
 distclean:
-	rm labrob-1.1.tgz
-	rm -r labrob-1.1
+	rm labrob_kollmann_spindler.tgz
+	rm -r labrob_kollmann_spindler
 clean:
 	rm -f labrob.o labrob
 # remove dSYM dir created on Mac due to g++ -g flag

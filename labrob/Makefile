@@ -32,3 +32,5 @@ distclean:
 	rm -r labrob-1.1
 clean:
 	rm -f labrob.o labrob
+# remove dSYM dir created on Mac due to g++ -g flag
+	@rm -f -r labrob.dSYM

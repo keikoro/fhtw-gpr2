@@ -24,7 +24,8 @@ labrob.o: labrob.cpp
 dist:
 	mkdir labrob-1.1
 	cp labrob.cpp labrob-1.1/
-	cp *.cpp labrob-1.1/
+	cp labrob.cpp labrob-1.1/
+	cp *.h labrob-1.1/
 	cp Makefile labrob-1.1/
 	tar -cvzf labrob-1.1.tgz labrob-1.1
 distclean:

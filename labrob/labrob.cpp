@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include "mazes.h"
 #include "robots.h"
-#include "robot1.h"
+#include "t1.h"
 
 using namespace std;
 

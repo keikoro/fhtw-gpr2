@@ -4,8 +4,8 @@
 
 class robots{
 public:	
-	robots();
-	~robots();
+	//~ robots();
+	//~ ~robots();
 	char robotcharacter;	// character the robot draws on the labyrinth,
 							// has to be accessible from outside
 protected:

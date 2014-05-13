@@ -15,7 +15,8 @@
 #include <string>
 #include <vector>
 #include <getopt.h>
-#include "classes.h"
+#include "mazes.h"
+#include "robots.h"
 #include "checkuserinput.cpp"
 
 using namespace std;

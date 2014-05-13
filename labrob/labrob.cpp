@@ -27,27 +27,27 @@ public:
     vector<string> v_maze;
     void checkuserinput(int, char**, char**);
     void createmaze();
-    std::vector<string> lindacreatemaze();
+    std::vector<string> lindacreatemaze(char** inputfile);
 };
-std::vector<string> lindacreatemaze (char** inputfile)
-{
-    string one_row;
-    vector<string> v_maze;
-
-    std::ifstream mazefile;
-    mazefile.open(*inputfile);
-
-    if (mazefile.is_open())
-    {
-        while ( getline (mazefile,one_row) )
-        {
-            v_maze.push_back (one_row);
-        }
-    }
-    mazefile.close();
-
-    return (v_maze);
-}
+//~ std::vector<string> lindacreatemaze (char** inputfile)
+//~ {
+    //~ string one_row;
+    //~ vector<string> v_maze;
+//~ 
+    //~ std::ifstream mazefile;
+    //~ mazefile.open(*inputfile);
+//~ 
+    //~ if (mazefile.is_open())
+    //~ {
+        //~ while ( getline (mazefile,one_row) )
+        //~ {
+            //~ v_maze.push_back (one_row);
+        //~ }
+    //~ }
+    //~ mazefile.close();
+//~ 
+    //~ return (v_maze);
+//~ }
 
 int main(int argc, char *argv[])
 {
@@ -55,11 +55,6 @@ int main(int argc, char *argv[])
     string one_row;
     vector<string> v_maze;
 
-    // create an instance of mazes
-    // mazes mazefile;
-    // mazes *mymaze = new mazes();
-
-    // move the below from main to checkuserinput
     std::ifstream mazefile (argv[1], std::ifstream::in);
 
     if (mazefile.is_open())
@@ -72,9 +67,13 @@ int main(int argc, char *argv[])
     mazefile.close();
 
     // Prints the v_maze:
-    cout << "Out current v_maze:\n";
-    for(unsigned int i=0; i<v_maze.size(); i++)
-        cout << v_maze[i] << endl;
+    
+    mazes mymaze;
+	mymaze.v_maze = v_maze;
+    
+    cout << "Out current maze:\n";
+    for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
+        cout << mymaze.v_maze[i] << endl;
 
     return 0;
 }
@@ -129,4 +128,3 @@ void mazes::checkuserinput (int argc, char *argv[], char **inputfile) {
     // }
 
 }
-

@@ -1,5 +1,5 @@
-#ifndef MAZES_H
-#define MAZES_H
+#ifndef ROBOTS_H
+#define ROBOTS_H
 
 
 class robots{
@@ -10,4 +10,4 @@ private:
 	void exit_search(); // function that will contain the search algorithm
 };
 
-#endif // MAZES_H
+#endif // ROBOTS_H

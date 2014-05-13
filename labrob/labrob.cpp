@@ -27,7 +27,27 @@ public:
     vector<string> v_maze;
     void checkuserinput(int, char**, char**);
     void createmaze();
+    std::vector<string> lindacreatemaze();
 };
+std::vector<string> lindacreatemaze (char** inputfile)
+{
+    string one_row;
+    vector<string> v_maze;
+
+    std::ifstream mazefile;
+    mazefile.open(*inputfile);
+
+    if (mazefile.is_open())
+    {
+        while ( getline (mazefile,one_row) )
+        {
+            v_maze.push_back (one_row);
+        }
+    }
+    mazefile.close();
+
+    return (v_maze);
+}
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +73,7 @@ int main(int argc, char *argv[])
 
     // Prints the v_maze:
     cout << "Out current v_maze:\n";
-    for(int i=0; i<v_maze.size(); i++)
+    for(unsigned int i=0; i<v_maze.size(); i++)
         cout << v_maze[i] << endl;
 
     return 0;

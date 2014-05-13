@@ -10,6 +10,7 @@
     and then printing that vector.
 
 */
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -19,6 +20,7 @@
 #include <unistd.h>
 #include "mazes.h"
 #include "robots.h"
+#include "robot1.h"
 
 using namespace std;
 

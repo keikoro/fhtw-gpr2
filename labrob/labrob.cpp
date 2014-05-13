@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 
 
     cout << "Our current maze:\n";
-    for(int i=0; i < mymaze->v_maze.size(); i++)
+    for(unsigned int i=0; i < mymaze->v_maze.size(); i++)
         cout << mymaze->v_maze[i] << endl;
 
     delete mymaze;

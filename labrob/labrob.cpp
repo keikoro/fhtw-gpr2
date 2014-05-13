@@ -47,7 +47,8 @@ int main(int argc, char *argv[])
     mazefile.close();
 
     mazes mymaze; //make an instance of mazeses called mymaze
-    mymaze.v_maze = v_maze; //the v_maze vector is equal toe the vector v_maze here in main
+    /*  the v_maze vector is equal toe the vector v_maze here in main */
+    mymaze.v_maze = v_maze;
 
     checkuserinput(argc, argv);
 

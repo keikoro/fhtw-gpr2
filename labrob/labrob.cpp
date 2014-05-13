@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
     // create an instance of mazes
     // mazes mazefile;
-    mazes *mymaze = new mazes();
+    // mazes *mymaze = new mazes();
 
     // move the below from main to checkuserinput
     std::ifstream mazefile (argv[1], std::ifstream::in);

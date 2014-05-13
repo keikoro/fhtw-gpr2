@@ -1,9 +1,9 @@
-#ifndef CLASSES_H
-#define CLASSES_H
+#ifndef MAZES_H
+#define MAZES_H
 
 class mazes {
 public:
     std::vector<std::string> v_maze;
 };
 
-#endif // CLASSES_H
+#endif // MAZES_H

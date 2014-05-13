@@ -5,8 +5,6 @@
 
 class t1 : public robot {
 public:
-	//~ t1();
-	//~ ~t1();
 
 protected:
 	void t1_exit_search();

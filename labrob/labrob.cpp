@@ -18,29 +18,52 @@
 
 using namespace std;
 
+//NOTE: Current programm causes stack overflow! Uploading it for sharing anyway.
+// But previous commit is last functioning programm.
+
 // TODO: remove later, überbleibsel of original function
 // void checkuserinput(int argc, char *argv[], char **inputfile);
 
+//class mazes {
+//public:
+//    void checkuserinput(char**);
+//    vector<string> createmaze(char**); // function for read
+////private:
+//    string one_row;
+//    vector<string> v_maze;
+//};
+//std::vector<string> createmaze (char** inputfile)
+//{
+//    string one_row;
+//    vector<string> v_maze;
+//    std::ifstream mazefile (*inputfile, std::ifstream::in);
+//
+//    if (mazefile.is_open())
+//    {
+//        while ( getline (mazefile,one_row) )
+//        {
+//            v_maze.push_back (one_row);
+//        }
+//    }
+//    mazefile.close();
+//
+//    return v_maze;
+//}
 class mazes {
 public:
+    void checkuserinput(char**);
+    vector<string> createmaze(char**){}; // function for read
+//private:
     string one_row;
     vector<string> v_maze;
-    void checkuserinput(int, char**, char**);
-    void createmaze();
 };
 
-int main(int argc, char *argv[])
+std::vector<string> createmaze (char** inputfile)
 {
-
     string one_row;
     vector<string> v_maze;
 
-    // create an instance of mazes
-    // mazes mazefile;
-    mazes *mymaze = new mazes();
-
-    // move the below from main to checkuserinput
-    std::ifstream mazefile (argv[1], std::ifstream::in);
+    std::ifstream mazefile (*inputfile);
 
     if (mazefile.is_open())
     {
@@ -51,15 +74,32 @@ int main(int argc, char *argv[])
     }
     mazefile.close();
 
-    // Prints the v_maze:
-    cout << "Out current v_maze:\n";
-    for(int i=0; i<v_maze.size(); i++)
+    return (v_maze);
+}
+
+
+int main(int argc, char *argv[])
+{
+
+//    mazes.checkuserinput(argv[1]);
+
+    // create an instance of mazes
+    // mazes mazefile;
+
+    char *filename = argv[1];
+    mazes mymaze;
+    vector<string> v_maze;
+    v_maze = mymaze.createmaze(&filename);
+
+
+    cout << "Our current maze:\n";
+    for(unsigned int i=0; i<v_maze.size(); ++i)
         cout << v_maze[i] << endl;
 
     return 0;
 }
 
-void mazes::checkuserinput (int argc, char *argv[], char **inputfile) {
+//void mazes::checkuserinput (char *inputfile) {
 
     // function that includes/refers to checkuserinput (= getopt func)
     // ... ??
@@ -110,5 +150,4 @@ void mazes::checkuserinput (int argc, char *argv[], char **inputfile) {
 
 
 
-}
-
+//}

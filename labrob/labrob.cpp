@@ -23,27 +23,6 @@ using namespace std;
 void checkuserinput (int argc, char argv[]);
 
 
-//  lindacreatemaze/createmaze are not in use
-std::vector<string> lindacreatemaze (char** inputfile)
-{
-    string one_row;
-    vector<string> v_maze;
-
-    std::ifstream mazefile;
-    mazefile.open(*inputfile);
-
-    if (mazefile.is_open())
-    {
-        while ( getline (mazefile,one_row) )
-        {
-            v_maze.push_back (one_row);
-        }
-    }
-    mazefile.close();
-
-    return (v_maze);
-}
-
 int main(int argc, char *argv[])
 {
 

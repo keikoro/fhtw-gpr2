@@ -10,8 +10,8 @@
 
 */
 
-#ifndef ROBOT1_H
-#define ROBOT1_H
+#ifndef T1_H
+#define T1_H
 
 class t1 : public robot {
 public:

@@ -26,7 +26,7 @@ using namespace std;
 class mazes {
 public:
     void checkuserinput(char**);
-    vector<string> createmaze(char**){}; // function for read
+    vector<string> createmaze(char**); // function for read
 //private:
     string one_row;
     vector<string> v_maze;
@@ -61,7 +61,7 @@ private:
 int main(int argc, char *argv[])
 {
 
-    char *filename = argv[1];
+    // char *filename = argv[1];
     mazes* mymaze = new mazes();
 
 

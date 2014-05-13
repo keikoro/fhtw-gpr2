@@ -13,7 +13,7 @@
 #ifndef T1_H
 #define T1_H
 
-class t1 : public robot {
+class t1 : public robots {
 public:
 
 protected:

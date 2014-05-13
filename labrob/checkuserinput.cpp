@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 #include <getopt.h>
-#include "classes.h"
+#include "mazes.h"
+#include "robots.h"
 
 
 void checkuserinput (int argc, char *argv[]) {

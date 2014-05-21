@@ -1,6 +1,6 @@
 # Makefile for labrob program
 #
-# GPR2 UE5
+# GPR2 UE 5+6+7
 #
 # if13b076 - Linda Spindler
 # if13b070 - K Kollmann

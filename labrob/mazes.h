@@ -22,7 +22,7 @@ public:
 	*/
 	void add_robot();
 	// List for saving pointers to the individual instances of robots
-	list<robot*> robots_list;
+//	list<robot*> robots_list;
 };
 
 #endif // MAZES_H

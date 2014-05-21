@@ -1,14 +1,13 @@
 /*  labrob program
     labrob.cpp
 
-    GPR2 UE5 (+ UE6, UE7)
+    GPR2 UE5 + UE6 + UE7
 
     if13b070 - K Kollmann
     if13b076 - Linda Spindler
 
     Small programm for reading mazes into a C++ vector
     and then printing that vector.
-
 */
 
 #include <iostream>

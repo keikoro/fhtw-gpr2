@@ -1,3 +1,15 @@
+/*  labrob program
+    mazes.h
+
+    GPR2 UE5 + UE6 + UE7
+
+    if13b070 - K Kollmann
+    if13b076 - Linda Spindler
+
+    class for mazes
+*/
+
+
 #ifndef MAZES_H
 #define MAZES_H
 

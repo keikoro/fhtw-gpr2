@@ -13,14 +13,14 @@
 #define ROBOTS_H
 
 class robots {
-public:
-	//~ robots();
-	//~ ~robots();
-	char robotcharacter;	// character the robot draws on the labyrinth,
-	int x,y;				// integers for saving the
-							// coordinates of the robot
+private:
+	// character the robot draws on the labyrinth,
+	char robotcharacter;
+	// integers for saving the coordinates of the robot
+	int x,y;
 protected:
-	void exit_search(); // function that will contain the search algorithm
+	// function that will contain the search algorithm
+	void exit_search(); 
 };
 
 #endif // ROBOTS_H

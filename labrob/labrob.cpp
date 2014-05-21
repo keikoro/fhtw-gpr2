@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     mazefile.close();
 
     mazes mymaze; //make an instance of mazeses called mymaze
-    /*  the v_maze vector is equal toe the vector v_maze here in main */
+    /*  the v_maze vector is equal to the vector v_maze here in main */
     mymaze.v_maze = v_maze;
 
     mazes.add_robot(new t1);
@@ -100,12 +100,12 @@ void checkuserinput (int argc, char *argv[]) {
 }
 
 
-mazes::add_robot(*robots)
+void mazes::add_robot(*robots)
 {
 
 }
 
-t1::exit_search()
+void t1::exit_search()
 {
 
 }

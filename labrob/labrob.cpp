@@ -52,6 +52,8 @@ int main(int argc, char *argv[])
     /*  the v_maze vector is equal toe the vector v_maze here in main */
     mymaze.v_maze = v_maze;
 
+    mazes.add_robot(new t1);
+
     checkuserinput(argc, argv);
 
     cout << "Our current maze:\n";
@@ -96,4 +98,15 @@ void checkuserinput (int argc, char *argv[]) {
     *maze = argv[optind];
     // print name of maze
     // cout << "the maze name is " << *maze << endl;
+}
+
+
+mazes::add_robot(*robots)
+{
+
+}
+
+t1::exit_search()
+{
+
 }

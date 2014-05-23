@@ -14,6 +14,8 @@
 
 class robots {
 private:
+	// function that will contain the search algorithm
+	void exit_search(); 
 	// character the robot draws on the labyrinth,
 	char robotcharacter;
 	// integers for saving the coordinates of the robot

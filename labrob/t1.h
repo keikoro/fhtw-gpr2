@@ -14,9 +14,9 @@
 
 class t1 : public robots {
 public:
-
-protected:
     void t1_exit_search();
+protected:
+
 };
 
 #endif // T1_H

@@ -124,7 +124,9 @@ void checkuserinput (int argc, char *argv[]) {
                         "like so:";
 
     int getflags;
-    string *robot = new string();
+    char *robot_type=NULL;
+
+//    string *robot = new string();
     string *maze = new string();
 
     // print all arguments
@@ -140,24 +142,19 @@ void checkuserinput (int argc, char *argv[]) {
                 exit(EXIT_FAILURE);
                 break;
             case 't':
-                    *robot = optarg;
+                    robot_type=optarg;
                     // print number of robot
-                    cout << "the robot number is " << *robot << endl;
+                    cout << "the robot number is " << robot_type << endl;
                 break;
         }
     }
     
 	*maze = argv[optind];
 
-	//int nrobot = 1;
-	
-	//std::string str("test string");
-	//char* crobot = &robot.c_str();
-	
-	// TODO: convert the string *robot to an int
+	int robot_number = 1;
+	sscanf(robot_type, "%d", &robot_number);
 
-    // print name of maze
-    // cout << "the maze name is " << *maze << endl;
+	cout << "The robot number as an int is " << robot_number << endl;
 }
 
 

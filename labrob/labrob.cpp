@@ -9,17 +9,13 @@
     Programm for sending robots with different search algorithms 
     *  through mazes and then printing stats about their performance.
 
-	The current print statements are called
-	* - 2 in main
-	* - 2 in checkuserinput
-
     * Status:
     * - wrote function "add_robots" that saves robots to a linked list,
-    * which is delcared in the "Mazes" class.
-    * - the method "exit_search" can be called and generates output the
+    * which is declared in the "Mazes" class.
+    * - the method "exit_search" can be called and generates the
     * intended output (different one for Robots and t1, so I think the
     * add_robots method works as intended)
-    * - wrote a "print_robots" method for printing the list; might be
+    * - wrote a "print_robots" method for printing the list; could be
     * used and expanded on later for going through the list in general
     * (to print stats and whatever else is needed)
 
@@ -82,6 +78,9 @@ int main(int argc, char *argv[])
     }
     mazefile.close();
 
+    checkuserinput(argc, argv);
+
+
     Mazes mymaze; //make an instance of mazeses called mymaze
     /*  the v_maze vector is equal to the vector v_maze here in main
 		Can move this to a method in mazes, but this is not a priority
@@ -102,8 +101,6 @@ int main(int argc, char *argv[])
 	* the checkuserinput function. 1 is default
 	int robot_type = 1;
 */
-
-    checkuserinput(argc, argv);
 
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)

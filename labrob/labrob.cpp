@@ -8,6 +8,12 @@
 
     Small programm for reading mazes into a C++ vector
     and then printing that vector.
+    * 
+    * 
+    * Status: a function that saves robots to a linked list, which
+    * is delcared in the "Mazes" class
+    * TODO: Could not test this yet, since the output can only be tested once
+    * we have robots that contain anything.
 */
 
 #include <iostream>
@@ -17,8 +23,8 @@
 #include <cstdlib>
 #include <getopt.h>
 #include <unistd.h>
-#include "mazes.h"
 #include "robots.h"
+#include "mazes.h"
 #include "t1.h"
 
 using namespace std;
@@ -47,7 +53,7 @@ int main(int argc, char *argv[])
     }
     mazefile.close();
 
-    mazes mymaze; //make an instance of mazeses called mymaze
+    Mazes mymaze; //make an instance of mazeses called mymaze
     /*  the v_maze vector is equal to the vector v_maze here in main */
     mymaze.v_maze = v_maze;
 
@@ -99,12 +105,33 @@ void checkuserinput (int argc, char *argv[]) {
     // cout << "the maze name is " << *maze << endl;
 }
 
-/*
-mazes::add_robot(*robots)
-{
 
+
+
+void Mazes::add_robot(Robots **a_robot)
+{
+	/* create a node for the list and put the robot into
+		a_robot_in_a_list part of the struct
+	*/
+	
+	list* list_element = new list; //using "new", need to "delete" later
+	list_element->a_robot_in_a_list = *a_robot;
+	
+	
+	
+    if (head!=NULL)
+    {
+        list_element->next = head;
+        head = list_element;
+    }
+    else
+    {
+        head = list_element;
+        list_element->next = NULL;
+    }
 }
 
+/*
 t1::exit_search()
 {
 

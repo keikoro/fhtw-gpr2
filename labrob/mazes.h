@@ -13,22 +13,31 @@
 #ifndef MAZES_H
 #define MAZES_H
 
-class mazes {
+class Mazes {
 public:
-	/*
-	 function for adding a new robot into the maze
-	 needs to be accessible by objects of class "robots"
-	*/
-	void add_robot();
-
-private:
+/*
+ return things to private later,
+ commented in out now for easier testing
+*/
+//private:
 	// Vector that contains the maze
 	std::vector<std::string> v_maze;
-	/* List for saving pointers to the individual instances of robots
-	   TODO: define lists (struct nodes)
-	*/
-//	list<robot*> robots_list;
+	
+	
+	// A stuct for saving pointers to individual instances of robots
+	struct node
+	{
+		Robots *a_robot_in_a_list; // pointer to a robot
+		struct node *next;
+	};
+	// typdef so we don't have to write "struct node" every time
+	typedef struct node list;
 
+	/* the function to call when adding a robot
+		by default should be of type t1 (TODO)
+	*/
+	void add_robot (Robots **a_robot); 
+	list *head = NULL;
 };
 
 #endif // MAZES_H

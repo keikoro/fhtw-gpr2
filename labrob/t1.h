@@ -12,7 +12,7 @@
 #ifndef T1_H
 #define T1_H
 
-class t1 : public robots {
+class t1 : public Robots {
 public:
     void t1_exit_search();
 protected:

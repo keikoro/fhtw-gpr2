@@ -8,7 +8,7 @@
 
     Small programm for reading mazes into a C++ vector
     and then printing that vector.
-    * 
+
     * 
     * Status: a function that saves robots to a linked list, which
     * is delcared in the "Mazes" class
@@ -54,10 +54,19 @@ int main(int argc, char *argv[])
     mazefile.close();
 
     Mazes mymaze; //make an instance of mazeses called mymaze
-    /*  the v_maze vector is equal to the vector v_maze here in main */
+    /*  the v_maze vector is equal to the vector v_maze here in main
+		Can move this to a method in mazes, but this is not a priority
+	*/
     mymaze.v_maze = v_maze;
 
 //    mazes.add_robot(new t1);
+
+
+/*
+	an int saving the robot type (1,2,3, needs to come from 
+	* the checkuserinput function. 1 is default.
+	int robot_type = 1;
+*/
 
     checkuserinput(argc, argv);
 
@@ -67,6 +76,9 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+
+
 
 void checkuserinput (int argc, char *argv[]) {
 
@@ -95,7 +107,7 @@ void checkuserinput (int argc, char *argv[]) {
             case 't':
                     *robot = optarg;
                     // print number of robot
-                    // cout << "the robot number is " << *robot << endl;
+                    cout << "the robot number is " << *robot << endl;
                 break;
         }
     }
@@ -106,19 +118,17 @@ void checkuserinput (int argc, char *argv[]) {
 }
 
 
-
-
+/* 
+	create a node for the list (called "list_element")
+	and put the robot into the "a_robot_in_a_list" part of the struct
+*/
 void Mazes::add_robot(Robots **a_robot)
 {
-	/* create a node for the list and put the robot into
-		a_robot_in_a_list part of the struct
-	*/
 	
 	list* list_element = new list; //using "new", need to "delete" later
 	list_element->a_robot_in_a_list = *a_robot;
-	
-	
-	
+
+// Add at the start of the list	
     if (head!=NULL)
     {
         list_element->next = head;
@@ -131,9 +141,8 @@ void Mazes::add_robot(Robots **a_robot)
     }
 }
 
-/*
-t1::exit_search()
-{
 
+void t1::t1_exit_search()
+{
+	cout << "Robot of type 1 is looking for an exit" << endl;
 }
-*/

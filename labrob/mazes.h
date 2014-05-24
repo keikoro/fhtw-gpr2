@@ -16,8 +16,8 @@
 class Mazes {
 public:
 /*
- return things to private later,
- commented in out now for easier testing
+ TODO return things to "private" later,
+ commented it out now for easier testing
 */
 //private:
 	// Vector that contains the maze

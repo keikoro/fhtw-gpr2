@@ -36,8 +36,8 @@ public:
 	/* the function to call when adding a robot
 		by default should be of type t1 (TODO)
 	*/
-	void add_robot (Robots **a_robot); 
 	list *head = NULL;
+	void add_robot (Robots *a_robot);
 };
 
 #endif // MAZES_H

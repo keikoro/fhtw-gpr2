@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 //    mazes.add_robot(new t1);
 
 	
-	mymaze.add_robot(new Robots*());
+	mymaze.add_robot(new Robots());
 	
 	mymaze.head->a_robot_in_a_list->exit_search();
 
@@ -135,11 +135,11 @@ void checkuserinput (int argc, char *argv[]) {
 	create a node for the list (called "list_element")
 	and put the robot into the "a_robot_in_a_list" part of the struct
 */
-void Mazes::add_robot(Robots **a_robot)
+void Mazes::add_robot(Robots *a_robot)
 {
 	
 	list* list_element = new list; //using "new", need to "delete" later
-	list_element->a_robot_in_a_list = *a_robot;
+	list_element->a_robot_in_a_list = a_robot;
 
 // Add at the start of the list	
     if (head!=NULL)

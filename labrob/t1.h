@@ -14,7 +14,7 @@
 
 class t1 : public Robots {
 public:
-    void t1_exit_search();
+    virtual void t1_exit_search();
 protected:
 
 };

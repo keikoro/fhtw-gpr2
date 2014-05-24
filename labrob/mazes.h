@@ -38,6 +38,8 @@ public:
 	*/
 	list *head = NULL;
 	void add_robot (Robots *a_robot);
+	
+	void print_robots();	
 };
 
 #endif // MAZES_H

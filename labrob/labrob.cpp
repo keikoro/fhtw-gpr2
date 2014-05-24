@@ -66,14 +66,14 @@ int main(int argc, char *argv[])
 	*/
     mymaze.v_maze = v_maze;
 
-//    mazes.add_robot(new t1);
+    mymaze.add_robot(new t1());
 
-	
+	//add a robot to the list:
 	mymaze.add_robot(new Robots());
-	
-	mymaze.head->a_robot_in_a_list->exit_search();
+	// print the cout message in the method "exit_search":
+	//mymaze.head->a_robot_in_a_list->exit_search();
 
-	
+	mymaze.print_robots();
 
 /*
 	an int saving the robot type (1,2,3, needs to come from 
@@ -156,7 +156,7 @@ void Mazes::add_robot(Robots *a_robot)
 }
 
 
-void t1::t1_exit_search()
+void t1::exit_search()
 {
 	cout << "Robot of type 1 is looking for an exit" << endl;
 }
@@ -165,4 +165,16 @@ void t1::t1_exit_search()
 void Robots::exit_search()
 {
 	cout << "This robot is looking for an exit" << endl;
+}
+
+
+void Mazes::print_robots(){
+    list *travelling_node;
+    travelling_node=head;
+    while(travelling_node != NULL)
+    {
+		travelling_node->a_robot_in_a_list->exit_search();
+		travelling_node = travelling_node->next;
+    }
+
 }

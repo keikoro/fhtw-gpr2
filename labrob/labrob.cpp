@@ -11,7 +11,7 @@
 
 	The current print statements are called
 	* - 2 in main
-	* - 1 in checkuserinput
+	* - 2 in checkuserinput
 
     * Status:
     * - wrote function "add_robots" that saves robots to a linked list,

@@ -11,30 +11,34 @@
 
     * 
     * Status:
-    * - wrote function that saves robots to a linked list, which
-    * is delcared in the "Mazes" class. Robots have no content yet,
-    * so connot fully test this, but the cout output I can generate
-    *  suggests this is fine.
-    * - the method "exit_search" can be called and generates output
-    * - the add_robot method now works both for Robots and for the derived class t1
+    * - wrote function "add_robots" that saves robots to a linked list,
+    * which is delcared in the "Mazes" class.
+    * - the method "exit_search" can be called and generates output the
+    * intended output (different one for Robots and t1, so I think the
+    * add_robots method works as intended)
     * - wrote a "print_robots" method for printing the list; might be
-    * used later for going through the list in general (to print stats)
+    * used and expanded on later for going through the list in general
+    * (to print stats and whatever else is needed)
 
     * 
     * Issues:
     * - need to add error catching in user input (no file results in
     * segmentation fault right now)
     * - need to get the number for the robot type
-    * (1, 2, 3, none, which means 1) back from checkuserinput() to main()
-    * - need to work on ... something. I'll remember in a second,
-    * but I want to push this now.
+    * (1, 2, 3, none, which means 1) from checkuserinput() to main()
+    * - need to free the allocated space again, right now program
+    * doesn't do this at all
+    * - made everything in the classes public, remember to put everything
+    * that doesn't need to be public back to private later
+    * Maybe also use "const" (which can be used for making something in
+    * a class visible but read only from outside)
     * 
 	Next steps:
+	* - the freeing space thing
 	* - can start working on actual search algorithms?!!!
-	* - need some automatised way of deciding which character the robot
-	* will write into the labyrinth
 	* - need to implement a way for the user to add several robots, and
-	* then ask for the output, all of it over command line
+	* then ask for the output when he/she is done. Both over
+	*  command line?
 */
 
 #include <iostream>

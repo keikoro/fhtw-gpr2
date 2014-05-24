@@ -25,7 +25,7 @@ class Robots {
 	int x,y;
 //protected:
 	// function that will contain the search algorithm
-	void exit_search(); 
+	virtual void exit_search(); 
 };
 
 #endif // ROBOTS_H

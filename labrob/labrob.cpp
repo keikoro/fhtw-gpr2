@@ -6,29 +6,35 @@
     if13b070 - K Kollmann
     if13b076 - Linda Spindler
 
-    Small programm for reading mazes into a C++ vector
-    and then printing that vector.
+    Programm for sending robots with different search algorithms 
+    *  through mazes and then printing stats about their performance.
 
     * 
     * Status:
     * - wrote function that saves robots to a linked list, which
     * is delcared in the "Mazes" class. Robots have no content yet,
-    * so connot fully test this.
+    * so connot fully test this, but the cout output I can generate
+    *  suggests this is fine.
     * - the method "exit_search" can be called and generates output
-    * - add_robot now works both for Robots and for the derived class t1
-    * without producing an error (issues see bellow)
+    * - the add_robot method now works both for Robots and for the derived class t1
     * - wrote a "print_robots" method for printing the list; might be
     * used later for going through the list in general (to print stats)
 
     * 
     * Issues:
-    * - clearly still problems with inheritance: print robots prints
-    * the message from "Robots" and not "t1" regardless of which one
-    * of the two was supposed to be added
     * - need to add error catching in user input (no file results in
     * segmentation fault right now)
     * - need to get the number for the robot type
-    * (1, 2, 3, none, which means 1) back from checkuserinput() to main() 
+    * (1, 2, 3, none, which means 1) back from checkuserinput() to main()
+    * - need to work on ... something. I'll remember in a second,
+    * but I want to push this now.
+    * 
+	Next steps:
+	* - can start working on actual search algorithms?!!!
+	* - need some automatised way of deciding which character the robot
+	* will write into the labyrinth
+	* - need to implement a way for the user to add several robots, and
+	* then ask for the output, all of it over command line
 */
 
 #include <iostream>
@@ -184,5 +190,4 @@ void Mazes::print_robots(){
 		travelling_node->a_robot_in_a_list->exit_search();
 		travelling_node = travelling_node->next;
     }
-
 }

@@ -9,7 +9,10 @@
     Programm for sending robots with different search algorithms 
     *  through mazes and then printing stats about their performance.
 
-    * 
+	The current print statements are called
+	* - 2 in main
+	* - 1 in checkuserinput
+
     * Status:
     * - wrote function "add_robots" that saves robots to a linked list,
     * which is delcared in the "Mazes" class.
@@ -45,6 +48,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cstdio>
 #include <cstdlib>
 #include <getopt.h>
 #include <unistd.h>
@@ -84,12 +88,12 @@ int main(int argc, char *argv[])
 	*/
     mymaze.v_maze = v_maze;
 
+
+	// add a robot of type 1 to the list
     mymaze.add_robot(new t1());
 
-	//add a robot to the list:
+	//add a robot with no specific type to the list:
 	mymaze.add_robot(new Robots());
-	// print the cout message in the method "exit_search":
-	//mymaze.head->a_robot_in_a_list->exit_search();
 
 	mymaze.print_robots();
 
@@ -142,8 +146,16 @@ void checkuserinput (int argc, char *argv[]) {
                 break;
         }
     }
+    
+	*maze = argv[optind];
 
-    *maze = argv[optind];
+	//int nrobot = 1;
+	
+	//std::string str("test string");
+	//char* crobot = &robot.c_str();
+	
+	// TODO: convert the string *robot to an int
+
     // print name of maze
     // cout << "the maze name is " << *maze << endl;
 }

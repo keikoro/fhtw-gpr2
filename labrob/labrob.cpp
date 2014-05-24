@@ -11,16 +11,24 @@
 
     * 
     * Status:
-    * - there is a function that saves robots to a linked list, which
+    * - wrote function that saves robots to a linked list, which
     * is delcared in the "Mazes" class. Robots have no content yet,
     * so connot fully test this.
-    * - the method "exit_search" (for the general "Robots"), and generates
-    * an output.
+    * - the method "exit_search" can be called and generates output
+    * - add_robot now works both for Robots and for the derived class t1
+    * without producing an error (issues see bellow)
+    * - wrote a "print_robots" method for printing the list; might be
+    * used later for going through the list in general (to print stats)
+
     * 
     * Issues:
-    * there must be a problem with class inheritance between Robots and
-    * t1, t1 is not recognised as a subclass.
-
+    * - clearly still problems with inheritance: print robots prints
+    * the message from "Robots" and not "t1" regardless of which one
+    * of the two was supposed to be added
+    * - need to add error catching in user input (no file results in
+    * segmentation fault right now)
+    * - need to get the number for the robot type
+    * (1, 2, 3, none, which means 1) back from checkuserinput() to main() 
 */
 
 #include <iostream>
@@ -77,7 +85,7 @@ int main(int argc, char *argv[])
 
 /*
 	an int saving the robot type (1,2,3, needs to come from 
-	* the checkuserinput function. 1 is default.
+	* the checkuserinput function. 1 is default
 	int robot_type = 1;
 */
 

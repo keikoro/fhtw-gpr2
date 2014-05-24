@@ -10,10 +10,17 @@
     and then printing that vector.
 
     * 
-    * Status: a function that saves robots to a linked list, which
-    * is delcared in the "Mazes" class
-    * TODO: Could not test this yet, since the output can only be tested once
-    * we have robots that contain anything.
+    * Status:
+    * - there is a function that saves robots to a linked list, which
+    * is delcared in the "Mazes" class. Robots have no content yet,
+    * so connot fully test this.
+    * - the method "exit_search" (for the general "Robots"), and generates
+    * an output.
+    * 
+    * Issues:
+    * there must be a problem with class inheritance between Robots and
+    * t1, t1 is not recognised as a subclass.
+
 */
 
 #include <iostream>
@@ -61,6 +68,12 @@ int main(int argc, char *argv[])
 
 //    mazes.add_robot(new t1);
 
+	
+	mymaze.add_robot(new Robots*());
+	
+	mymaze.head->a_robot_in_a_list->exit_search();
+
+	
 
 /*
 	an int saving the robot type (1,2,3, needs to come from 
@@ -134,6 +147,7 @@ void Mazes::add_robot(Robots **a_robot)
         list_element->next = head;
         head = list_element;
     }
+
     else
     {
         head = list_element;
@@ -145,4 +159,10 @@ void Mazes::add_robot(Robots **a_robot)
 void t1::t1_exit_search()
 {
 	cout << "Robot of type 1 is looking for an exit" << endl;
+}
+
+
+void Robots::exit_search()
+{
+	cout << "This robot is looking for an exit" << endl;
 }

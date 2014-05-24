@@ -12,9 +12,10 @@
 #ifndef ROBOTS_H
 #define ROBOTS_H
 
-// TODO: put things back to private (commented out now)
+// TODO: put things back to private/protected (commented out for testing)
 
 class Robots {
+	public:
 //private:
 	// function that will contain the search algorithm
 //	void exit_search(); 
@@ -22,7 +23,7 @@ class Robots {
 	char robotcharacter;
 	// integers for saving the coordinates of the robot
 	int x,y;
-protected:
+//protected:
 	// function that will contain the search algorithm
 	void exit_search(); 
 };

@@ -2,26 +2,26 @@
 ----
 
 *create 1 labyrinth class
-- contains the maze vector (?)
-- saves positions of all robots
+- contains the maze vector
+- (saves positions of all robots -> could to this in the robots class too)
 - has to know its own size
-- includes function to find entrance (or put this into the robot's
-search algoritm instead: what if the first opening leads to a dead end?)
+- has a function for adding a new instance of robots (in practice of 
+	t1, t2, t3) into a list
+- a list of pointers to robots
 
 *create 1 robot class
 - with 3 sub classes (for 3 different kinds of "search" behaviours/algorithms)
 - variable for saving the character used by the robot to mark its way
-- function for the search algoritm (we do not need to implement functions
-themselves yet)
+- function for the search algoritm
 - needs to communicate with the labyrinth class to
 	a. determine whether is has a wall in front of itself
 	b. for its own position (?)
 
-*read maze file
-*output maze
+*output maze, maybe move this to a method
 
-*put classes into header-files
-*create Makefile
+*create Makefile DONE
+
+*free all the space allocated with malloc before the program closes
 
 -----
 

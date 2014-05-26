@@ -26,14 +26,10 @@
 
 using namespace std;
 
-
 void checkuserinput (int argc, char *argv[]) {
 
 string programname = argv[0];
-string helpmsg = "To send a robot through the labyrinth, \nplease "
-                    "enter the filename of the maze you'd like to use\n"
-                    "as well as the shortcut of the robot (t1 to t3), "
-                    "like so:";
+string helpmsg = "Usage: labrob filename [-t1] [–t2] [–t3]...[-tN] [-h]";
 
 int getflags;
 char *robot_type=NULL;
@@ -56,35 +52,32 @@ while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
             exit(EXIT_FAILURE);
             break;
         case 't':
-                robot_type=optarg;
-                // print number of robot
-                cout << "the robot number is " << robot_type << endl;
-				if (robot_type != NULL)
-				{
-					int robot_number = 1;
-					sscanf(robot_type, "%d", &robot_number);
+            robot_type=optarg;
+            // print robot number
+            cout << "the robot number is " << robot_type << endl;
+			if (robot_type != NULL)
+			{
+				int robot_number = 1;
+				sscanf(robot_type, "%d", &robot_number);
 
-					robot_numbers.push_back (robot_number);
-				}
-				else
-				{
-					cout << "Option missing" << endl;
-					exit(EXIT_FAILURE);
-				}					
-				
-				
-				break;
+				robot_numbers.push_back (robot_number);
+			}
+			else
+			{
+                cout << "Option t missing"  << endl << helpmsg << endl;
+				exit(EXIT_FAILURE);
+			}
+			break;
     }
 }
 
 if (argc < optind+1) /* wrong nb of options */
 {
-  cout << "Too few options!" << endl;
-  exit(EXIT_FAILURE);
+	cout << "Too few options!" << endl << helpmsg << endl;
+	exit(EXIT_FAILURE);
 }
 
 *maze = argv[optind];
-
 
 cout << "All the arguments in an int vector: ";
 for(std::vector<int>::iterator i=robot_numbers.begin();

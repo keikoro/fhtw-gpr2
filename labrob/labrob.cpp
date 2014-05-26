@@ -94,13 +94,13 @@ int main(int argc, char *argv[])
     string bla = "";
     string *mazepath = &bla;
 
-    cout << "first mazepath print: " << *mazepath << endl;
-
     checkuserinput(argc, argv, mazepath);
 
-    cout << "last mazepath print: " << *mazepath << endl;
+    cout << "mazepath: " << *mazepath << endl;
 
-    ifstream mazefile (argv[1], ifstream::in);
+    string thefilename = "mazes/maze1__small.txt";
+
+    ifstream mazefile (thefilename.c_str(), ifstream::in);
     if (mazefile.is_open())
     {
         while ( getline (mazefile,one_row) )

@@ -163,7 +163,9 @@ void Mazes::print_robots()
  right now only if it is in the first line.*/
 void Mazes::find_entrance(std::vector<std::string> v_maze)
 {
-	for (unsigned int j=0; j < v_maze[0].length(); ++j)
+	bool foundit = false;
+//	for int i = 0; i <=3 ; 
+		for (unsigned int j=0; j < v_maze[0].length(); ++j)
 	{
 		if(v_maze[0][j] != '#')
 		{
@@ -171,6 +173,12 @@ void Mazes::find_entrance(std::vector<std::string> v_maze)
 			entrance[1] = j;
 			cout << "Coordinated of the entrance: " <<
 				entrance[0] << "," << entrance [1] << endl;
+				foundit = true;
+				break;
 		}
+	}
+	if (foundit)
+	{
+		cout << "Found entrance in first row" << endl;
 	}
 }

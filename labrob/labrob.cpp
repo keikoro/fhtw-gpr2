@@ -147,12 +147,12 @@ void Mazes::add_robot(Robots *a_robot)
 
 void t1::exit_search()
 {
-	cout << "Robot of type 1 is looking for an exit" << endl;
+	//cout << "Robot of type 1 is looking for an exit" << endl;
 }
 
 void Robots::exit_search()
 {
-	cout << "This robot is looking for an exit" << endl;
+	//cout << "This robot is looking for an exit" << endl;
 }
 
 void Mazes::print_robots()

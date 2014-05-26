@@ -21,7 +21,6 @@
     With:
     -t1-tN being used for the robot type (if no type is specified, t1 is used)
     -h being used for printing a usage message
-
 */
 
 using namespace std;

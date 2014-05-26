@@ -37,8 +37,6 @@ void checkuserinput (int argc, char *argv[], string *mazefile) {
     //    string *robot = new string();
     string bla = "bli";
     *mazefile = bla;
-    cout << "inner function mazepath print: " << *mazefile << endl;
-
 
     /*  use double colon for option argument for the*/
     while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
@@ -93,12 +91,9 @@ void checkuserinput (int argc, char *argv[], string *mazefile) {
     {
         if (argv[optind])
         {
-            // maze file == argv[optind]
-            // check for valid file here!
+            /*  store the name of the maze file
+                attn.: validity of file name is not yet confirmed */
             *mazefile = string(argv[optind]);
-            cout << "inner function mazepath print no. 2: " << mazefile << endl;
-
-            // cout << "path to maze file:" << endl << *mazefile << endl;
         }
         else
         {

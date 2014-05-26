@@ -31,7 +31,7 @@ class Robots {
 	char direction;
 	
 	void turn_left();
-	void turn right();
+	void turn_right();
 	void step_forward();
 };
 

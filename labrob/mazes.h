@@ -50,10 +50,6 @@ public:
 		enters the labyrinth; could be included into the
 		find_entrance method as well */
 	void start_position();
-	{
-		if
-		
-	}
 	
 	/* function to check whether the char right in front of the 
 	   robot is a wall or not */

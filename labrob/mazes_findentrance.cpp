@@ -2,6 +2,11 @@
  right now only if it is in the first line.
  Returns 0 (instead of being declared void) so I can easily leave
  the whole program anytime
+
+ Status:
+ - should now find the correct coordinated for entrance and exit
+   and prints them.
+
  */
  
 using namespace std;
@@ -66,7 +71,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				}
 					else
 				{
-					(found_exit = true);
+					found_exit = true;
 					mazeexit[0] = v_maze[0].length()-1;
 					mazeexit[1] = i;
 					cout << "Exit is on the right" << endl;				
@@ -81,13 +86,13 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 	{
 		for (unsigned int i = maze_length-2 ; i >= 1 ; --i)
 		{
-			if(v_maze[maze_height-2][i] != '#')
+			if(v_maze[maze_height-1][i] != '#')
 			{
 				if (found_entrance == false)
 				{
 					found_entrance = true;
 					entrance[0] = i;
-					entrance[1] = 20;
+					entrance[1] = maze_height-1;
 					cout << "Entrance is at the bottom" << endl;
 					continue; // next iteration of the loop
 				}
@@ -106,7 +111,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 	// look for entrance on the left
 	if (found_entrance == false || found_exit == false)
 	{
-		for (unsigned int i=maze_height-1; i >= 1 ; --i)
+		for (unsigned int i=maze_height-2; i >= 1 ; --i)
 		{
 			if(v_maze[i][0] != '#')
 			{
@@ -115,11 +120,12 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 					found_entrance = true;
 					entrance[0] = 0;
 					entrance[1] = i;
+					cout << "Entrance is on the left" << endl;
 					continue; // next iteration of the loop
 				}
 					else
 				{
-					(found_exit = true);
+					found_exit = true;
 					mazeexit[0] = 0;
 					mazeexit[1] = i;
 					return 0;

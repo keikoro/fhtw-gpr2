@@ -91,6 +91,9 @@ int main(int argc, char *argv[])
 {
     string one_row;
     vector<string> v_maze;
+    string *mazepath = NULL;
+
+    checkuserinput(argc, argv, mazepath);
 
     std::ifstream mazefile (argv[1], std::ifstream::in);
     if (mazefile.is_open())
@@ -100,10 +103,8 @@ int main(int argc, char *argv[])
             v_maze.push_back (one_row);
         }
     }
-    
-    mazefile.close();
 
-    checkuserinput(argc, argv);
+    mazefile.close();
 
     //make an instance of mazeses called mymaze
     Mazes mymaze;
@@ -127,8 +128,8 @@ int main(int argc, char *argv[])
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
         cout << mymaze.v_maze[i] << endl;
-        
-        
+
+
 	mymaze.find_entrance (v_maze);
 	mymaze.dummy_function_for_printing();
 

@@ -67,7 +67,7 @@ string *maze = new string();
                         sscanf(optarg, "%d", &thisrobot);
                         robot_numbers.push_back(thisrobot);
                         /* below for debugging -- TODO: remove later on */
-                        cout << "robot " << thisrobot << endl;
+                        // cout << "robot " << thisrobot << endl;
                     }
                     else
                     {

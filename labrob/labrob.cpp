@@ -35,10 +35,6 @@
     - added error message when file couldn't be opened
 
     Issues/other TODOs:
-    - with the current char to int conversion, only the last argument
-    that has been entered with -tN is converted to int; either write
-    an int vector to save them all, or go back to the previous
-    version that saved all of them as a string.
     - need to get the numbers for the robot types
     (1, 2, 3, none, which means 1) from checkuserinput() to main()
     - need to free the allocated space again, right now program
@@ -52,9 +48,9 @@
     checkuserinput; not a priority though, works fine like it is right now
 
 	Next steps:
-	- resolve the -tN arguments issue
 	- free space
 	- start working on actual search algorithms?!!!
+	- get those t? arguments to main somehow
 */
 
 #include <iostream>

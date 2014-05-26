@@ -40,8 +40,8 @@
     (= the robot_list vector); could be used and expanded on later for
     going through the vector in general (to print stats and whatever
     else is needed)
-    - wrote find_entrance method; make it more efficient (less repeated
-	code) later, but for now works
+    - wrote find_entrance method (make it more efficient less repeated
+	code later if possible), but doesn't work as intended
     - added error message when file couldn't be opened
 
     Issues/other TODOs:
@@ -61,6 +61,7 @@
 		reading in the file?
 
 	Next steps:
+	- fix find entrance method
 	- free space
 	- get those t? arguments to main somehow
 	- expand the find_entrance method
@@ -284,12 +285,14 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 }
 
 
+
+// function that prints the exit and entrance coordinates for debugging
 void Mazes::dummy_function_for_printing()
 {
 	cout << "Coordinates of the entrance: X, Y: " <<
-		entrance[0] << "," << entrance [1] << endl;
+		entrance[0] << "," << entrance[1]-1 << endl;
 
 	cout << "Coordinates of the exit: X, Y: " <<
-		mazeexit[0] << "," << mazeexit [1] << endl;
+		mazeexit[0] << "," << mazeexit [1]-1 << endl;
 
 }

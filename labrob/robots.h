@@ -19,7 +19,10 @@ class Robots {
 //private:
 	// character the robot draws on the labyrinth:
 	char robotcharacter;
-	// integers for saving the coordinates of the robot
+	
+	int step_counter;
+	/* integers for saving the coordinates of the robot;
+		v is for the y-axis (vertical), h for the x-axis (horizontal)*/
 	int v, h;
 //protected:
 	// function that will contain the search algorithm
@@ -30,9 +33,15 @@ class Robots {
 	*/
 	char direction;
 	
-	void turn_left();
+	/* function for robot movement (started writing them but not
+		changing anything in the main function right now;
+		the instances of Robots that are called "robot" in the function
+		need to come from going through the vector of Robots pointers
+		saved through Mazes
+	*/
+	void turn_left(Robots robot);
 	void turn_right();
-	void step_forward();
+	void step_forward(Robots robot);
 };
 
 #endif // ROBOTS_H

@@ -25,18 +25,16 @@
 
 using namespace std;
 
-void checkuserinput (int argc, char *argv[], string *mazefile) {
+void checkuserinput (int argc, char *argv[], string *mazefile, vector<int> *robot_numbers) {
 
-    string helpmsg = "Usage: labrob path_to_maze [-t1] [–t2] [–t3]...[-tN] [-h]";
-
+    string helpmsg = "Usage: labrob path_to_maze "
+                        "[-t1] [–t2] [–t3]...[-tN] [-h]";
     int getflags;
     int thisrobot;
-    vector<int> robot_numbers;
+    vector<int> initialrobotnumbers;
+    string placeholder = "";
+    *mazefile = placeholder;
     // string *maze = NULL;
-
-    //    string *robot = new string();
-    string bla = "bli";
-    *mazefile = bla;
 
     /*  use double colon for option argument for the*/
     while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
@@ -52,15 +50,14 @@ void checkuserinput (int argc, char *argv[], string *mazefile) {
                 {
                     /*  check if argument is a number  */
                     thisrobot = 1;
-                    robot_numbers.push_back(thisrobot);
-                    /* below for debugging -- TODO: remove later on */
+                    robot_numbers->push_back(thisrobot);
                 }
                 else
                 {
                     if (isdigit(*optarg))
                     {
                         sscanf(optarg, "%d", &thisrobot);
-                        robot_numbers.push_back(thisrobot);
+                        robot_numbers->push_back(thisrobot);
                         /* below for debugging -- TODO: remove later on */
                         // cout << "robot " << thisrobot << endl;
                     }
@@ -100,6 +97,4 @@ void checkuserinput (int argc, char *argv[], string *mazefile) {
             cout << "no maze file was provided!" << endl << helpmsg << endl;
         }
     }
-
-    // *maze = argv[optind];
 }

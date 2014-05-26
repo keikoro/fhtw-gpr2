@@ -43,6 +43,7 @@
     - added error message when file couldn't be opened
 
     Issues/other TODOs:
+    - contonie with with find_entrance method (doesn't work right now)
     - need to get the numbers for the robot types
     (1, 2, 3, none, which means 1) from checkuserinput() to main()
     - need to free the allocated space again, right now program
@@ -60,8 +61,7 @@
 	Next steps:
 	- free space
 	- get those t? arguments to main somehow
-	- expand the find_entrance method to search through the whole
-		perimeter of the labyrinth, and add the search_exit method
+	- expand the find_entrance method
 */
 
 #include <iostream>
@@ -163,22 +163,48 @@ void Mazes::print_robots()
  right now only if it is in the first line.*/
 void Mazes::find_entrance(std::vector<std::string> v_maze)
 {
+	
+	/* Note: when going through the string vector with v_maze[a][b]
+		a is the index on the HEIGHT, b of the LENGTH; this is the 
+		opposite of the usual convention that looks at the x-axies first!
+	*/
+	
+	 // lenght of the maze is length of the strings:
+	unsigned int maze_length = v_maze[0].length();
+	
+	// height of the maze is length of the vector:
+	unsigned int maze_height = v_maze.size();
+	
 	bool foundit = false;
-//	for int i = 0; i <=3 ; 
-		for (unsigned int j=0; j < v_maze[0].length(); ++j)
+
+	for (unsigned int i = 0; i < maze_length; ++i)
 	{
-		if(v_maze[0][j] != '#')
+		if(v_maze[0][i] != '#')
 		{
-			entrance[0] = 0;
-			entrance[1] = j;
-			cout << "Coordinated of the entrance: " <<
+			entrance[0] = i;
+			entrance[1] = 0;
+			// inverse order for the printout
+			cout << "Coordinated of the entrance up: X, Y: " <<
 				entrance[0] << "," << entrance [1] << endl;
 				foundit = true;
 				break;
 		}
 	}
-	if (foundit)
+	
+	// if the entrance is not in the first row
+	if (foundit == false)
 	{
-		cout << "Found entrance in first row" << endl;
-	}
+		for (unsigned int i=0; i < maze_height; ++i)
+		{
+			if(v_maze[i][maze_length-1] != '#')
+			{
+				entrance[0] = v_maze[0].length();
+				entrance[1] = i;
+				cout << "Coordinated of the entrance right: X, Y: " <<
+					entrance[0] << "," << entrance [1] << endl;
+					foundit = true;
+					break;
+			}		
+		}
+	}	
 }

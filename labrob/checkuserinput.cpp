@@ -25,23 +25,18 @@
 
 using namespace std;
 
-void checkuserinput (int argc, char *argv[]) {
+void checkuserinput (int argc, char *argv[], string *mazepath) {
 
-string programname = argv[0];
-string helpmsg = "Usage: labrob path_to_maze [-t1] [–t2] [–t3]...[-tN] [-h]";
+    string programname = argv[0];
+    string helpmsg = "Usage: labrob path_to_maze [-t1] [–t2] [–t3]...[-tN] [-h]";
 
-int getflags;
-int thisrobot;
-std::vector<int> robot_numbers;
-// int robot_number;
+    int getflags;
+    int thisrobot;
+    std::vector<int> robot_numbers;
+    // int robot_number;
 
-//    string *robot = new string();
-string *maze = new string();
-
-// print all arguments
-// std::cout << "argc: " << argc << std::endl;
-// for (int i = 0; i < argc; ++i)
-//     std::cout << "argv: "<< argv[i] << std::endl;
+    //    string *robot = new string();
+    string *maze = new string();
 
     /*  use double colon for option argument for the*/
     while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
@@ -98,6 +93,8 @@ string *maze = new string();
         {
             // maze file == argv[optind]
             // check for valid file here!
+            // mazepath = argv[optind];
+            cout << "path to maze file:" << endl << *mazepath << endl;
         }
         else
         {

@@ -30,11 +30,15 @@ public:
 	std::vector<std::string> v_maze;
 	
 	/* int arrays for saving the coordinated of entrance and exit of
-		the maze, and method for finding the entrance */
+		the maze, and method for finding the entrance as well as the
+		robot start position in the robot; char for saving
+		that start position
+	*/
 	int entrance [2];
 	int mazeexit [2];
 	int find_entrance(std::vector<std::string> v_maze);
-	
+	char startposition;
+
 	void dummy_function_for_printing();
 	
 	// A vector that saves pointers to instances of robots
@@ -46,10 +50,6 @@ public:
 	// function for printing out the list of all robots
 	void print_robots();
 	
-	/* a method for deciding which way the robot should face when it
-		enters the labyrinth; could be included into the
-		find_entrance method as well */
-	void start_position();
 	
 	/* function to check whether the char right in front of the 
 	   robot is a wall or not */

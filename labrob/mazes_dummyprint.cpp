@@ -9,4 +9,7 @@ void Mazes::dummy_function_for_printing()
 
 	cout << "Coordinates of the exit: X, Y: " <<
 		mazeexit[0] << "," << mazeexit [1] << endl;
+		
+//	cout << "The robot enters the labyrinth facing: " << startposition << endl;
+
 }

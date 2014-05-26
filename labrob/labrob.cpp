@@ -37,7 +37,10 @@
 
     * 
     * Issues/other TODOs
-    * - move whole bit with reading in user input 
+    * - with the current char* to int conversion, only the laster argument
+    * that has been entered with -tN is converted to int; either write 
+    * an int vector to save them all, or go back to the previous
+    * version that saved all of them as a string.
     * - need to get the number for the robot type
     * (1, 2, 3, none, which means 1) from checkuserinput() to main()
     * - need to free the allocated space again, right now program
@@ -51,6 +54,7 @@
     * checkuserinput; not a priority though, works fine like this too
     * 
 	Next steps:
+	* - resolve the thing with the -tN arguments (see issues)
 	* - replace the linked list with a vector
 	* - the freeing space thing
 	* - can start working on actual search algorithms?!!!

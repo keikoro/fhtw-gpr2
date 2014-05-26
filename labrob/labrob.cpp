@@ -41,7 +41,7 @@
     going through the vector in general (to print stats and whatever
     else is needed)
     - wrote find_entrance method; make it more efficient (less repeated
-	code
+	code) later, but for now works
     - added error message when file couldn't be opened
 
     Issues/other TODOs:
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
         
         
 	mymaze.find_entrance (v_maze);
-
+	mymaze.dummy_function_for_printing();
 
     return 0;
 }
@@ -182,73 +182,114 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 	unsigned int maze_height = v_maze.size();
 	
 	bool found_entrance = false;
-//	bool found_exit = false;
+	bool found_exit = false;
 
-	// look for entrance at the top
+	// look for entrance/exit at the top
 	for (unsigned int i = 1; i < maze_length-1; ++i)
 	{
 		if(v_maze[0][i] != '#')
 		{
-			entrance[0] = i;
-			entrance[1] = 0;
-			// inverse order (x-coordinate first) for the printout
-			cout << "Coordinates of the entrance up: X, Y: " <<
-				entrance[0] << "," << entrance [1] << endl;		
-				found_entrance = true;		
+			if (found_entrance == false)
+			{
+				found_entrance = true;
+				entrance[0] = i;
+				entrance[1] = 0;
+				continue; // next iteration of the loop
+			}
+				else
+			{
+				(found_exit = true);
+				mazeexit[0] = i;
+				mazeexit[1] = 0;
 				return 0;
+			}
 		}
 	}
 	
-	// if the entrance is not in the first row look on the right side
-	if (found_entrance == false)
+	// if the entrance/exit is not in the first row look on the right side
+	if (found_entrance == false || found_exit == false)
 	{
 		for (unsigned int i=1; i < maze_height-2; ++i)
 		{
 			if(v_maze[i][maze_length-1] != '#')
 			{
-				entrance[0] = v_maze[0].length();
-				entrance[1] = i;
-				cout << "Coordinates of the entrance right: X, Y: " <<
-					entrance[0] << "," << entrance [1] << endl;
+				if (found_entrance == false)
+				{
 					found_entrance = true;
+					entrance[0] = v_maze[0].length();
+					entrance[1] = i;
+					continue; // next iteration of the loop
+				}
+					else
+				{
+					(found_exit = true);
+					mazeexit[0] = v_maze[0].length();
+					mazeexit[1] = i;
 					return 0;
-			}		
+				}
+			}
 		}
 	}
 
-	// look for entrance at the bottom
-	if (found_entrance == false)
+	// look for entrance/exit at the bottom
+	if (found_entrance == false || found_exit == false)
 	{
 		for (unsigned int i = maze_length-1 ; i >= 1 ; --i)
 		{
 			if(v_maze[maze_height-2][i] != '#')
 			{
-				entrance[0] = i;
-				entrance[1] = maze_height;
-				// inverse order (x-coordinate first) for the printout
-				cout << "Coordinates of the entrance down: X, Y: " <<
-					entrance[0] << "," << entrance [1] << endl;				
+				if (found_entrance == false)
+				{
+					found_entrance = true;
+					entrance[0] = i;
+					entrance[1] = maze_height;
+					continue; // next iteration of the loop
+				}
+					else
+				{
+					(found_exit = true);
+					mazeexit[0] = i;
+					mazeexit[1] = maze_height;
 					return 0;
+				}
 			}
 		}
 	}
 	
 	// look for entrance on the left
-	if (found_entrance == false)
+	if (found_entrance == false || found_exit == false)
 	{
 		for (unsigned int i=maze_height-2; i >= 1 ; --i)
 		{
 			if(v_maze[i][0] != '#')
 			{
-				entrance[0] = 0;
-				entrance[1] = i;
-				cout << "Coordinates of the entrance right: X, Y: " <<
-					entrance[0] << "," << entrance [1] << endl;
+				if (found_entrance == false)
+				{
 					found_entrance = true;
+					entrance[0] = 0;
+					entrance[1] = i;
+					continue; // next iteration of the loop
+				}
+					else
+				{
+					(found_exit = true);
+					mazeexit[0] = 0;
+					mazeexit[1] = i;
 					return 0;
+				}
 			}		
 		}
-	}
-	
+	}	
 	return 0;
+}
+
+
+void Mazes::dummy_function_for_printing()
+{
+	cout << "Coordinates of the entrance: X, Y: " <<
+		entrance[0] << "," << entrance [1] << endl;
+
+	cout << "Coordinates of the exit: X, Y: " <<
+		mazeexit[0] << "," << mazeexit [1] << endl;
+
 }

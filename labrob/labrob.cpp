@@ -8,53 +8,53 @@
 
 
 	TODO (feeback tutorial)
-	* - have a "step forward" method in robots
-	* - have a "is_free" method in mazes that checks if case right in
-	* front of the robot is a wall or not
-	* - search for the entrance and the exit of the labyrinth with a
-	*  method in mazes. The first place (starting upper left) that isn't
-	*  a wall in the outer perimeter is always the entrance, the second
-	* always the exit
-	* - in robots have a variable (a char?) that saves the direction the
-	* robot is currently looking into
+	- have a "step forward" method in robots
+    - have a "is_free" method in mazes that checks if what's in
+	front of the robot is a wall or not
+	- search for the entrance and the exit of the labyrinth with a
+    method in mazes; when starting in the upper left corner, the first
+    opening in the maze in the outer perimeter is always the entrance,
+    the second always the exit
+    - have a variable (a char?) in robots that saves the direction the
+    robot is currently looking into
 
 
-    Programm for sending robots with different search algorithms 
-    *  through mazes and then printing stats about their performance.
+    Programm for sending robots through mazes with different search
+    algorithms and printing stats about their performance.
 
-    * Status:
-    * - wrote function "add_robots" that saves pointers to robots to a
-    * vector is declared in the "Mazes" class.
-    * - the method "exit_search" can be called and generates the
-    * intended output (different one for Robots and t1, so I think the
-    * add_robots method works as intended)
-    * - "print_robots" prints the the current list of robots
-    * (=the robot_list vector); could be used and expanded on later for
-    * going through the vector in general
-    * (to print stats and whatever else is needed)
-    * - added error-message when file couldn't be opened
-    * 
-    * Issues/other TODOs
-    * - with the current char* to int conversion, only the laster argument
-    * that has been entered with -tN is converted to int; either write 
-    * an int vector to save them all, or go back to the previous
-    * version that saved all of them as a string.
-    * - need to get the numbers for the robot types
-    * (1, 2, 3, none, which means 1) from checkuserinput() to main()
-    * - need to free the allocated space again, right now program
-    * doesn't do this at all
-    * - made everything in the classes public, remember to put everything
-    * that doesn't need to be public back to private later, but only after
-    * we're done with the whole program
-    * Maybe also use "const" (which can be used for making something in
-    * a class visible but read only from outside)
-    * - opening the file should probably be moved from main to
-    * checkuserinput; not a priority though, works fine like this too
-    * 
+    Status:
+    - wrote function "add_robots" that saves pointers to robots to a
+    vector that is declared in the "mazes" class.
+    - the method "exit_search" can be called and generates the
+    intended output (different one for robots and t1, so I think the
+    add_robots method works as intended)
+    - "print_robots" prints the the current list of robots
+    (= the robot_list vector); could be used and expanded on later for
+    going through the vector in general (to print stats and whatever
+    else is needed)
+    - added error message when file couldn't be opened
+
+    Issues/other TODOs:
+    - with the current char to int conversion, only the last argument
+    that has been entered with -tN is converted to int; either write
+    an int vector to save them all, or go back to the previous
+    version that saved all of them as a string.
+    - need to get the numbers for the robot types
+    (1, 2, 3, none, which means 1) from checkuserinput() to main()
+    - need to free the allocated space again, right now program
+    doesn't do this at all
+    - made everything in the classes public, remember to put everything
+    that doesn't need to be public back to private later, but only after
+    we're done with the whole program
+    - maybe also use "const" (which can be used for making something in
+    a class visible but read-only from outside)
+    - opening the file should probably be moved from main to
+    checkuserinput; not a priority though, works fine like it is right now
+
 	Next steps:
-	* - resolve the thing with the -tN arguments (see issues)
-	* - the freeing space thing
-	* - can start working on actual search algorithms?!!!
+	- resolve the -tN arguments issue
+	- free space
+	- start working on actual search algorithms?!!!
 */
 
 #include <iostream>
@@ -75,17 +75,10 @@ void checkuserinput(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
-
     string one_row;
     vector<string> v_maze;
 
-    // create an instance of mazes
-    // mazes mazefile;
-    // mazes *mymaze = new mazes();
-
-    // move the below from main to checkuserinput
     std::ifstream mazefile (argv[1], std::ifstream::in);
-
     if (mazefile.is_open())
     {
         while ( getline (mazefile,one_row) )
@@ -97,37 +90,31 @@ int main(int argc, char *argv[])
 
     checkuserinput(argc, argv);
 
-
-    Mazes mymaze; //make an instance of mazeses called mymaze
+    //make an instance of mazeses called mymaze
+    Mazes mymaze;
     /*  the v_maze vector is equal to the vector v_maze here in main
 		Can move this to a method in mazes, but this is not a priority
 	*/
     mymaze.v_maze = v_maze;
 
-
 	// add a robot of type 1 to the list
     mymaze.add_robot(new t1());
-
-	//add a robot with no specific type to the list:
+	//add a robot with no specific type to the list
 	mymaze.add_robot(new Robots());
 
 	mymaze.print_robots();
 
 /*
-	an int saving the robot type (1,2,3, needs to come from 
-	* the checkuserinput function. 1 is default
+	an int saving the robot type (1,2,3, needs to come from
+	the checkuserinput function. 1 is default
 	int robot_type = 1;
 */
-
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
         cout << mymaze.v_maze[i] << endl;
 
     return 0;
 }
-
-
-
 
 void checkuserinput (int argc, char *argv[]) {
 
@@ -162,15 +149,14 @@ void checkuserinput (int argc, char *argv[]) {
                 break;
         }
     }
-    
+
 	if (argc < optind+1) /* wrong nb of options */
 	{
 	  cout << "Too few options!" << endl;
 	  exit(EXIT_FAILURE);
 	}
-    
-	*maze = argv[optind];
 
+	*maze = argv[optind];
 
 	/* Convert option after -t to int if there was an option at all
 	*/
@@ -188,8 +174,7 @@ void checkuserinput (int argc, char *argv[]) {
 	}
 }
 
-
-/* 
+/*
 	create a node for the list (called "list_element")
 	and put the robot into the "a_robot_in_a_list" part of the struct
 */
@@ -198,18 +183,15 @@ void Mazes::add_robot(Robots *a_robot)
 	robot_list.push_back (a_robot);
 }
 
-
 void t1::exit_search()
 {
 	cout << "Robot of type 1 is looking for an exit" << endl;
 }
 
-
 void Robots::exit_search()
 {
 	cout << "This robot is looking for an exit" << endl;
 }
-
 
 void Mazes::print_robots()
 {

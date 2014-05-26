@@ -76,7 +76,7 @@
 
 using namespace std;
 
-void checkuserinput(int argc, char *argv[]);
+// void checkuserinput(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {

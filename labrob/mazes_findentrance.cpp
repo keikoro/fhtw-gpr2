@@ -35,13 +35,15 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				found_entrance = true;
 				entrance[0] = i;
 				entrance[1] = 0;
+				cout << "Entrance is at the top" << endl;
 				continue; // next iteration of the loop
 			}
 				else
 			{
-				(found_exit = true);
+				found_exit = true;
 				mazeexit[0] = i;
 				mazeexit[1] = 0;
+				cout << "Exit is at the top" << endl;
 				return 0;
 			}
 		}
@@ -59,6 +61,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 					found_entrance = true;
 					entrance[0] = v_maze[0].length()-1;
 					entrance[1] = i;
+					cout << "Entrance is on the right" << endl;
 					continue; // next iteration of the loop
 				}
 					else
@@ -66,6 +69,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 					(found_exit = true);
 					mazeexit[0] = v_maze[0].length()-1;
 					mazeexit[1] = i;
+					cout << "Exit is on the right" << endl;				
 					return 0;
 				}
 			}
@@ -83,14 +87,16 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				{
 					found_entrance = true;
 					entrance[0] = i;
-					entrance[1] = maze_height-1;
+					entrance[1] = 20;
+					cout << "Entrance is at the bottom" << endl;
 					continue; // next iteration of the loop
 				}
 					else
 				{
-					(found_exit = true);
+					found_exit = true;
 					mazeexit[0] = i;
 					mazeexit[1] = maze_height-1;
+					cout << "Exit is at the bottom" << endl;
 					return 0;
 				}
 			}

@@ -85,46 +85,59 @@
 
 using namespace std;
 
-// void checkuserinput(int argc, char *argv[]);
+// void checkuserinput(int argc, char *argv[], string *mazefile,
+//                     vector<int> *robot_numbers);
 
 int main(int argc, char *argv[])
 {
     string one_row;
     vector<string> v_maze;
+    vector<int> robot_numbers;
     string bla = "";
     string *mazepath = &bla;
 
-    checkuserinput(argc, argv, mazepath);
+    checkuserinput(argc, argv, mazepath, &robot_numbers);
 
-    cout << "mazepath: " << *mazepath << endl;
-
-    string thefilename = "mazes/maze1__small.txt";
-
-    ifstream mazefile (thefilename.c_str(), ifstream::in);
-    if (mazefile.is_open())
+    /*  for reference:
+        for strings one would use mazepath.c_str()
+        for string pointers it's mazepath->c_str()
+    */
+    ifstream mazefile(mazepath->c_str(), ifstream::in);
+    if (mazefile)
     {
-        while ( getline (mazefile,one_row) )
+        while (getline(mazefile,one_row))
         {
-            v_maze.push_back (one_row);
+            v_maze.push_back(one_row);
         }
+    } else {
+        cout << "invalid file name" << endl;
+        exit(EXIT_FAILURE);
     }
-
     mazefile.close();
 
-    //make an instance of mazeses called mymaze
+    /* print robots numbers for debugging -- TODO: remove later on */
+    int robot_number;
+    cout << endl << "robot_numbers: ";
+    for(vector<int>::iterator i=robot_numbers.begin();
+        i != robot_numbers.end(); i++)
+    {
+        robot_number = *i;
+        cout << robot_number << " ";
+    }
+    cout << endl;
+
+    //make an instance of mazes called mymaze
     Mazes mymaze;
     /*  the v_maze vector is equal to the vector v_maze here in main
 		Can move this to a method in mazes, but this is not a priority
 	*/
     mymaze.v_maze = v_maze;
-
 	// add a robot of type 1 to the list
     mymaze.add_robot(new t1());
 	//add a robot with no specific type to the list
 	mymaze.add_robot(new Robots());
 
 	mymaze.print_robots();
-
 /*
 	an int saving the robot type (1,2,3, needs to come from
 	the checkuserinput function. 1 is default
@@ -133,7 +146,6 @@ int main(int argc, char *argv[])
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
         cout << mymaze.v_maze[i] << endl;
-
 
 	mymaze.find_entrance (v_maze);
 	mymaze.dummy_function_for_printing();
@@ -164,7 +176,7 @@ void Robots::exit_search()
 void Mazes::print_robots()
 {
 	for(std::vector<Robots*>::iterator i=robot_list.begin();
-		i != robot_list.end(); i++)
+		  i != robot_list.end(); i++)
 	{
 		Robots* a_robot = *i;
 		a_robot->exit_search();

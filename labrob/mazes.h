@@ -7,6 +7,12 @@
     if13b076 - Linda Spindler
 
     class for mazes
+
+	IMPORTANT: the maze is saved as a string vector.
+	This means that when referencing one character withing the maze like this:
+		vector[v][h] (where "vector" is the vector and v and h are ints)
+	"v" is the index on the y-axis (vertical), and 
+	"h" the index on the x-axix (horizontal)
 */
 
 
@@ -39,6 +45,19 @@ public:
 	
 	// function for printing out the list of all robots
 	void print_robots();
+	
+	/* a method for deciding which way the robot should face when it
+		enters the labyrinth; could be included into the
+		find_entrance method as well */
+	void start_position();
+	{
+		if
+		
+	}
+	
+	/* function to check whether the char right in front of the 
+	   robot is a wall or not */
+	bool is_wall();
 };
 
 #endif // MAZES_H

@@ -17,15 +17,22 @@
 class Robots {
 	public:
 //private:
-	// function that will contain the search algorithm
-//	void exit_search(); 
 	// character the robot draws on the labyrinth:
 	char robotcharacter;
 	// integers for saving the coordinates of the robot
-	int x,y;
+	int v, h;
 //protected:
 	// function that will contain the search algorithm
-	virtual void exit_search(); 
+	virtual void exit_search();
+	
+	/* saving which way the robot is facing; should contain 
+	   'n', 'e', 's', 'w'
+	*/
+	char direction;
+	
+	void turn_left();
+	void turn right();
+	void step_forward();
 };
 
 #endif // ROBOTS_H

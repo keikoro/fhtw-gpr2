@@ -192,7 +192,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 			entrance[0] = i;
 			entrance[1] = 0;
 			// inverse order (x-coordinate first) for the printout
-			cout << "Coordinated of the entrance up: X, Y: " <<
+			cout << "Coordinates of the entrance up: X, Y: " <<
 				entrance[0] << "," << entrance [1] << endl;		
 				found_entrance = true;		
 				return 0;
@@ -208,7 +208,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 			{
 				entrance[0] = v_maze[0].length();
 				entrance[1] = i;
-				cout << "Coordinated of the entrance right: X, Y: " <<
+				cout << "Coordinates of the entrance right: X, Y: " <<
 					entrance[0] << "," << entrance [1] << endl;
 					found_entrance = true;
 					return 0;
@@ -226,7 +226,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				entrance[0] = i;
 				entrance[1] = maze_height;
 				// inverse order (x-coordinate first) for the printout
-				cout << "Coordinated of the entrance down: X, Y: " <<
+				cout << "Coordinates of the entrance down: X, Y: " <<
 					entrance[0] << "," << entrance [1] << endl;				
 					return 0;
 			}
@@ -242,7 +242,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 			{
 				entrance[0] = 0;
 				entrance[1] = i;
-				cout << "Coordinated of the entrance right: X, Y: " <<
+				cout << "Coordinates of the entrance right: X, Y: " <<
 					entrance[0] << "," << entrance [1] << endl;
 					found_entrance = true;
 					return 0;

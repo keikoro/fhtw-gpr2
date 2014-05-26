@@ -91,11 +91,16 @@ int main(int argc, char *argv[])
 {
     string one_row;
     vector<string> v_maze;
-    string *mazepath = NULL;
+    string bla = "";
+    string *mazepath = &bla;
+
+    cout << "first mazepath print: " << *mazepath << endl;
 
     checkuserinput(argc, argv, mazepath);
 
-    std::ifstream mazefile (argv[1], std::ifstream::in);
+    cout << "last mazepath print: " << *mazepath << endl;
+
+    ifstream mazefile (argv[1], ifstream::in);
     if (mazefile.is_open())
     {
         while ( getline (mazefile,one_row) )

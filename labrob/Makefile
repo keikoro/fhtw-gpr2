@@ -17,10 +17,21 @@ CC=g++
 CFLAGS = -g -Wall -Werror -O
 
 all: labrob
+# TODO: uncomment once checkuserinput is merged into labrob again.
+# labrob: labrob.o
+# 	${CC} ${CFLAGS} -o labrob labrob.cpp
+# labrob.o: labrob.cpp
+# 	${CC} ${CFLAGS} -c labrob.cpp
+
+# start checkuserinput -- TODO: remove later on
 labrob: labrob.o
 	${CC} ${CFLAGS} -o labrob labrob.cpp
-labrob.o: labrob.cpp
+labrob.o: labrob.cpp checkuserinput.cpp
 	${CC} ${CFLAGS} -c labrob.cpp
+checkuserinput.o: checkuserinput.cpp
+	${CC} ${CFLAGS} -c checkuserinput.cpp
+# stop checkuserinput -- TODO: remove later on
+
 dist:
 	mkdir labrob_kollmann_spindler
 	cp labrob.cpp labrob_kollmann_spindler/

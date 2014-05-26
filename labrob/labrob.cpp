@@ -54,6 +54,8 @@
     a class visible but read-only from outside)
     - opening the file should probably be moved from main to
     checkuserinput; not a priority though, works fine like it is right now
+    - for efficiency's sake, maybe find entrance and exit right when
+		reading in the file?
 
 	Next steps:
 	- free space

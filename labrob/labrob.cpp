@@ -57,8 +57,9 @@
 
 	Next steps:
 	- free space
-	- start working on actual search algorithms?!!!
 	- get those t? arguments to main somehow
+	- expand the find_entrance method to search through the whole
+		perimeter of the labyrinth, and add the search_exit method
 */
 
 #include <iostream>
@@ -117,6 +118,10 @@ int main(int argc, char *argv[])
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
         cout << mymaze.v_maze[i] << endl;
+        
+        
+	mymaze.find_entrance (v_maze);
+
 
     return 0;
 }
@@ -148,5 +153,22 @@ void Mazes::print_robots()
 	{
 		Robots* a_robot = *i;
 		a_robot->exit_search();
+	}
+}
+
+
+/* function that calculates the coordinates of the entrance,
+ right now only if it is in the first line.*/
+void Mazes::find_entrance(std::vector<std::string> v_maze)
+{
+	for (unsigned int j=0; j < v_maze[0].length(); ++j)
+	{
+		if(v_maze[0][j] != '#')
+		{
+			entrance[0] = 0;
+			entrance[1] = j;
+			cout << "Coordinated of the entrance: " <<
+				entrance[0] << "," << entrance [1] << endl;
+		}
 	}
 }

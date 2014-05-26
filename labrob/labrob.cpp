@@ -8,8 +8,6 @@
 
 
 	TODO (feeback tutorial)
-	* - Instead of making linked list yourself, use a vector for the 
-	* list of pointers to poiners
 	* - have a "step forward" method in robots
 	* - have a "is_free" method in mazes that checks if case right in
 	* front of the robot is a wall or not
@@ -25,23 +23,23 @@
     *  through mazes and then printing stats about their performance.
 
     * Status:
-    * - wrote function "add_robots" that saves robots to a linked list,
-    * which is declared in the "Mazes" class.
+    * - wrote function "add_robots" that saves pointers to robots to a
+    * vector is declared in the "Mazes" class.
     * - the method "exit_search" can be called and generates the
     * intended output (different one for Robots and t1, so I think the
     * add_robots method works as intended)
-    * - wrote a "print_robots" method for printing the list; could be
-    * used and expanded on later for going through the list in general
+    * - "print_robots" prints the the current list of robots
+    * (=the robot_list vector); could be used and expanded on later for
+    * going through the vector in general
     * (to print stats and whatever else is needed)
     * - added error-message when file couldn't be opened
-
     * 
     * Issues/other TODOs
     * - with the current char* to int conversion, only the laster argument
     * that has been entered with -tN is converted to int; either write 
     * an int vector to save them all, or go back to the previous
     * version that saved all of them as a string.
-    * - need to get the number for the robot type
+    * - need to get the numbers for the robot types
     * (1, 2, 3, none, which means 1) from checkuserinput() to main()
     * - need to free the allocated space again, right now program
     * doesn't do this at all
@@ -55,7 +53,6 @@
     * 
 	Next steps:
 	* - resolve the thing with the -tN arguments (see issues)
-	* - replace the linked list with a vector
 	* - the freeing space thing
 	* - can start working on actual search algorithms?!!!
 */
@@ -198,22 +195,7 @@ void checkuserinput (int argc, char *argv[]) {
 */
 void Mazes::add_robot(Robots *a_robot)
 {
-	
-	list* list_element = new list; //using "new", need to "delete" later
-	list_element->a_robot_in_a_list = a_robot;
-
-// Add at the start of the list	
-    if (head!=NULL)
-    {
-        list_element->next = head;
-        head = list_element;
-    }
-
-    else
-    {
-        head = list_element;
-        list_element->next = NULL;
-    }
+	robot_list.push_back (a_robot);
 }
 
 
@@ -229,12 +211,12 @@ void Robots::exit_search()
 }
 
 
-void Mazes::print_robots(){
-    list *travelling_node;
-    travelling_node=head;
-    while(travelling_node != NULL)
-    {
-		travelling_node->a_robot_in_a_list->exit_search();
-		travelling_node = travelling_node->next;
-    }
+void Mazes::print_robots()
+{
+	for(std::vector<Robots*>::iterator i=robot_list.begin();
+		i != robot_list.end(); i++)
+	{
+		Robots* a_robot = *i;
+		a_robot->exit_search();
+	}
 }

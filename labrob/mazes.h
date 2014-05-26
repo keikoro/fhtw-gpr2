@@ -23,22 +23,13 @@ public:
 	// Vector that contains the maze
 	std::vector<std::string> v_maze;
 	
+	// A vector that saves pointers to instances of robots
+	std::vector<Robots*> robot_list;
 	
-	// A stuct for saving pointers to individual instances of robots
-	struct node
-	{
-		Robots *a_robot_in_a_list; // pointer to a robot
-		struct node *next;
-	};
-	// typdef so we don't have to write "struct node" every time
-	typedef struct node list;
-
-	/* the function to call when adding a robot
-		by default should be of type t1 (TODO)
-	*/
-	list *head = NULL;
+	// function for adding new robots to the vector
 	void add_robot (Robots *a_robot);
 	
+	// function for printing out the list of all robots
 	void print_robots();	
 };
 

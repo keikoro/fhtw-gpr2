@@ -59,8 +59,6 @@ string *maze = new string();
                     thisrobot = 1;
                     robot_numbers.push_back(thisrobot);
                     /* below for debugging -- TODO: remove later on */
-                    cout << "robot " << thisrobot << " (-t without arg given)"
-                    << endl;
                 }
                 else
                 {
@@ -98,8 +96,7 @@ string *maze = new string();
     {
         if (argv[optind])
         {
-            cout << "maze file: "  << argv[optind] << endl;
-
+            // maze file == argv[optind]
             // check for valid file here!
         }
         else

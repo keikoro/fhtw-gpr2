@@ -119,10 +119,15 @@ int main(int argc, char *argv[])
 void checkuserinput (int argc, char *argv[]) {
 
     string programname = argv[0];
-    string helpmsg = "Usage: labrob filename [-t1] [–t2] [–t3]...[-tN] [-h]";
+    string helpmsg = "To send a robot through the labyrinth, \nplease "
+                        "enter the filename of the maze you'd like to use\n"
+                        "as well as the shortcut of the robot (t1 to t3), "
+                        "like so:";
 
     int getflags;
     char *robot_type=NULL;
+    std::vector<int> robot_numbers;
+	int robot_number;
 
 //    string *robot = new string();
     string *maze = new string();
@@ -143,32 +148,41 @@ void checkuserinput (int argc, char *argv[]) {
                     robot_type=optarg;
                     // print number of robot
                     cout << "the robot number is " << robot_type << endl;
-                break;
+					if (robot_type != NULL)
+					{
+						int robot_number = 1;
+						sscanf(robot_type, "%d", &robot_number);
+
+						robot_numbers.push_back (robot_number);
+					}
+					else
+					{
+						cout << "Option missing" << endl;
+						exit(EXIT_FAILURE);
+					}					
+					
+					
+					break;
         }
     }
-
+    
 	if (argc < optind+1) /* wrong nb of options */
 	{
-	  cout << "Too few options!" << endl << helpmsg << endl;
+	  cout << "Too few options!" << endl;
 	  exit(EXIT_FAILURE);
 	}
-
+    
 	*maze = argv[optind];
 
-	/* Convert argument after -t to int if there was an argument at all
-	*/
-	if (robot_type != NULL)
-	{
-		int robot_number = 1;
-		sscanf(robot_type, "%d", &robot_number);
 
-		cout << "The robot number as an int is " << robot_number << endl;
-	}
-	else
+	cout << "All the arguments in an int vector: ";
+	for(std::vector<int>::iterator i=robot_numbers.begin();
+		i != robot_numbers.end(); i++)
 	{
-		cout << "Option t missing"  << endl << helpmsg << endl;
-		exit(EXIT_FAILURE);
+		robot_number = *i;
+		cout << robot_number << "   ";
 	}
+	cout << endl;
 }
 
 /*

@@ -6,6 +6,21 @@
     if13b070 - K Kollmann
     if13b076 - Linda Spindler
 
+
+	TODO (feeback tuttorial)
+	* - Instead of making linked list yourself, use a vector for the 
+	* list of pointers to poiners
+	* - have a "step forward" method in robots
+	* - have a "is_free" method in mazes that checks if case right in
+	* front of the robot is a wall or not
+	* - search for the entrance and the exit of the labyrinth with a
+	*  method in mazes. The first place (starting upper left) that isn't
+	*  a wall in the outer perimeter is always the entrance, the second
+	* always the exit
+	* - in robots have a variable (a char?) that saves the direction the
+	* robot is currently looking into
+
+
     Programm for sending robots with different search algorithms 
     *  through mazes and then printing stats about their performance.
 
@@ -21,8 +36,8 @@
 
     * 
     * Issues:
-    * - need to add error catching in user input (no file results in
-    * segmentation fault right now)
+    * - move the file reading to checkuserinput; deal with the segmentation
+    * fault that appear on wrong user input
     * - need to get the number for the robot type
     * (1, 2, 3, none, which means 1) from checkuserinput() to main()
     * - need to free the allocated space again, right now program
@@ -131,7 +146,7 @@ void checkuserinput (int argc, char *argv[]) {
     // for (int i = 0; i < argc; ++i)
     //     std::cout << "argv: "<< argv[i] << std::endl;
 
-    while ((getflags = getopt(argc, (char **)argv, "t:h")) != -1) {
+    while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
 
         switch(getflags) {
             case 'h':
@@ -146,12 +161,26 @@ void checkuserinput (int argc, char *argv[]) {
         }
     }
     
+	if (argc < optind+1) /* falsche Anzahl an Optionen */
+	{
+	  cout << "Too few options!" << endl;
+	  exit(EXIT_FAILURE);
+	}
+    
 	*maze = argv[optind];
 
-	int robot_number = 1;
-	sscanf(robot_type, "%d", &robot_number);
+	if (robot_type != NULL)
+	{
+		int robot_number = 1;
+		sscanf(robot_type, "%d", &robot_number);
 
-	cout << "The robot number as an int is " << robot_number << endl;
+		cout << "The robot number as an int is " << robot_number << endl;
+	}
+	else
+	{
+		cout << "Option missing" << endl;
+		exit(EXIT_FAILURE);
+	}
 }
 
 

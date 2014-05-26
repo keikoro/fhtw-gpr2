@@ -33,6 +33,7 @@
     * - wrote a "print_robots" method for printing the list; could be
     * used and expanded on later for going through the list in general
     * (to print stats and whatever else is needed)
+    * - added error-message when file couldn't be opened
 
     * 
     * Issues/other TODOs
@@ -161,7 +162,7 @@ void checkuserinput (int argc, char *argv[]) {
         }
     }
     
-	if (argc < optind+1) /* falsche Anzahl an Optionen */
+	if (argc < optind+1) /* wrong nb of options */
 	{
 	  cout << "Too few options!" << endl;
 	  exit(EXIT_FAILURE);
@@ -169,6 +170,9 @@ void checkuserinput (int argc, char *argv[]) {
     
 	*maze = argv[optind];
 
+
+	/* Convert option after -t to int if there was an option at all
+	*/
 	if (robot_type != NULL)
 	{
 		int robot_number = 1;

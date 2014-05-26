@@ -59,7 +59,7 @@ string *maze = new string();
                     thisrobot = 1;
                     robot_numbers.push_back(thisrobot);
                     /* below for debugging -- TODO: remove later on */
-                    cout << "robot " << thisrobot << "(-t without arg given)"
+                    cout << "robot " << thisrobot << " (-t without arg given)"
                     << endl;
                 }
                 else
@@ -73,14 +73,16 @@ string *maze = new string();
                     }
                     else
                     {
+                        cout << "invalid argument: " << optarg << endl;
                         cout << helpmsg << endl;
                         exit(EXIT_FAILURE);
                     }
-                break;
                 }
+                break;
             /*  unknown option used */
             case '?':
-                cout << helpmsg << endl;
+                cout << "invalid option: " << optarg << endl
+                << helpmsg << endl;
                 exit(EXIT_FAILURE);
                 break;
         }
@@ -107,15 +109,4 @@ string *maze = new string();
     }
 
     *maze = argv[optind];
-
-// cout << "All the arguments in an int vector: ";
-// for(std::vector<int>::iterator i=robot_numbers.begin();
-// 	i != robot_numbers.end(); i++)
-// {
-// 	robot_number = *i;
-// 	cout << robot_number << "   ";
-// }
-// cout << endl;
-// }
-
 }

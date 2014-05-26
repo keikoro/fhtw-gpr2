@@ -28,7 +28,7 @@ using namespace std;
 void checkuserinput (int argc, char *argv[]) {
 
 string programname = argv[0];
-string helpmsg = "Usage: labrob filename [-t1] [–t2] [–t3]...[-tN] [-h]";
+string helpmsg = "Usage: labrob path_to_maze [-t1] [–t2] [–t3]...[-tN] [-h]";
 
 int getflags;
 char *robot_type=NULL;

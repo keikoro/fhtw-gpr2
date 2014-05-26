@@ -7,7 +7,7 @@
     if13b076 - Linda Spindler
 
 
-	TODO (feeback tuttorial)
+	TODO (feeback tutorial)
 	* - Instead of making linked list yourself, use a vector for the 
 	* list of pointers to poiners
 	* - have a "step forward" method in robots
@@ -35,24 +35,24 @@
     * (to print stats and whatever else is needed)
 
     * 
-    * Issues:
-    * - move the file reading to checkuserinput; deal with the segmentation
-    * fault that appear on wrong user input
+    * Issues/other TODOs
+    * - move whole bit with reading in user input 
     * - need to get the number for the robot type
     * (1, 2, 3, none, which means 1) from checkuserinput() to main()
     * - need to free the allocated space again, right now program
     * doesn't do this at all
     * - made everything in the classes public, remember to put everything
-    * that doesn't need to be public back to private later
+    * that doesn't need to be public back to private later, but only after
+    * we're done with the whole program
     * Maybe also use "const" (which can be used for making something in
     * a class visible but read only from outside)
+    * - opening the file should probably be moved from main to
+    * checkuserinput; not a priority though, works fine like this too
     * 
 	Next steps:
+	* - replace the linked list with a vector
 	* - the freeing space thing
 	* - can start working on actual search algorithms?!!!
-	* - need to implement a way for the user to add several robots, and
-	* then ask for the output when he/she is done. Both over
-	*  command line?
 */
 
 #include <iostream>

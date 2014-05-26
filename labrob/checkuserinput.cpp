@@ -31,7 +31,7 @@ string programname = argv[0];
 string helpmsg = "Usage: labrob path_to_maze [-t1] [–t2] [–t3]...[-tN] [-h]";
 
 int getflags;
-char *robot_type=NULL;
+int thisrobot;
 std::vector<int> robot_numbers;
 int robot_number;
 
@@ -43,34 +43,45 @@ string *maze = new string();
 // for (int i = 0; i < argc; ++i)
 //     std::cout << "argv: "<< argv[i] << std::endl;
 
+/*  use double colon for option argument for the*/
 while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
 
     switch(getflags) {
         case 'h':
-            cout << helpmsg << endl; // prints help message
+            cout << helpmsg << endl;
             exit(EXIT_FAILURE);
             break;
         case 't':
-            robot_type=optarg;
-            // print robot number
-            cout << "the robot number is " << robot_type << endl;
-			if (robot_type != NULL)
-			{
-				int robot_number = 1;
-				sscanf(robot_type, "%d", &robot_number);
-
-				robot_numbers.push_back (robot_number);
-			}
-			else
-			{
-                cout << "Option t missing"  << endl << helpmsg << endl;
-				exit(EXIT_FAILURE);
-			}
-			break;
+            /*  if no argument is given, use 1  */
+            if (optarg == NULL)
+            {
+            /*  check if argument is a number  */
+                thisrobot = 1;
+                robot_numbers.push_back(thisrobot);
+                cout << "the robot number is " << thisrobot << endl; /*
+                for debugging -- TODO: remove later on */
+            }
+            else
+            {
+                if (isdigit(*optarg))
+                {
+                    sscanf(optarg, "%d", &thisrobot);
+                    robot_numbers.push_back(thisrobot);
+                    cout << "the robot number is " << thisrobot << endl; /*
+                    for debugging -- TODO: remove later on */
+                }
+                else
+                {
+                    cout << helpmsg << endl;
+                    exit(EXIT_FAILURE);
+                }
+            break;
+            }
     }
 }
 
-if (argc < optind+1) /* wrong nb of options */
+/*  not enough options given    */
+if (argc < optind+1)
 {
 	cout << "Too few options!" << endl << helpmsg << endl;
 	exit(EXIT_FAILURE);

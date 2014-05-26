@@ -10,9 +10,7 @@ using namespace std;
 int Mazes::find_entrance(std::vector<std::string> v_maze)
 {
 	
-	/* Note: when going through the string vector with v_maze[a][b]
-		a is the index on the HEIGHT, b of the LENGTH; this is the 
-		opposite of the usual convention that looks at the x-axis first!
+	/* 
 	*/
 	
 	 // lenght of the maze is length of the strings:
@@ -24,8 +22,9 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 	bool found_entrance = false;
 	bool found_exit = false;
 
-	// look for entrance/exit at the top
-	for (unsigned int i = 1; i < maze_length-2; ++i)
+	// look for entrance/exit at the top; the corner is irrelavant
+	// so stop at maze_length - 2
+	for (unsigned int i = 1; i < maze_length-1; ++i)
 	{
 		if(v_maze[0][i] != '#')
 		{

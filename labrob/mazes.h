@@ -23,6 +23,12 @@ public:
 	// Vector that contains the maze
 	std::vector<std::string> v_maze;
 	
+	/* int arrays for saving the coordinated of entrance and exit of
+		the maze, and method for finding the entrance */
+	int entrance [2];
+	int exit [2];
+	void find_entrance(std::vector<std::string> v_maze);
+	
 	// A vector that saves pointers to instances of robots
 	std::vector<Robots*> robot_list;
 	

@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
             v_maze.push_back (one_row);
         }
     }
+    
     mazefile.close();
 
     checkuserinput(argc, argv);
@@ -160,8 +161,11 @@ void Mazes::print_robots()
 
 
 /* function that calculates the coordinates of the entrance,
- right now only if it is in the first line.*/
-void Mazes::find_entrance(std::vector<std::string> v_maze)
+ right now only if it is in the first line.
+ Returns 0 (instead of being declared void) so I can easily leave
+ the whole program anytime
+ */
+int Mazes::find_entrance(std::vector<std::string> v_maze)
 {
 	
 	/* Note: when going through the string vector with v_maze[a][b]
@@ -187,7 +191,7 @@ void Mazes::find_entrance(std::vector<std::string> v_maze)
 			cout << "Coordinated of the entrance up: X, Y: " <<
 				entrance[0] << "," << entrance [1] << endl;
 				foundit = true;
-				break;
+				return 0;
 		}
 	}
 	
@@ -203,8 +207,9 @@ void Mazes::find_entrance(std::vector<std::string> v_maze)
 				cout << "Coordinated of the entrance right: X, Y: " <<
 					entrance[0] << "," << entrance [1] << endl;
 					foundit = true;
-					break;
+					return 0;
 			}		
 		}
-	}	
+	}
+	return 0;
 }

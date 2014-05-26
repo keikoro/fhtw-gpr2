@@ -26,8 +26,10 @@ public:
 	/* int arrays for saving the coordinated of entrance and exit of
 		the maze, and method for finding the entrance */
 	int entrance [2];
-	int exit [2];
+	int mazeexit [2];
 	int find_entrance(std::vector<std::string> v_maze);
+	
+	void dummy_function_for_printing();
 	
 	// A vector that saves pointers to instances of robots
 	std::vector<Robots*> robot_list;
@@ -36,7 +38,7 @@ public:
 	void add_robot (Robots *a_robot);
 	
 	// function for printing out the list of all robots
-	void print_robots();	
+	void print_robots();
 };
 
 #endif // MAZES_H

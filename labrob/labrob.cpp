@@ -40,6 +40,8 @@
     (= the robot_list vector); could be used and expanded on later for
     going through the vector in general (to print stats and whatever
     else is needed)
+    - wrote find_entrance method; make it more efficient (less repeated
+	code
     - added error message when file couldn't be opened
 
     Issues/other TODOs:
@@ -179,26 +181,28 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 	// height of the maze is length of the vector:
 	unsigned int maze_height = v_maze.size();
 	
-	bool foundit = false;
+	bool found_entrance = false;
+//	bool found_exit = false;
 
-	for (unsigned int i = 0; i < maze_length; ++i)
+	// look for entrance at the top
+	for (unsigned int i = 1; i < maze_length-1; ++i)
 	{
 		if(v_maze[0][i] != '#')
 		{
 			entrance[0] = i;
 			entrance[1] = 0;
-			// inverse order for the printout
+			// inverse order (x-coordinate first) for the printout
 			cout << "Coordinated of the entrance up: X, Y: " <<
-				entrance[0] << "," << entrance [1] << endl;
-				foundit = true;
+				entrance[0] << "," << entrance [1] << endl;		
+				found_entrance = true;		
 				return 0;
 		}
 	}
 	
-	// if the entrance is not in the first row
-	if (foundit == false)
+	// if the entrance is not in the first row look on the right side
+	if (found_entrance == false)
 	{
-		for (unsigned int i=0; i < maze_height; ++i)
+		for (unsigned int i=1; i < maze_height-2; ++i)
 		{
 			if(v_maze[i][maze_length-1] != '#')
 			{
@@ -206,10 +210,45 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				entrance[1] = i;
 				cout << "Coordinated of the entrance right: X, Y: " <<
 					entrance[0] << "," << entrance [1] << endl;
-					foundit = true;
+					found_entrance = true;
 					return 0;
 			}		
 		}
 	}
+
+	// look for entrance at the bottom
+	if (found_entrance == false)
+	{
+		for (unsigned int i = maze_length-1 ; i >= 1 ; --i)
+		{
+			if(v_maze[maze_height-2][i] != '#')
+			{
+				entrance[0] = i;
+				entrance[1] = maze_height;
+				// inverse order (x-coordinate first) for the printout
+				cout << "Coordinated of the entrance down: X, Y: " <<
+					entrance[0] << "," << entrance [1] << endl;				
+					return 0;
+			}
+		}
+	}
+	
+	// look for entrance on the left
+	if (found_entrance == false)
+	{
+		for (unsigned int i=maze_height-2; i >= 1 ; --i)
+		{
+			if(v_maze[i][0] != '#')
+			{
+				entrance[0] = 0;
+				entrance[1] = i;
+				cout << "Coordinated of the entrance right: X, Y: " <<
+					entrance[0] << "," << entrance [1] << endl;
+					found_entrance = true;
+					return 0;
+			}		
+		}
+	}
+	
 	return 0;
 }

@@ -43,7 +43,7 @@ string *maze = new string();
 // for (int i = 0; i < argc; ++i)
 //     std::cout << "argv: "<< argv[i] << std::endl;
 
-/*  use double colon for option argument for the*/
+    /*  use double colon for option argument for the*/
     while ((getflags = getopt(argc, (char **)argv, "t::h")) != -1) {
 
         switch(getflags) {
@@ -55,11 +55,12 @@ string *maze = new string();
                 /*  if no argument is given, use 1  */
                 if (optarg == NULL)
                 {
-                /*  check if argument is a number  */
+                    /*  check if argument is a number  */
                     thisrobot = 1;
                     robot_numbers.push_back(thisrobot);
-                    cout << "the robot number is " << thisrobot << endl; /*
-                    for debugging -- TODO: remove later on */
+                    /* below for debugging -- TODO: remove later on */
+                    cout << "robot " << thisrobot << "(-t without arg given)"
+                    << endl;
                 }
                 else
                 {
@@ -67,8 +68,8 @@ string *maze = new string();
                     {
                         sscanf(optarg, "%d", &thisrobot);
                         robot_numbers.push_back(thisrobot);
-                        cout << "the robot number is " << thisrobot << endl; /*
-                        for debugging -- TODO: remove later on */
+                        /* below for debugging -- TODO: remove later on */
+                        cout << "robot " << thisrobot << endl;
                     }
                     else
                     {
@@ -78,14 +79,12 @@ string *maze = new string();
                 break;
                 }
             /*  unknown option used */
-            // case '?':
-            //     cout << helpmsg << endl;
-            //     exit(EXIT_FAILURE);
-            //     break;
+            case '?':
+                cout << helpmsg << endl;
+                exit(EXIT_FAILURE);
+                break;
         }
     }
-
-// cout << "optind: " << optind << endl;
 
     /*  there must be at least 3 argv (program name, -t, file name of maze) */
     if (sizeof(argv) < 3)
@@ -97,19 +96,15 @@ string *maze = new string();
     {
         if (argv[optind])
         {
-            cout << "the maze name is: "  << argv[optind] << endl;
+            cout << "maze file: "  << argv[optind] << endl;
+
+            // check for valid file here!
         }
         else
         {
-            cout << "no maze name was provided" << endl << helpmsg << endl;
+            cout << "no maze file was provided!" << endl << helpmsg << endl;
         }
     }
-
-        // /*  loop through file names */
-        // for (int i = optind; i < argc; i++)
-        // {
-        //      cout << argv[i] << endl;
-        // }
 
     *maze = argv[optind];
 

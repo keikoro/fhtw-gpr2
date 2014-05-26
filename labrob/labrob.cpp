@@ -119,10 +119,7 @@ int main(int argc, char *argv[])
 void checkuserinput (int argc, char *argv[]) {
 
     string programname = argv[0];
-    string helpmsg = "To send a robot through the labyrinth, \nplease "
-                        "enter the filename of the maze you'd like to use\n"
-                        "as well as the shortcut of the robot (t1 to t3), "
-                        "like so:";
+    string helpmsg = "Usage: labrob filename [-t1] [–t2] [–t3]...[-tN] [-h]";
 
     int getflags;
     char *robot_type=NULL;
@@ -152,13 +149,13 @@ void checkuserinput (int argc, char *argv[]) {
 
 	if (argc < optind+1) /* wrong nb of options */
 	{
-	  cout << "Too few options!" << endl;
+	  cout << "Too few options!" << endl << helpmsg << endl;
 	  exit(EXIT_FAILURE);
 	}
 
 	*maze = argv[optind];
 
-	/* Convert option after -t to int if there was an option at all
+	/* Convert argument after -t to int if there was an argument at all
 	*/
 	if (robot_type != NULL)
 	{
@@ -169,7 +166,7 @@ void checkuserinput (int argc, char *argv[]) {
 	}
 	else
 	{
-		cout << "Option missing" << endl;
+		cout << "Option t missing"  << endl << helpmsg << endl;
 		exit(EXIT_FAILURE);
 	}
 }

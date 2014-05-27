@@ -29,7 +29,7 @@ Robots Robots::step_forward(Robots robot)
     else
     if (robot.direction == 'e')
     {
-        robot.v++;
+        robot.h++;
     }
     /*  message for debugging -- TODO: remove later on */
     else cout << "something went wrong (func Robots::step_forward)" << endl;

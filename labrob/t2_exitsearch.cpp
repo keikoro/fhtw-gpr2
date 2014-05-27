@@ -34,42 +34,64 @@ using namespace std;
 
 
 
-//~ 
+
 void t2::exit_search(Robots robot, Mazes this_maze)
 {
-    //~ step_counter = 0;
-    //~ /*  coordinates of the robot are directly accessible since they're
-        //~ stored in Robots (or t2)
-    //~ */
-    //~ while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
-	//~ {
-		//~ while (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
-			//~ robot = step_forward(robot);
-		//~ if (this_maze.wall_left(robot.v, robot.h, robot.direction, this_maze.v_maze)
-			//~ robot = turn_right(robot);
-//~ 
-	//~ {
-		//~ if 
-		//~ step_count++;
-	//~ }
-//~ }
+    int step_count = 0;
+    /*  coordinates of the robot are directly accessible since they're
+        stored in Robots (or t2)
+    */
     
-    //~ while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
-    //~ {
-        //~ cout << "V: " << robot.v << ", H: " << robot.h << endl;
-        //~ 
-        //~ if (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
-        //~ {
-            //~ /*  if there's a wall, turn left and try again */
-            //~ robot.direction = turn_left(robot);
-            //~ exit_search(robot, this_maze);
-        //~ }
-        //~ else
-        //~ {
-            //~ robot = step_forward(robot);
-            //~ step_counter++;
-        //~ }
-    //~ }
-    //~ cout << "Steps taken: " << step_counter << endl;
-    //~ cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;
+    bool stop = false;
+
+	while (!stop)
+	{
+		/*
+			As long as there is no wall in front and a wall on the left,
+			keep going
+		*/
+		if  (
+			(!(this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze)) )
+			&&
+			(this_maze.wall_left(robot.v, robot.h, robot.direction, this_maze.v_maze))
+			)
+		{
+			robot = step_forward(robot);
+			step_count++;
+			cout << "V: " << robot.v << ", H: " << robot.h << endl;
+		}
+		else
+		{
+			// if there's a wall on the left, turn right
+			if (this_maze.wall_left(robot.v, robot.h, robot.direction, this_maze.v_maze))
+			{
+				robot.direction = turn_right(robot);
+			}
+			// if there is no wall on the left, turn left
+			else
+			{
+				robot.direction = turn_left(robot);
+			}
+			// in both cases, leave the loop
+			stop = true;
+		}
+	}
+	cout << "Steps: " << step_count << endl;
 }
+	
+	//~ while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
+	//~ {
+		//~ cout << robot.v << " " << robot.h << endl;
+		//~ while (! (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze)) )
+		//~ {
+			//~ if (  !(this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze)) )
+			//~ {
+				//~ robot = step_forward(robot);
+				//~ step_count++;
+			//~ }
+			//~ else break;
+		//~ }
+		//~ if (this_maze.wall_left(robot.v, robot.h, robot.direction, this_maze.v_maze))
+		//~ robot.direction = turn_right(robot);
+	//~ }
+

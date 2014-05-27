@@ -48,7 +48,7 @@ public:
 	void add_robot (Robots *a_robot, Mazes maze);
 	
 	// function for printing out the list of all robots
-	void print_robots();	
+	void print_robots(Mazes mymaze);	
 	
 	/* function to check whether the char right in front of the 
 	   robot is a wall or not */

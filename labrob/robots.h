@@ -12,6 +12,8 @@
 #ifndef ROBOTS_H
 #define ROBOTS_H
 
+class Mazes;
+
 // TODO: put things back to private/protected (commented out for testing)
 
 class Robots {
@@ -26,7 +28,7 @@ class Robots {
 	int v, h;
 //protected:
 	// function that will contain the search algorithm
-    virtual void exit_search();
+    virtual void exit_search(Robots robot, Mazes this_maze);
 	
 	/* saving which way the robot is facing; should contain 
 	   'n', 'e', 's', 'w'

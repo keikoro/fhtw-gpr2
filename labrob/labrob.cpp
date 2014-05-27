@@ -45,12 +45,14 @@
     - added error message when file couldn't be opened
 	- add_robot now also adds the start direction and coordinates 
 	- added helper methods turn_left and step_forward; not yet tested
+	- included forward declaration of Mazes in Robots. Method in t2 now
+		overrides the one in Robots when robot of type 2 is added.
 
     Issues/other TODOs:
     - need to free the allocated space again, right now program
     doesn't do this at all
-    - the virtual method from t2 overwriting the same one in Robots doesn't
-		seem to work.
+    - exit_search function in t2 isn't working; need to pay attention to
+		what the recursion actually does 
     - made everything in the classes public, remember to put everything
     that doesn't need to be public back to private later, but only after
     we're done with the whole program
@@ -153,7 +155,7 @@ int main(int argc, char *argv[])
     }
     cout << endl;
 
-	mymaze.print_robots();
+	mymaze.print_robots(mymaze);
 
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
@@ -184,13 +186,13 @@ void t1::exit_search()
 	cout << "Robot of type 1 is looking for an exit" << endl;
 }
 
-void Mazes::print_robots()
+void Mazes::print_robots(Mazes mymaze)
 {
 	for(std::vector<Robots*>::iterator i=robot_list.begin();
 		  i != robot_list.end(); i++)
 	{
 		Robots* a_robot = *i;
-		a_robot->exit_search();
+		a_robot->exit_search(*a_robot, mymaze);
 	}
 }
 
@@ -326,7 +328,7 @@ bool Mazes::is_wall(int v, int h, char direction,
 	return (true);
 }
 
-void Robots::exit_search()
+void Robots::exit_search(Robots robot, Mazes this_maze)
 {
 	cout << "This robot is looking for an exit" << endl;
 }

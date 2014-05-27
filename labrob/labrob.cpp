@@ -35,7 +35,7 @@
 
 using namespace std;
 
- void checkuserinput(int argc, char *argv[], string *mazefile,
+void checkuserinput(int argc, char *argv[], string *mazefile,
                      vector<int> *robot_numbers);
 
 int main(int argc, char *argv[])
@@ -125,8 +125,6 @@ void Mazes::add_robot(Robots *a_robot, Mazes maze)
 	a_robot->direction = maze.startposition;
 }
 
-
-
 void Mazes::print_robots(Mazes mymaze)
 {
 	for(vector<Robots*>::iterator i=robot_list.begin();
@@ -193,8 +191,6 @@ char Robots::turn_left(Robots robot)
 return 'x';
 }
 
-
-
 char Robots::turn_right(Robots robot)
 {
 	switch(robot.direction)
@@ -222,19 +218,17 @@ return 'x';
     it moves one step forward. The robot also saves the number of steps
     it has already taken.
 */
-
-
 void t2::exit_search(Robots robot, Mazes this_maze)
 {
     int step_count = 0;
     /*  coordinates of the robot are directly accessible since they're
         stored in Robots (or t2)
     */
-    
+
 //    bool stop = false;
-    
+
     int t = 23;
-	
+
 	while (t > 0)
 	{
 		/*
@@ -285,6 +279,7 @@ void t2::exit_search(Robots robot, Mazes this_maze)
 
 void t1::exit_search(Robots thisrobot, Mazes thismaze)
 {
+    string wall = "#";
     thisrobot.step_counter = 0;
 
     // thisrobot.h // x coordinate;
@@ -294,19 +289,15 @@ void t1::exit_search(Robots thisrobot, Mazes thismaze)
     cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
     << "facing: " << thisrobot.direction << endl << endl;
 
-    thisrobot = step_forward(thisrobot);
-    thisrobot.step_counter++;
-
-    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
-    << "facing: " << thisrobot.direction << endl << endl;
-
-    thisrobot = step_forward(thisrobot);
-    thisrobot.step_counter++;
-
-    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
-    << "facing: " << thisrobot.direction << endl << endl;
-
-    cout << "steps: " << thisrobot.step_counter << endl << endl;
+// thismaze.wall_check(thisrobot.v, thisrobot.h, thisrobot.direction)
+    if(" " == wall)
+    {
+        cout << "wall!" << endl;
+    }
+    else
+    {
+        cout << "empty!" << endl;
+    }
 
 }
 
@@ -544,6 +535,15 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 		}
 	}
 	return 0;
+}
+
+char Mazes::wall_check(int x, int y, char direction) {
+    return v_maze[y-1][x];
+}
+
+Robots Robots::step_forward_v2(Robots robot)
+{
+    return(robot);
 }
 
 

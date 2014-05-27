@@ -53,6 +53,7 @@
 #include "robots_stepforward.cpp"
 #include "robots_turnleft.cpp"
 #include "t2_exitsearch.cpp"
+#include "t1_exitsearch.cpp"
 
 using namespace std;
 

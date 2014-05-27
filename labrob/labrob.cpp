@@ -19,53 +19,19 @@
     -h being used for printing a usage message
 
 
-    TODO (feeback tutorial)
-	- have a "step forward" method in robots
-    - have a "is_free" method in mazes that checks if what's in
-	front of the robot is a wall or not
-	- search for the entrance and the exit of the labyrinth with a
-    method in mazes; when starting in the upper left corner, the first
-    opening in the maze in the outer perimeter is always the entrance,
-    the second always the exit
-    - have a variable (a char?) in robots that saves the direction the
-    robot is currently looking into
-
-    Status:
-    - wrote function "add_robots" that saves pointers to robots to a
-    vector that is declared in the "mazes" class.
-    - the method "exit_search" can be called and generates the
-    intended output (different one for robots and t1, so I think the
-    add_robots method works as intended)
-    - "print_robots" prints the the current list of robots
-    (= the robot_list vector); could be used and expanded on later for
-    going through the vector in general (to print stats and whatever
-    else is needed)
-    - wrote find_entrance method (make it more efficient less repeated
-	code later if possible, not a priority)
-    - added error message when file couldn't be opened
-	- add_robot now also adds the start direction and coordinates
-	- added helper methods turn_left and step_forward; not yet tested
-	- included forward declaration of Mazes in Robots. Method in t2 now
-		overrides the one in Robots when robot of type 2 is added.
-
-    Issues/other TODOs:
+    TODOS / ISSUES:
     - need to free the allocated space again, right now program
     doesn't do this at all
     - exit_search function in t2 isn't working; need to pay attention to
-		what the recursion actually does
+    what the recursion actually does
     - made everything in the classes public, remember to put everything
     that doesn't need to be public back to private later, but only after
     we're done with the whole program
     - maybe also use "const" (which can be used for making something in
     a class visible but read-only from outside)
     - for efficiency's sake, maybe find entrance and exit right when
-		reading in the file?
+    reading in the file?
 	- add_robot needing a Mazes argument is a bit awkward; works tho
-
-	Next steps:
-	- !! figure out communication between classes: class that is included
-		first connot use anything from the classes included bellow it
-	- free space
 */
 
 #include <iostream>

@@ -22,6 +22,7 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 
 	// height of the maze is length of the vector:
 	unsigned int maze_height = v_maze.size();
+	cout << maze_height << endl;
 
 	bool found_entrance = false;
 	bool found_exit = false;

@@ -1,11 +1,18 @@
-/* function that calculates the coordinates of the entrance,
- right now only if it is in the first line.
- Returns 0 (instead of being declared void) so I can easily leave
+/*
+	labrob program
+    mazes_findentrance.cpp
+
+    GPR2 UE5 + UE6 + UE7
+    if13b070 - K Kollmann
+    if13b076 - Linda Spindler
+
+ Function that calculates the coordinates of the entrance, and of the 
+ exit of the maze, as well as determining which way the robot will face
+ when it enters the labyrinth.
+ Returns 0 (instead of being declared void) so one can easily leave
  the whole program anytime
 
- Status:
- - should now find the correct coordinated for entrance and exit
-   and prints them.
+
 
  */
  

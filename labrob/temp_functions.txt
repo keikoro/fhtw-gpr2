@@ -1,6 +1,7 @@
 // Just a bunch of function ideas, not yet tested.
 
 
+// would not need acces to Mazes
 void Robots::turn_left(Robots robot)
 {
 	if (robot.direction == 'n')
@@ -21,7 +22,7 @@ void Robots::turn_left(Robots robot)
 }
 
 
-
+// would not need acces to Mazes
 void Robots::step_forward(Robots robot)
 {
 	if (robot.direction == 'n')
@@ -48,12 +49,18 @@ void Robots::step_forward(Robots robot)
 
 
 
-void t2::exit_search(Robots robot, int v, int h, Mazes this_maze)
+void t2::exit_search(Robots robot, Mazes this_maze)
 {
 	step_counter = 0;
+	
+	/* coordinated of the robot, are directly accessible since they're
+		stored in Robots (or t2) */
+	int v = robot.v;
+	int h = robot.h;
+	
 	while (!(v == this_maze.mazexit[0]) && h == this_maze.mazeexit[1])
 	
-	if (this_maze.is_wall())
+	if (this_maze.is_wall(v, h, robot.direction))
 	{
 		turn_left(robot);
 		exit_search(robot, v, h, this_maze);
@@ -65,12 +72,13 @@ void t2::exit_search(Robots robot, int v, int h, Mazes this_maze)
 	}
 }
 
-
-bool Mazes::is_wall(int v, int h) //current coordinates of the robot
+/* There will be a problem because the mymaze in not in scope of the
+	function; pass it as an argument?*/
+bool Mazes::is_wall(int v, int h, char direction) //current coordinates of the robot
 {
-	if (robot.direction == 'n')
+	if (direction == 'n')
 	{
-		if (v_maze[v][h+1] == '#'
+		if (mymaze[v][h+1] == '#'
 		{
 			return true;
 		}
@@ -80,9 +88,9 @@ bool Mazes::is_wall(int v, int h) //current coordinates of the robot
 		}
 	}
 	else 
-	if (robot.direction == 'w')
+	if (direction == 'w')
 	{
-		if (v_maze[v][h-1] == '#'
+		if (mymaze[v][h-1] == '#'
 		{
 			return true;
 		}
@@ -93,7 +101,7 @@ bool Mazes::is_wall(int v, int h) //current coordinates of the robot
 	}
 	else
 	{
-		if (v_maze[v+1][h] == '#'
+		if (mymaze[v+1][h] == '#'
 		{
 			return true;
 		}
@@ -104,7 +112,7 @@ bool Mazes::is_wall(int v, int h) //current coordinates of the robot
 	}
 	else 
 	{
-		if (v_maze[v-1][h] == '#'
+		if (mymaze[v-1][h] == '#'
 		{
 			return true;
 		}
@@ -117,4 +125,3 @@ bool Mazes::is_wall(int v, int h) //current coordinates of the robot
 	
 	return (true);
 }
-

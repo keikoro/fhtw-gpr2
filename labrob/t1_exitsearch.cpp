@@ -10,7 +10,31 @@
     by always turning right.
 */
 
+using namespace std;
+
 void t1::exit_search(Robots thisrobot, Mazes thismaze)
 {
-    step_counter = 0;
+    thisrobot.step_counter = 0;
+
+    // thisrobot.h // x coordinate;
+    // thisrobot.v // y coordinate;
+    // thisrobot.direction // direction the robot is currently facing;
+
+    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
+    << "facing: " << thisrobot.direction << endl << endl;
+
+    thisrobot = step_forward(thisrobot);
+    thisrobot.step_counter++;
+
+    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
+    << "facing: " << thisrobot.direction << endl << endl;
+
+    thisrobot = step_forward(thisrobot);
+    thisrobot.step_counter++;
+
+    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
+    << "facing: " << thisrobot.direction << endl << endl;
+
+    cout << "steps: " << thisrobot.step_counter << endl << endl;
+
 }

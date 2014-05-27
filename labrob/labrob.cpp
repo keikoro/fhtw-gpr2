@@ -51,6 +51,7 @@
 #include "mazes_dummyprint.cpp"
 #include "mazes_iswall.cpp"
 #include "robots_stepforward.cpp"
+#include "robots_stepforward_v2.cpp"
 #include "robots_turnleft.cpp"
 #include "t2_exitsearch.cpp"
 #include "t1_exitsearch.cpp"

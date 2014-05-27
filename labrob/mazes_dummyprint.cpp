@@ -13,9 +13,9 @@ using namespace std;
 
 void Mazes::dummy_function_for_printing()
 {
-	cout << "Coordinates of the entrance: X, Y: " <<
+	cout << "Coordinates of the entrance: " <<
 		entrance[0] << "," << entrance[1] << endl;
-	cout << "Coordinates of the exit: X, Y: " <<
+	cout << "Coordinates of the exit: " <<
 		mazeexit[0] << "," << mazeexit [1] << endl;
 //	cout << "The robot enters the labyrinth facing: " << startposition << endl;
 }

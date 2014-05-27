@@ -37,16 +37,16 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 			if (found_entrance == false)
 			{
 				found_entrance = true;
-				entrance[0] = i;
-				entrance[1] = 0;
+				entrance[0] = 0;
+				entrance[1] = i;
 				startposition = 's';
 				continue; // next iteration of the loop
 			}
 				else
 			{
 				found_exit = true;
-				mazeexit[0] = i;
-				mazeexit[1] = 0;
+				mazeexit[0] = 0;
+				mazeexit[1] = i;
 //				cout << "Exit is at the top" << endl;
 				return 0;
 			}
@@ -57,23 +57,23 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 		look on the right side of the maze */
 	if (found_entrance == false || found_exit == false)
 	{
-		for (unsigned int i=1; i <= maze_height-2; ++i)
+		for (unsigned int i=1; i < maze_height-1; ++i)
 		{
 			if(v_maze[i][maze_length-1] != '#')
 			{
 				if (found_entrance == false)
 				{
 					found_entrance = true;
-					entrance[0] = v_maze[0].length()-1;
-					entrance[1] = i;
+					entrance[0] = i;
+					entrance[1] = maze_length-1;
 					startposition = 'w';
 					continue; // next iteration of the loop
 				}
 					else
 				{
 					found_exit = true;
-					mazeexit[0] = v_maze[0].length()-1;
-					mazeexit[1] = i;
+					mazeexit[0] = i;
+					mazeexit[1] = maze_length-1;
 		//			cout << "Exit is on the right" << endl;
 					return 0;
 				}
@@ -91,16 +91,16 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				if (found_entrance == false)
 				{
 					found_entrance = true;
-					entrance[0] = i;
-					entrance[1] = maze_height-1;
+					entrance[0] = maze_height-1;
+					entrance[1] = i;
 					startposition = 'n';
 					continue; // next iteration of the loop
 				}
 					else
 				{
 					found_exit = true;
-					mazeexit[0] = i;
-					mazeexit[1] = maze_height-1;
+					mazeexit[0] = maze_height-1;
+					mazeexit[1] = i;
 	//				cout << "Exit is at the bottom" << endl;
 					return 0;
 				}
@@ -118,16 +118,16 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 				if (found_entrance == false)
 				{
 					found_entrance = true;
-					entrance[0] = 0;
-					entrance[1] = i;
+					entrance[0] = i;
+					entrance[1] = 0;
 					startposition = 'e';
 					continue; // next iteration of the loop
 				}
 					else
 				{
 					found_exit = true;
-					mazeexit[0] = 0;
-					mazeexit[1] = i;
+					mazeexit[0] = i;
+					mazeexit[1] = 0;
 					return 0;
 				}
 			}

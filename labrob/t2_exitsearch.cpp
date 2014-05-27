@@ -16,27 +16,60 @@
     it has already taken.
 */
 
+
+/*  labrob program
+    mazes_iswall.cpp
+
+    GPR2 UE5 + UE6 + UE7
+    if13b070 - K Kollmann
+    if13b076 - Linda Spindler
+     
+    Method in mazes that checks whether the robot has a wall in front of
+    itself (what "in front of" mean depends on which way the robot is
+    facing (=char direction). Returns TRUE if there is a wall and FALSE
+    is there isn't
+*/
+
+using namespace std;
+
+
+
+//~ 
 void t2::exit_search(Robots robot, Mazes this_maze)
 {
-    step_counter = 0;
-    /*  coordinates of the robot are directly accessible since they're
-        stored in Robots (or t2)
-    */
-    while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
-    {
-        cout << "V: " << robot.v << ", H: " << robot.h << endl;
-        if (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
-        {
-            /*  if there's a wall, turn left and try again */
-            robot.direction = turn_left(robot);
-            exit_search(robot, this_maze);
-        }
-        else
-        {
-            robot = step_forward(robot);
-            step_counter++;
-        }
-    }
-    cout << "Steps taken: " << step_counter << endl;
-    cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;
+    //~ step_counter = 0;
+    //~ /*  coordinates of the robot are directly accessible since they're
+        //~ stored in Robots (or t2)
+    //~ */
+    //~ while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
+	//~ {
+		//~ while (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
+			//~ robot = step_forward(robot);
+		//~ if (this_maze.wall_left(robot.v, robot.h, robot.direction, this_maze.v_maze)
+			//~ robot = turn_right(robot);
+//~ 
+	//~ {
+		//~ if 
+		//~ step_count++;
+	//~ }
+//~ }
+    
+    //~ while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
+    //~ {
+        //~ cout << "V: " << robot.v << ", H: " << robot.h << endl;
+        //~ 
+        //~ if (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
+        //~ {
+            //~ /*  if there's a wall, turn left and try again */
+            //~ robot.direction = turn_left(robot);
+            //~ exit_search(robot, this_maze);
+        //~ }
+        //~ else
+        //~ {
+            //~ robot = step_forward(robot);
+            //~ step_counter++;
+        //~ }
+    //~ }
+    //~ cout << "Steps taken: " << step_counter << endl;
+    //~ cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;
 }

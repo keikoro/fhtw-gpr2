@@ -76,3 +76,36 @@ bool Mazes::is_wall(int v, int h, char direction) //current coordinates of the r
 	
 	return (true);
 }
+
+
+
+
+void t2::exit_search(Robots robot, vector<string> v_maze, int exit_v, int exit_h)
+{
+	cout << "Robot 2 in maze" << endl;
+	step_counter = 0;
+	
+	/* coordinated of the robot, are directly accessible since they're
+		stored in Robots (or t2)
+		Declare them as v and h here because it's more practical
+		than having to write robot.v every time
+	*/
+	int v = robot.v;
+	int h = robot.h;
+	
+	while (!(v == this_maze.mazeexit[0]) && (h == this_maze.mazeexit[1])
+	
+	if (this_maze.is_wall(v, h, robot.direction, this_maze.v_maze))
+	{
+		turn_left(robot);
+		exit_search(robot, this_maze);
+	}
+	else
+	{
+		step_forward(robot);
+		step_counter++;
+	}
+	cout << "Steps taken: " << step_counter << endl;
+	cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;
+}
+

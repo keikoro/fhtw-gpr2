@@ -50,7 +50,7 @@
     - need to free the allocated space again, right now program
     doesn't do this at all
     - the virtual method from t2 overwriting the same one in Robots doesn't
-		seem to work
+		seem to work.
     - made everything in the classes public, remember to put everything
     that doesn't need to be public back to private later, but only after
     we're done with the whole program
@@ -184,11 +184,6 @@ void t1::exit_search()
 	cout << "Robot of type 1 is looking for an exit" << endl;
 }
 
-void Robots::exit_search()
-{
-	cout << "This robot is looking for an exit" << endl;
-}
-
 void Mazes::print_robots()
 {
 	for(std::vector<Robots*>::iterator i=robot_list.begin();
@@ -259,7 +254,7 @@ void t2::exit_search(Robots robot, Mazes this_maze)
 	int v = robot.v;
 	int h = robot.h;
 	
-	while (!(v == this_maze.mazeexit[0]) && h == this_maze.mazeexit[1])
+	while (!(v == this_maze.mazeexit[0]) && (h == this_maze.mazeexit[1]))
 	
 	if (this_maze.is_wall(v, h, robot.direction, this_maze.v_maze))
 	{
@@ -329,5 +324,10 @@ bool Mazes::is_wall(int v, int h, char direction,
 	else cout << "something went wrong" << endl;	
 	
 	return (true);
+}
+
+void Robots::exit_search()
+{
+	cout << "This robot is looking for an exit" << endl;
 }
 

@@ -52,7 +52,6 @@
 #include "mazes_iswall.cpp"
 #include "robots_stepforward.cpp"
 #include "robots_turnleft.cpp"
-
 #include "t2_exitsearch.cpp"
 
 using namespace std;

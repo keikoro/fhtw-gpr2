@@ -26,7 +26,7 @@ all: labrob
 # start checkuserinput -- TODO: remove later on
 labrob: labrob.o
 	${CC} ${CFLAGS} -o labrob labrob.cpp
-labrob.o: labrob.cpp checkuserinput.cpp mazes_findentrance.cpp mazes_dummyprint.cpp mazes_dummyprint.cpp mazes_iswall.cpp t1_exitsearch.cpp t2_exitsearch.cpp robots_stepforward.cpp robots_turnleft.cpp
+labrob.o: labrob.cpp checkuserinput.cpp mazes_findentrance.cpp mazes_dummyprint.cpp mazes_dummyprint.cpp mazes_iswall.cpp t1_exitsearch.cpp t2_exitsearch.cpp robots_stepforward.cpp robots_stepforward_v2.cpp robots_turnleft.cpp
 	${CC} ${CFLAGS} -c labrob.cpp
 mazes_findentrance.o: mazes_findentrance.cpp
 	${CC} ${CFLAGS} -c checkuserinput.cpp
@@ -40,6 +40,8 @@ t2_exitsearch.o: t2_exitsearch.cpp
 	${CC} ${CFLAGS} -c t2_exitsearch.cpp
 robots_stepforward.o: robots_stepforward.cpp
 	${CC} ${CFLAGS} -c robots_stepforward.cpp
+robots_stepforward_v2.o: robots_stepforward_v2.cpp
+	${CC} ${CFLAGS} -c robots_stepforward_v2.cpp
 robots_turnleft.o: robots_turnleft.cpp
 	${CC} ${CFLAGS} -c robots_turnleft.cpp
 

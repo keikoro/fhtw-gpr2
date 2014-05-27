@@ -314,7 +314,7 @@ bool Mazes::is_wall(int v, int h, char direction,
 		}
 	}
 	else
-	if (direction == 'e')
+	// (direction == 'e')
 	{
 		if (v_maze[v][h+1] == '#')
 		{
@@ -325,9 +325,6 @@ bool Mazes::is_wall(int v, int h, char direction,
 			return false;
 		}
 	}
-	else cout << "something went wrong" << endl;	
-	
-	return (true);
 }
 
 void Robots::exit_search(Robots robot, Mazes this_maze)

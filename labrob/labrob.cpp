@@ -197,7 +197,7 @@ void Mazes::print_robots(Mazes mymaze)
 }
 
 
-void Robots::turn_left(Robots robot)
+Robots Robots::turn_left(Robots robot)
 {
 	if (robot.direction == 'n')
 	{
@@ -213,31 +213,35 @@ void Robots::turn_left(Robots robot)
 	{
 		robot.direction = 'e';
 	}
-	else robot.direction = 'n';		
+	else robot.direction = 'n';	
+	
+	return (robot);	
 }
 
-void Robots::step_forward(Robots robot)
+Robots Robots::step_forward(Robots robot)
 {
 	if (robot.direction == 'n')
 	{
-		v--;
+		robot.v--;
 	}
 	else 
 	if (robot.direction == 'w')
 	{
-		h--;
+		robot.h--;
 	}
 	else
 	if (robot.direction == 's')
 	{
-		v++;
+		robot.v++;
 	}
 	else 
 	if (robot.direction == 'e')
 	{
-		v--;
+		robot.v--;
 	}
-	else cout << "something went wrong" << endl;		
+	else cout << "something went wrong" << endl;	
+	
+	return (robot);	
 }
 
 
@@ -250,23 +254,21 @@ void t2::exit_search(Robots robot, Mazes this_maze)
 	
 	/* coordinated of the robot, are directly accessible since they're
 		stored in Robots (or t2)
-		Declare them as v and h here because it's more practical
-		than having to write robot.v every time
+
 	*/
-	int v = robot.v;
-	int h = robot.h;
-	
-	while (!(v == this_maze.mazeexit[0]) && (h == this_maze.mazeexit[1]))
-	
-	if (this_maze.is_wall(v, h, robot.direction, this_maze.v_maze))
+	while (!(robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]))
 	{
-		turn_left(robot);
-		exit_search(robot, this_maze);
-	}
-	else
-	{
-		step_forward(robot);
-		step_counter++;
+		
+		if (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
+		{
+			robot = turn_left(robot);
+			exit_search(robot, this_maze);
+		}
+		else
+		{
+			robot = step_forward(robot);
+			step_counter++;
+		}
 	}
 	cout << "Steps taken: " << step_counter << endl;
 	cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;

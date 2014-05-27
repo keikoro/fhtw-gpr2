@@ -43,7 +43,7 @@
     - wrote find_entrance method (make it more efficient less repeated
 	code later if possible, not a priority)
     - added error message when file couldn't be opened
-	- add_robot now also adds the start direction and coordinates 
+	- add_robot now also adds the start direction and coordinates
 	- added helper methods turn_left and step_forward; not yet tested
 	- included forward declaration of Mazes in Robots. Method in t2 now
 		overrides the one in Robots when robot of type 2 is added.
@@ -52,7 +52,7 @@
     - need to free the allocated space again, right now program
     doesn't do this at all
     - exit_search function in t2 isn't working; need to pay attention to
-		what the recursion actually does 
+		what the recursion actually does
     - made everything in the classes public, remember to put everything
     that doesn't need to be public back to private later, but only after
     we're done with the whole program
@@ -203,7 +203,7 @@ char Robots::turn_left(Robots robot)
 	{
 		robot.direction = 'w';
 	}
-	else 
+	else
 	if (robot.direction == 'w')
 	{
 		robot.direction = 's';
@@ -213,9 +213,9 @@ char Robots::turn_left(Robots robot)
 	{
 		robot.direction = 'e';
 	}
-	else robot.direction = 'n';	
-	
-	return (robot.direction);	
+	else robot.direction = 'n';
+
+	return (robot.direction);
 }
 
 Robots Robots::step_forward(Robots robot)
@@ -224,7 +224,7 @@ Robots Robots::step_forward(Robots robot)
 	{
 		robot.v--;
 	}
-	else 
+	else
 	if (robot.direction == 'w')
 	{
 		robot.h--;
@@ -234,14 +234,14 @@ Robots Robots::step_forward(Robots robot)
 	{
 		robot.v++;
 	}
-	else 
+	else
 	if (robot.direction == 'e')
 	{
 		robot.v++;
 	}
-	else cout << "something went wrong" << endl;	
-	
-	return (robot);	
+	else cout << "something went wrong" << endl;
+
+	return (robot);
 }
 
 
@@ -250,7 +250,7 @@ Robots Robots::step_forward(Robots robot)
 void t2::exit_search(Robots robot, Mazes this_maze)
 {
 	step_counter = 0;
-	
+
 	/* coordinated of the robot, are directly accessible since they're
 		stored in Robots (or t2)
 
@@ -274,58 +274,6 @@ void t2::exit_search(Robots robot, Mazes this_maze)
 	cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;
 }
 
-
-bool Mazes::is_wall(int v, int h, char direction, 
-			std::vector<std::string> v_maze)
-{
-	if (direction == 'n')
-	{
-		if (v_maze[v-1][h] == '#')
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else 
-	if (direction == 'w')
-	{
-		if (v_maze[v][h-1] == '#')
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	if (direction == 's')
-	{
-		if (v_maze[v+1][h] == '#')
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	// (direction == 'e')
-	{
-		if (v_maze[v][h+1] == '#')
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-}
 
 void Robots::exit_search(Robots robot, Mazes this_maze)
 {

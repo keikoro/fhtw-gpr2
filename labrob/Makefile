@@ -26,12 +26,14 @@ all: labrob
 # start checkuserinput -- TODO: remove later on
 labrob: labrob.o
 	${CC} ${CFLAGS} -o labrob labrob.cpp
-labrob.o: labrob.cpp checkuserinput.cpp mazes_findentrance.cpp mazes_dummyprint.cpp
+labrob.o: labrob.cpp checkuserinput.cpp mazes_findentrance.cpp mazes_dummyprint.cpp mazes_dummyprint.cpp mazes_iswall.cpp
 	${CC} ${CFLAGS} -c labrob.cpp
 mazes_findentrance.o: mazes_findentrance.cpp
 	${CC} ${CFLAGS} -c checkuserinput.cpp
 mazes_dummyprint.o: mazes_dummyprint.cpp
 	${CC} ${CFLAGS} -c mazes_dummyprint.cpp
+mazes_iswall.o: mazes_iswall.cpp
+	${CC} ${CFLAGS} -c mazes_iswall.cpp
 # stop checkuserinput -- TODO: remove later on
 
 dist:

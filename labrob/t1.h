@@ -14,7 +14,9 @@
 
 class t1 : public Robots {
 public:
-    virtual void exit_search();
+	// search algoritm; not certain whether all those arguments will
+	// have to be passed yet
+    virtual void exit_search(Robots robot, int v, int h, Mazes this_maze);
 protected:
 
 };

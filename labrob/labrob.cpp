@@ -41,9 +41,9 @@
     going through the vector in general (to print stats and whatever
     else is needed)
     - wrote find_entrance method (make it more efficient less repeated
-	code later if possible)
+	code later if possible, not a priority)
     - added error message when file couldn't be opened
-	- add_robot now read now also adds the start direction and coordinates 
+	- add_robot now also adds the start direction and coordinates 
 
     Issues/other TODOs:
     - need to free the allocated space again, right now program
@@ -58,7 +58,8 @@
 	- add_robot needing a Mazes argument is a bit awkward; works tho
 
 	Next steps:
-	- fix find entrance method
+	- !! figure out communication between classes: class that is included
+		first connot use anything from the classes included bellow it
 	- free space
 */
 

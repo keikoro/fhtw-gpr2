@@ -52,7 +52,8 @@ public:
 	
 	/* function to check whether the char right in front of the 
 	   robot is a wall or not */
-	bool is_wall();
+	bool is_wall(int v, int h, char direction, 
+		std::vector<std::string> v_maze);
 };
 
 #endif // MAZES_H

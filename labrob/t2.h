@@ -14,7 +14,7 @@
 
 class t2 : public Robots {
 public:
-    virtual void exit_search(Robots robot, int v, int h, Mazes this_maze);
+    virtual void exit_search(Robots robot, Mazes this_maze);
 protected:
 
 };

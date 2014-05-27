@@ -26,7 +26,7 @@ class Robots {
 	int v, h;
 //protected:
 	// function that will contain the search algorithm
-	virtual void exit_search();
+    virtual void exit_search();
 	
 	/* saving which way the robot is facing; should contain 
 	   'n', 'e', 's', 'w'

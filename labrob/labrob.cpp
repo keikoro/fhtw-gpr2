@@ -49,6 +49,8 @@
     Issues/other TODOs:
     - need to free the allocated space again, right now program
     doesn't do this at all
+    - the virtual method from t2 overwriting the same one in Robots doesn't
+		seem to work
     - made everything in the classes public, remember to put everything
     that doesn't need to be public back to private later, but only after
     we're done with the whole program
@@ -75,6 +77,7 @@
 #include "robots.h"
 #include "mazes.h"
 #include "t1.h"
+#include "t2.h"
 #include "checkuserinput.cpp"
 #include "mazes_findentrance.cpp"
 #include "mazes_dummyprint.cpp"
@@ -122,7 +125,9 @@ int main(int argc, char *argv[])
 
 	mymaze.find_entrance(v_maze);
 
-    /* print robots numbers for debugging -- TODO: remove later on */
+    /* print robots numbers for debugging -- TODO: remove later on
+		Note: only remove the print statement, not the loop!
+	*/
     int robot_number;
     cout << endl << "robot_numbers: ";
     for(vector<int>::iterator i=robot_numbers.begin();
@@ -130,11 +135,16 @@ int main(int argc, char *argv[])
     {
         robot_number = *i;
         cout << robot_number << " ";
-        /* adding all the robots to the vector; later can be expanded
-			with robot_number==2 and 3*/
+        /* adding all the robots to the vector; right now with 1 and 2
+		*/
         if (robot_number == 1)
         {
 			mymaze.add_robot(new t1(), mymaze);
+		}
+		else
+		if (robot_number == 2)
+        {
+			mymaze.add_robot(new t2(), mymaze);
 		}
 		else
 		{
@@ -164,11 +174,8 @@ void Mazes::add_robot(Robots *a_robot, Mazes maze)
 {
 	robot_list.push_back (a_robot);
 	a_robot->v = maze.entrance[0];
-	cout << "Vertical: " << a_robot->v << endl;
 	a_robot->h = maze.entrance[1];
-	cout << "Horizontal: " << a_robot->h << endl;
 	a_robot->direction = maze.startposition;
-	cout << "Direction: " << a_robot->direction << endl;
 }
 
 
@@ -235,3 +242,92 @@ void Robots::step_forward(Robots robot)
 	}
 	else cout << "something went wrong" << endl;		
 }
+
+
+
+
+void t2::exit_search(Robots robot, Mazes this_maze)
+{
+	cout << "Robot 2 in maze" << endl;
+	step_counter = 0;
+	
+	/* coordinated of the robot, are directly accessible since they're
+		stored in Robots (or t2)
+		Declare them as v and h here because it's more practical
+		than having to write robot.v every time
+	*/
+	int v = robot.v;
+	int h = robot.h;
+	
+	while (!(v == this_maze.mazeexit[0]) && h == this_maze.mazeexit[1])
+	
+	if (this_maze.is_wall(v, h, robot.direction, this_maze.v_maze))
+	{
+		turn_left(robot);
+		exit_search(robot, this_maze);
+	}
+	else
+	{
+		step_forward(robot);
+		step_counter++;
+	}
+	cout << "Steps taken: " << step_counter << endl;
+	cout << "Current position (X,Y): " << robot.h << ", " << robot.v << endl;
+}
+
+
+bool Mazes::is_wall(int v, int h, char direction, 
+			std::vector<std::string> v_maze)
+{
+	if (direction == 'n')
+	{
+		if (v_maze[v-1][h] == '#')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else 
+	if (direction == 'w')
+	{
+		if (v_maze[v][h-1] == '#')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	if (direction == 's')
+	{
+		if (v_maze[v+1][h] == '#')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	if (direction == 'e')
+	{
+		if (v_maze[v][h+1] == '#')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else cout << "something went wrong" << endl;	
+	
+	return (true);
+}
+

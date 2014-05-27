@@ -41,7 +41,7 @@ class Robots {
 		need to come from going through the vector of Robots pointers
 		saved through Mazes
 	*/
-	Robots turn_left(Robots robot);
+	char turn_left(Robots robot);
 	void turn_right();
 	Robots step_forward(Robots robot);
 };

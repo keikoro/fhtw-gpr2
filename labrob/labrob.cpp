@@ -197,7 +197,7 @@ void Mazes::print_robots(Mazes mymaze)
 }
 
 
-Robots Robots::turn_left(Robots robot)
+char Robots::turn_left(Robots robot)
 {
 	if (robot.direction == 'n')
 	{
@@ -215,7 +215,7 @@ Robots Robots::turn_left(Robots robot)
 	}
 	else robot.direction = 'n';	
 	
-	return (robot);	
+	return (robot.direction);	
 }
 
 Robots Robots::step_forward(Robots robot)
@@ -237,7 +237,7 @@ Robots Robots::step_forward(Robots robot)
 	else 
 	if (robot.direction == 'e')
 	{
-		robot.v--;
+		robot.v++;
 	}
 	else cout << "something went wrong" << endl;	
 	
@@ -249,19 +249,19 @@ Robots Robots::step_forward(Robots robot)
 
 void t2::exit_search(Robots robot, Mazes this_maze)
 {
-	cout << "Robot 2 in maze" << endl;
 	step_counter = 0;
 	
 	/* coordinated of the robot, are directly accessible since they're
 		stored in Robots (or t2)
 
 	*/
-	while (!(robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]))
+	while (! ( (robot.v == this_maze.mazeexit[0]) && (robot.h == this_maze.mazeexit[1]) ) )
 	{
-		
+		cout << robot.v << robot.h << endl;
 		if (this_maze.is_wall(robot.v, robot.h, robot.direction, this_maze.v_maze))
 		{
-			robot = turn_left(robot);
+			// if there's a wall turn left and try again
+			robot.direction = turn_left(robot);
 			exit_search(robot, this_maze);
 		}
 		else

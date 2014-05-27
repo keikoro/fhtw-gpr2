@@ -45,9 +45,6 @@
     - added error message when file couldn't be opened
 
     Issues/other TODOs:
-    - contonie with with find_entrance method (doesn't work right now)
-    - need to get the numbers for the robot types
-    (1, 2, 3, none, which means 1) from checkuserinput() to main()
     - need to free the allocated space again, right now program
     doesn't do this at all
     - made everything in the classes public, remember to put everything
@@ -55,16 +52,12 @@
     we're done with the whole program
     - maybe also use "const" (which can be used for making something in
     a class visible but read-only from outside)
-    - opening the file should probably be moved from main to
-    checkuserinput; not a priority though, works fine like it is right now
     - for efficiency's sake, maybe find entrance and exit right when
 		reading in the file?
 
 	Next steps:
 	- fix find entrance method
 	- free space
-	- get those t? arguments to main somehow
-	- expand the find_entrance method
 */
 
 #include <iostream>
@@ -115,6 +108,13 @@ int main(int argc, char *argv[])
     }
     mazefile.close();
 
+    //make an instance of mazes called mymaze
+    Mazes mymaze;
+    /*  the v_maze vector is equal to the vector v_maze here in main
+		Can move this to a method in mazes, but this is not a priority
+	*/
+    mymaze.v_maze = v_maze;
+
     /* print robots numbers for debugging -- TODO: remove later on */
     int robot_number;
     cout << endl << "robot_numbers: ";
@@ -123,19 +123,21 @@ int main(int argc, char *argv[])
     {
         robot_number = *i;
         cout << robot_number << " ";
+        /* adding all the robots to the vector; later can be expanded
+			with robot_number==2 and 3*/
+        if (robot_number == 1)
+        {
+			mymaze.add_robot(new t1());
+		}
+		else
+		{
+			mymaze.add_robot(new Robots());
+		}
     }
     cout << endl;
 
-    //make an instance of mazes called mymaze
-    Mazes mymaze;
-    /*  the v_maze vector is equal to the vector v_maze here in main
-		Can move this to a method in mazes, but this is not a priority
-	*/
-    mymaze.v_maze = v_maze;
-	// add a robot of type 1 to the list
-    mymaze.add_robot(new t1());
-	//add a robot with no specific type to the list
-	mymaze.add_robot(new Robots());
+
+
 
 	mymaze.print_robots();
 /*
@@ -165,12 +167,12 @@ void Mazes::add_robot(Robots *a_robot)
 
 void t1::exit_search()
 {
-	//cout << "Robot of type 1 is looking for an exit" << endl;
+	cout << "Robot of type 1 is looking for an exit" << endl;
 }
 
 void Robots::exit_search()
 {
-	//cout << "This robot is looking for an exit" << endl;
+	cout << "This robot is looking for an exit" << endl;
 }
 
 void Mazes::print_robots()

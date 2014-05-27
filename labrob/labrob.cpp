@@ -56,6 +56,9 @@
 
 using namespace std;
 
+// function declarations
+/*  currently commented out as they are in separate files;
+    uncomment again later on/add proper declarations -- TODO */
 // void checkuserinput(int argc, char *argv[], string *mazefile,
 //                     vector<int> *robot_numbers);
 
@@ -136,9 +139,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
-/*
-	create a node for the list (called "list_element")
+/*	create a node for the list (called "list_element")
 	and put the robot into the "a_robot_in_a_list" part of the struct
 */
 void Mazes::add_robot(Robots *a_robot, Mazes maze)
@@ -148,7 +149,6 @@ void Mazes::add_robot(Robots *a_robot, Mazes maze)
 	a_robot->h = maze.entrance[1];
 	a_robot->direction = maze.startposition;
 }
-
 
 void t1::exit_search()
 {
@@ -169,4 +169,3 @@ void Robots::exit_search(Robots robot, Mazes this_maze)
 {
 	cout << "This robot is looking for an exit" << endl;
 }
-

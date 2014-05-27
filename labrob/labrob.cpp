@@ -157,7 +157,7 @@ void t1::exit_search()
 
 void Mazes::print_robots(Mazes mymaze)
 {
-	for(std::vector<Robots*>::iterator i=robot_list.begin();
+	for(vector<Robots*>::iterator i=robot_list.begin();
 		  i != robot_list.end(); i++)
 	{
 		Robots* a_robot = *i;

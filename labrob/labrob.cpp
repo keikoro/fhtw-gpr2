@@ -50,6 +50,9 @@
 #include "mazes_findentrance.cpp"
 #include "mazes_dummyprint.cpp"
 #include "mazes_iswall.cpp"
+#include "robots_stepforward.cpp"
+#include "robots_turnleft.cpp"
+
 #include "t2_exitsearch.cpp"
 
 using namespace std;
@@ -161,54 +164,6 @@ void Mazes::print_robots(Mazes mymaze)
 		Robots* a_robot = *i;
 		a_robot->exit_search(*a_robot, mymaze);
 	}
-}
-
-
-char Robots::turn_left(Robots robot)
-{
-	if (robot.direction == 'n')
-	{
-		robot.direction = 'w';
-	}
-	else
-	if (robot.direction == 'w')
-	{
-		robot.direction = 's';
-	}
-	else
-	if (robot.direction == 's')
-	{
-		robot.direction = 'e';
-	}
-	else robot.direction = 'n';
-
-	return (robot.direction);
-}
-
-Robots Robots::step_forward(Robots robot)
-{
-	if (robot.direction == 'n')
-	{
-		robot.v--;
-	}
-	else
-	if (robot.direction == 'w')
-	{
-		robot.h--;
-	}
-	else
-	if (robot.direction == 's')
-	{
-		robot.v++;
-	}
-	else
-	if (robot.direction == 'e')
-	{
-		robot.v++;
-	}
-	else cout << "something went wrong" << endl;
-
-	return (robot);
 }
 
 void Robots::exit_search(Robots robot, Mazes this_maze)

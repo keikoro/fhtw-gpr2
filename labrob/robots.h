@@ -42,8 +42,10 @@ class Robots {
 		saved through Mazes
 	*/
 	char turn_left(Robots robot);
-	void turn_right(Robots robot);
+	char turn_right(Robots robot);
 	Robots step_forward(Robots robot);
+    Robots step_forward_v2(Robots robot);
+
 };
 
 #endif // ROBOTS_H

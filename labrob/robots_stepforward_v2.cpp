@@ -7,32 +7,19 @@
     if13b076 - Linda Spindler
 
     function that makes a robot step forward
-    (direction in which it steps is dependend on direction it is facing)
+    (direction in which it steps is dependent on direction it is facing)
 */
+
+using namespace std;
+
+/*  return character at given coordinates
+    (either empty space or # for a wall)
+*/
+char Mazes::wall_check(int x, int y, char direction) {
+    return v_maze[y-1][x];
+}
 
 Robots Robots::step_forward_v2(Robots robot)
 {
-    if (robot.direction == 'n')
-    {
-        robot.v--;
-    }
-    else
-    if (robot.direction == 'w')
-    {
-        robot.h--;
-    }
-    else
-    if (robot.direction == 's')
-    {
-        robot.v++;
-    }
-    else
-    if (robot.direction == 'e')
-    {
-        robot.v++;
-    }
-    /*  message for debugging -- TODO: remove later on */
-    else cout << "something went wrong (func Robots::step_forward_v2)" << endl;
-
-    return (robot);
+    return(robot);
 }

@@ -6,13 +6,11 @@
     if13b070 - K Kollmann
     if13b076 - Linda Spindler
 
-
+    function that prints the exit and entrance coordinates for debugging
 */
 
 using namespace std;
 
-
-// function that prints the exit and entrance coordinates for debugging
 void Mazes::dummy_function_for_printing()
 {
 	cout << "Coordinates of the entrance: X, Y: " <<

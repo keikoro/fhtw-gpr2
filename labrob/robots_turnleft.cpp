@@ -29,3 +29,26 @@ char Robots::turn_left(Robots robot)
 
     return (robot.direction);
 }
+
+
+
+char Robots::turn_right(Robots robot)
+{
+    if (robot.direction == 'n')
+    {
+        robot.direction = 'e';
+    }
+    else
+    if (robot.direction == 'w')
+    {
+        robot.direction = 'n';
+    }
+    else
+    if (robot.direction == 's')
+    {
+        robot.direction = 'w';
+    }
+    else robot.direction = 's';
+
+    return (robot.direction);
+}

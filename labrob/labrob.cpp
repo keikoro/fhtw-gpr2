@@ -150,10 +150,7 @@ void Mazes::add_robot(Robots *a_robot, Mazes maze)
 	a_robot->direction = maze.startposition;
 }
 
-void t1::exit_search()
-{
-	cout << "Robot of type 1 is looking for an exit" << endl;
-}
+
 
 void Mazes::print_robots(Mazes mymaze)
 {

@@ -169,3 +169,15 @@ void Robots::exit_search(Robots robot, Mazes this_maze)
 {
 	cout << "This robot is looking for an exit" << endl;
 }
+
+
+/*  how to free/delete vectors??
+    https://stackoverflow.com/questions/
+    10464992/c-delete-vector-objects-free-memory
+*/
+
+// delete vector<Robots*>;
+// vector<string> v_maze;
+// vector<int> robot_numbers;
+// vector<tempObject>().swap(tempVector);
+// vector<string> v_maze().swap(v_maze);

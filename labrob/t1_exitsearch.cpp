@@ -14,6 +14,7 @@ using namespace std;
 
 void t1::exit_search(Robots thisrobot, Mazes thismaze)
 {
+    string wall = "#";
     thisrobot.step_counter = 0;
 
     // thisrobot.h // x coordinate;
@@ -23,18 +24,15 @@ void t1::exit_search(Robots thisrobot, Mazes thismaze)
     cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
     << "facing: " << thisrobot.direction << endl << endl;
 
-    thisrobot = step_forward(thisrobot);
-    thisrobot.step_counter++;
+    if(thismaze.wall_check(thisrobot.v, thisrobot.h, thisrobot.direction) == wall)
+    {
+        cout << "wall!" << endl;
+    }
+    else
+    {
+        cout << "empty!" << endl;
+    }
 
-    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
-    << "facing: " << thisrobot.direction << endl << endl;
-
-    thisrobot = step_forward(thisrobot);
-    thisrobot.step_counter++;
-
-    cout << endl << "X: " << thisrobot.h << " Y: " << thisrobot.v << endl << endl
-    << "facing: " << thisrobot.direction << endl << endl;
-
-    cout << "steps: " << thisrobot.step_counter << endl << endl;
+    cout << "wall check: " << thismaze.wall_check(thisrobot.v, thisrobot.h, thisrobot.direction) << endl ;
 
 }

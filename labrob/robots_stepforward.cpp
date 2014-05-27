@@ -31,7 +31,8 @@ Robots Robots::step_forward(Robots robot)
     {
         robot.v++;
     }
-    else cout << "something went wrong" << endl;
+    /*  message for debugging -- TODO: remove later on */
+    else cout << "something went wrong (func Robots::step_forward)" << endl;
 
     return (robot);
 }

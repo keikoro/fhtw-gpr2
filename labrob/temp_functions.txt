@@ -1,6 +1,4 @@
-// Just a bunch of function ideas, not yet tested, because need to
-// create instances of robots by going through robot_numbers
-// vector first, and then communication between classes and so on.
+// Just a bunch of function ideas, not yet tested.
 
 
 void Robots::turn_left(Robots robot)
@@ -120,11 +118,3 @@ bool Mazes::is_wall(int v, int h) //current coordinates of the robot
 	return (true);
 }
 
-
-void Mazes::add_robot(Robots *a_robot, Mazes maze)
-{
-	robot_list.push_back (a_robot);
-	a_robot->v = maze.entrance[0];
-	a_robot->h = maze.entrance[1];
-	a_robot->direction = maze.startposition;
-}

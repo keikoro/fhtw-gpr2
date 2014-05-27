@@ -65,7 +65,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     string one_row;
-    vector<string> v_maze;
+    vector<string> mazefile_lines;
     vector<int> robot_numbers;
     string bla = "";
     string *mazepath = &bla;
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     {
         while (getline(mazefile,one_row))
         {
-            v_maze.push_back(one_row);
+            mazefile_lines.push_back(one_row);
         }
     } else {
         cout << "invalid file name" << endl;
@@ -89,15 +89,14 @@ int main(int argc, char *argv[])
     }
     mazefile.close();
 
-    //make an instance of mazes called mymaze
+    //  create an instance of mazes
     Mazes mymaze;
     /*  the v_maze vector is equal to the vector v_maze here in main
 		Can move this to a method in mazes, but this is not a priority
 	*/
-    mymaze.v_maze = v_maze;
+    mymaze.v_maze = mazefile_lines;
 
-
-	mymaze.find_entrance(v_maze);
+	mymaze.find_entrance(mymaze.v_maze);
 
     /* print robots numbers for debugging -- TODO: remove later on
 		Note: only remove the print statement, not the loop!
@@ -131,11 +130,11 @@ int main(int argc, char *argv[])
 
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
+    {
         cout << mymaze.v_maze[i] << endl;
+    }
 
-	mymaze.find_entrance (v_maze);
 	mymaze.dummy_function_for_printing();
-
     return 0;
 }
 

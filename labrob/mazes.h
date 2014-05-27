@@ -45,7 +45,7 @@ public:
 	std::vector<Robots*> robot_list;
 	
 	// function for adding new robots to the vector
-	void add_robot (Robots *a_robot);
+	void add_robot (Robots *a_robot, Mazes maze);
 	
 	// function for printing out the list of all robots
 	void print_robots();	

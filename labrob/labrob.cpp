@@ -41,8 +41,9 @@
     going through the vector in general (to print stats and whatever
     else is needed)
     - wrote find_entrance method (make it more efficient less repeated
-	code later if possible), but doesn't work as intended
+	code later if possible)
     - added error message when file couldn't be opened
+	- add_robot now read now also adds the start direction and coordinates 
 
     Issues/other TODOs:
     - need to free the allocated space again, right now program
@@ -54,6 +55,7 @@
     a class visible but read-only from outside)
     - for efficiency's sake, maybe find entrance and exit right when
 		reading in the file?
+	- add_robot needing a Mazes argument is a bit awkward; works tho
 
 	Next steps:
 	- fix find entrance method
@@ -127,11 +129,11 @@ int main(int argc, char *argv[])
 			with robot_number==2 and 3*/
         if (robot_number == 1)
         {
-			mymaze.add_robot(new t1());
+			mymaze.add_robot(new t1(), mymaze);
 		}
 		else
 		{
-			mymaze.add_robot(new Robots());
+			mymaze.add_robot(new Robots(), mymaze);
 		}
     }
     cout << endl;
@@ -160,10 +162,17 @@ int main(int argc, char *argv[])
 	create a node for the list (called "list_element")
 	and put the robot into the "a_robot_in_a_list" part of the struct
 */
-void Mazes::add_robot(Robots *a_robot)
+void Mazes::add_robot(Robots *a_robot, Mazes maze)
 {
 	robot_list.push_back (a_robot);
+	a_robot->v = maze.entrance[0];
+	cout << "Vertical: " << a_robot->v << endl;
+	a_robot->h = maze.entrance[1];
+	cout << "Horizontal: " << a_robot->h << endl;
+	a_robot->direction = maze.startposition;
+	cout << "Direction: " << a_robot->direction << endl;
 }
+
 
 void t1::exit_search()
 {

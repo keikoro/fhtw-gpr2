@@ -21,7 +21,7 @@ class Robots {
 //private:
 	// character the robot draws on the labyrinth:
 	char robotcharacter;
-	
+
 	int step_counter;
 	/* integers for saving the coordinates of the robot;
 		v is for the y-axis (vertical), h for the x-axis (horizontal)*/
@@ -29,12 +29,12 @@ class Robots {
 //protected:
 	// function that will contain the search algorithm
     virtual void exit_search(Robots robot, Mazes this_maze);
-	
-	/* saving which way the robot is facing; should contain 
+
+	/* saving which way the robot is facing; should contain
 	   'n', 'e', 's', 'w'
 	*/
 	char direction;
-	
+
 	/* function for robot movement (started writing them but not
 		changing anything in the main function right now;
 		the instances of Robots that are called "robot" in the function

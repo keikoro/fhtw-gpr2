@@ -1,54 +1,5 @@
 // Just a bunch of function ideas, not yet tested.
 
-
-// would not need acces to Mazes
-void Robots::turn_left(Robots robot)
-{
-	if (robot.direction == 'n')
-	{
-		robot.direction = 'w';
-	}
-	else 
-	if (robot.direction == 'w')
-	{
-		robot.direction = 's';
-	}
-	else
-	if (robot.direction == 's')
-	{
-		robot.direction = 'e';
-	}
-	else robot.direction = 'n';		
-}
-
-
-// would not need acces to Mazes
-void Robots::step_forward(Robots robot)
-{
-	if (robot.direction == 'n')
-	{
-		v--;
-	}
-	else 
-	if (robot.direction == 'w')
-	{
-		h--;
-	}
-	else
-	if (robot.direction == 's')
-	{
-		v++;
-	}
-	else 
-	if (robot.direction == 'e')
-	{
-		v--;
-	}
-	else cout << "something went wrong" << endl;		
-}
-
-
-
 void t2::exit_search(Robots robot, Mazes this_maze)
 {
 	step_counter = 0;

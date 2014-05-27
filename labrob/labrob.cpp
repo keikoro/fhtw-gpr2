@@ -44,6 +44,7 @@
 	code later if possible, not a priority)
     - added error message when file couldn't be opened
 	- add_robot now also adds the start direction and coordinates 
+	- added helper methods turn_left and step_forward; not yet tested
 
     Issues/other TODOs:
     - need to free the allocated space again, right now program
@@ -191,3 +192,46 @@ void Mazes::print_robots()
 	}
 }
 
+
+void Robots::turn_left(Robots robot)
+{
+	if (robot.direction == 'n')
+	{
+		robot.direction = 'w';
+	}
+	else 
+	if (robot.direction == 'w')
+	{
+		robot.direction = 's';
+	}
+	else
+	if (robot.direction == 's')
+	{
+		robot.direction = 'e';
+	}
+	else robot.direction = 'n';		
+}
+
+void Robots::step_forward(Robots robot)
+{
+	if (robot.direction == 'n')
+	{
+		v--;
+	}
+	else 
+	if (robot.direction == 'w')
+	{
+		h--;
+	}
+	else
+	if (robot.direction == 's')
+	{
+		v++;
+	}
+	else 
+	if (robot.direction == 'e')
+	{
+		v--;
+	}
+	else cout << "something went wrong" << endl;		
+}

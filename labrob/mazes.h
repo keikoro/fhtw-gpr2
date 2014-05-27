@@ -55,9 +55,12 @@ public:
 		robot is a wall or not */
 	bool is_wall(int v, int h, char direction,
 		std::vector<std::string> v_maze);
-		
+
 	bool wall_left (int v, int h, char direction,
 		std::vector<std::string> v_maze);
+
+	char wall_check(int v, int h, char direction);
+
 };
 
 #endif // MAZES_H

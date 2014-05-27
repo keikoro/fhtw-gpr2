@@ -117,6 +117,9 @@ int main(int argc, char *argv[])
 	*/
     mymaze.v_maze = v_maze;
 
+
+	mymaze.find_entrance(v_maze);
+
     /* print robots numbers for debugging -- TODO: remove later on */
     int robot_number;
     cout << endl << "robot_numbers: ";
@@ -138,15 +141,8 @@ int main(int argc, char *argv[])
     }
     cout << endl;
 
-
-
-
 	mymaze.print_robots();
-/*
-	an int saving the robot type (1,2,3, needs to come from
-	the checkuserinput function. 1 is default
-	int robot_type = 1;
-*/
+
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
         cout << mymaze.v_maze[i] << endl;

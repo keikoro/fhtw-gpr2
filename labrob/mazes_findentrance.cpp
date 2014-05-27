@@ -28,8 +28,8 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 
 // cout << "Length: " << maze_length << endl; << "Height: " << maze_height <<endl;
 
-	/*	look for entrance/exit at the top; the corner is irrelevant
-		so stop at maze_length - 2 */
+	/*	look for entrance/exit in the top row of the maze;
+		the corner is irrelevant, so stop at maze_length-2 */
 	for (unsigned int i = 1; i < maze_length-1; ++i)
 	{
 		if(v_maze[0][i] != '#')
@@ -53,8 +53,8 @@ int Mazes::find_entrance(std::vector<std::string> v_maze)
 		}
 	}
 
-	/*	if the entrance/exit is not in the first row
-	look on the right side */
+	/*	if the entrance/exit is not in the first row,
+		look on the right side of the maze */
 	if (found_entrance == false || found_exit == false)
 	{
 		for (unsigned int i=1; i <= maze_height-2; ++i)

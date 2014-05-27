@@ -308,8 +308,6 @@ void t1::exit_search(Robots thisrobot, Mazes thismaze)
     is there isn't
 */
 
-using namespace std;
-
 bool Mazes::is_wall(int v, int h, char direction,
             vector<string> v_maze)
 {

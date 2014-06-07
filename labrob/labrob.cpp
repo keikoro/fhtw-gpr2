@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     string bla = "";
     string *mazepath = &bla;
     int rc;
+    int j;
     pthread_t threads[NUM_THREADS];
 
     checkuserinput(argc, argv, mazepath, &robot_numbers);
@@ -96,13 +97,15 @@ int main(int argc, char *argv[])
     {
         robot_number = *i;
 
-        cout << "main() : creating thread, " << robot_number << endl;
-        rc = pthread_create(&threads[robot_number], NULL,
-                      PrintHello, NULL);
-        if (rc){
-            cout << "Error:unable to create thread," << rc << endl;
-            exit(-1);
-        }
+
+       for( j=0; j < NUM_THREADS; j++ ){
+          cout << "main() : creating thread, " << j << endl;
+          rc = pthread_create(&threads[j], NULL, PrintHello, (void *)j);
+          if (rc){
+             cout << "Error:unable to create thread," << rc << endl;
+             exit(-1);
+          }
+       }
 
         cout << robot_number << " ";
         /* adding all the robots to the vector; right now with 1 and 2

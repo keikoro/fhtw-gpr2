@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
     int num_threads = robot_numbers.size();
     pthread_t threads[num_threads];
-    
+
 	for( j=0; j < num_threads; j++ )
 	{
 		cout << "main() : creating thread, " << j << endl;
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	mymaze.print_robots(mymaze);
+	mymaze.traverse_robots(mymaze);
 
     cout << "Our current maze:\n";
     for(unsigned int i=0; i<mymaze.v_maze.size(); i++)
@@ -151,7 +151,7 @@ void Mazes::add_robot(Robots *a_robot, Mazes maze)
 	a_robot->direction = maze.startposition;
 }
 
-void Mazes::print_robots(Mazes mymaze)
+void Mazes::traverse_robots(Mazes mymaze)
 {
 	for(vector<Robots*>::iterator i=robot_list.begin();
 		  i != robot_list.end(); i++)

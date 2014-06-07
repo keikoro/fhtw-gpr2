@@ -54,13 +54,17 @@ void checkuserinput(int argc, char *argv[], string *mazefile,
 
 void *PrintRobot(void *threadarg)
 {
-   struct thread_data *my_data;
-   my_data = (struct thread_data *) threadarg;
+    struct thread_data *my_data;
+    my_data = (struct thread_data *) threadarg;
 
-   cout << "Thread ID : " << my_data->thread_id << endl;
-   cout << " Message : hallo " << endl;
+    Robots testrobot = my_data->robot;
 
-   pthread_exit(NULL);
+    testrobot->exit_search(my_data->robot, my_data->this_maze);
+
+    cout << "Thread ID : " << my_data->thread_id << endl;
+    cout << " Message : hallo " << endl;
+
+    pthread_exit(NULL);
 }
 
 int main(int argc, char *argv[])

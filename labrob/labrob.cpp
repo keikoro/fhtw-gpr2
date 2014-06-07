@@ -17,9 +17,8 @@
     With:
     -t1-tN being used for the robot type (if no type is specified, t1 is used)
     -h being used for printing a usage message
-
-
 */
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -28,15 +27,26 @@
 #include <cstdlib>
 #include <getopt.h>
 #include <unistd.h>
+#include <pthread.h>
 #include "robots.h"
 #include "mazes.h"
 #include "t1.h"
 #include "t2.h"
 
+#define NUM_THREADS 5
+
 using namespace std;
 
 void checkuserinput(int argc, char *argv[], string *mazefile,
                      vector<int> *robot_numbers);
+
+void *PrintHello(void *threadid)
+{
+   long tid;
+   tid = (long)threadid;
+   cout << "Hello World! Thread ID, " << tid << endl;
+   pthread_exit(NULL);
+}
 
 int main(int argc, char *argv[])
 {
@@ -45,6 +55,8 @@ int main(int argc, char *argv[])
     vector<int> robot_numbers;
     string bla = "";
     string *mazepath = &bla;
+    int rc;
+    pthread_t threads[NUM_THREADS];
 
     checkuserinput(argc, argv, mazepath, &robot_numbers);
 
@@ -81,8 +93,17 @@ int main(int argc, char *argv[])
     cout << endl << "robot_numbers: ";
     for(vector<int>::iterator i=robot_numbers.begin();
         i != robot_numbers.end(); i++)
-    {
+    {        
         robot_number = *i;
+    
+        cout << "main() : creating thread, " << robot_number << endl;
+        rc = pthread_create(&threads[robot_number], NULL,
+                      PrintHello, NULL);
+        if (rc){
+            cout << "Error:unable to create thread," << rc << endl;
+            exit(-1);
+        }
+
         cout << robot_number << " ";
         /* adding all the robots to the vector; right now with 1 and 2
 		*/
@@ -416,10 +437,10 @@ bool Mazes::wall_left(int v, int h, char direction,
 int Mazes::find_entrance(std::vector<std::string> v_maze)
 {
 	 // length of the maze is length of the strings:
-	unsigned int maze_length = v_maze[0].length();
+	unsigned long maze_length = v_maze[0].length();
 
 	// height of the maze is length of the vector:
-	unsigned int maze_height = v_maze.size();
+	unsigned long maze_height = v_maze.size();
 	cout << maze_height << endl;
 
 	bool found_entrance = false;
@@ -599,7 +620,7 @@ void checkuserinput (int argc, char *argv[], string *mazefile, vector<int> *robo
     }
 
     /*  there must be at least 3 argv (program name, -t, file name of maze) */
-    if (sizeof(argv) < 3)
+    if (sizeof(argc) < 3)
     {
         cout << "not enough options provided" << endl << helpmsg << endl;
         exit(EXIT_FAILURE);

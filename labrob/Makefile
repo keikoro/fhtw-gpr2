@@ -15,11 +15,12 @@
 #
 CC=g++
 CFLAGS = -g -Wall -Werror -O
+LINKER = -lpthread
 DEPS = robots.h mazes.h t1.h t2.h
 
 all: labrob
 labrob: labrob.o
-	${CC} ${CFLAGS} -o labrob labrob.o
+	${CC} ${CFLAGS} -o labrob labrob.o ${LINKER}
 labrob.o: labrob.cpp ${DEPS}
 	${CC} ${CFLAGS} -c labrob.cpp
 

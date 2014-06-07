@@ -93,10 +93,6 @@ int main(int argc, char *argv[])
         i != robot_numbers.end(); i++)
     {
         robot_number = *i;
-
-
-
-
         cout << robot_number << " ";
         /* adding all the robots to the vector; right now with 1 and 2
 		*/
@@ -129,6 +125,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
+
 	mymaze.print_robots(mymaze);
 
     cout << "Our current maze:\n";
@@ -138,6 +135,8 @@ int main(int argc, char *argv[])
     }
 
 //	mymaze.dummy_function_for_printing();
+	pthread_exit(NULL);
+
     return 0;
 }
 

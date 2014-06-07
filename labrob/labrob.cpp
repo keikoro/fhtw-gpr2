@@ -33,8 +33,6 @@
 #include "t1.h"
 #include "t2.h"
 
-#define NUM_THREADS 5
-
 using namespace std;
 
 void checkuserinput(int argc, char *argv[], string *mazefile,
@@ -57,7 +55,6 @@ int main(int argc, char *argv[])
     string *mazepath = &bla;
     int rc;
     int j;
-    pthread_t threads[NUM_THREADS];
 
     checkuserinput(argc, argv, mazepath, &robot_numbers);
 
@@ -98,14 +95,7 @@ int main(int argc, char *argv[])
         robot_number = *i;
 
 
-       for( j=0; j < NUM_THREADS; j++ ){
-          cout << "main() : creating thread, " << j << endl;
-          rc = pthread_create(&threads[j], NULL, PrintHello, (void *)j);
-          if (rc){
-             cout << "Error:unable to create thread," << rc << endl;
-             exit(-1);
-          }
-       }
+
 
         cout << robot_number << " ";
         /* adding all the robots to the vector; right now with 1 and 2
@@ -125,6 +115,19 @@ int main(int argc, char *argv[])
 		}
     }
     cout << endl;
+
+    int num_threads = robot_numbers.size();
+    pthread_t threads[num_threads];
+    
+	for( j=0; j < num_threads; j++ )
+	{
+		cout << "main() : creating thread, " << j << endl;
+		rc = pthread_create(&threads[j], NULL, PrintHello, (void *)j);
+		if (rc){
+			 cout << "Error:unable to create thread," << rc << endl;
+			 exit(-1);
+		}
+	}
 
 	mymaze.print_robots(mymaze);
 

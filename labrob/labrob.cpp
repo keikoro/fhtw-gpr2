@@ -93,9 +93,9 @@ int main(int argc, char *argv[])
     cout << endl << "robot_numbers: ";
     for(vector<int>::iterator i=robot_numbers.begin();
         i != robot_numbers.end(); i++)
-    {        
+    {
         robot_number = *i;
-    
+
         cout << "main() : creating thread, " << robot_number << endl;
         rc = pthread_create(&threads[robot_number], NULL,
                       PrintHello, NULL);

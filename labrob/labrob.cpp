@@ -35,14 +35,31 @@
 
 using namespace std;
 
+struct thread_data{
+    int thread_id;
+    Robots robot;
+    Mazes this_maze;
+};
+
 void checkuserinput(int argc, char *argv[], string *mazefile,
                      vector<int> *robot_numbers);
 
-void *PrintHello(void *threadid)
+// void *PrintHello(void *threadid)
+// {
+//    long tid;
+//    tid = (long)threadid;
+//    cout << "Hello World! Thread ID, " << tid << endl;
+//    pthread_exit(NULL);
+// }
+
+void *PrintRobot(void *threadarg)
 {
-   long tid;
-   tid = (long)threadid;
-   cout << "Hello World! Thread ID, " << tid << endl;
+   struct thread_data *my_data;
+   my_data = (struct thread_data *) threadarg;
+
+   cout << "Thread ID : " << my_data->thread_id << endl;
+   cout << " Message : hallo " << endl;
+
    pthread_exit(NULL);
 }
 
@@ -53,8 +70,6 @@ int main(int argc, char *argv[])
     vector<int> robot_numbers;
     string bla = "";
     string *mazepath = &bla;
-    int rc;
-    int j;
 
     checkuserinput(argc, argv, mazepath, &robot_numbers);
 
@@ -112,20 +127,6 @@ int main(int argc, char *argv[])
     }
     cout << endl;
 
-    int num_threads = robot_numbers.size();
-    pthread_t threads[num_threads];
-
-	for( j=0; j < num_threads; j++ )
-	{
-		cout << "main() : creating thread, " << j << endl;
-		rc = pthread_create(&threads[j], NULL, PrintHello, (void *)j);
-		if (rc){
-			 cout << "Error:unable to create thread," << rc << endl;
-			 exit(-1);
-		}
-	}
-
-
 	mymaze.traverse_robots(mymaze);
 
     cout << "Our current maze:\n";
@@ -157,7 +158,28 @@ void Mazes::traverse_robots(Mazes mymaze)
 		  i != robot_list.end(); i++)
 	{
 		Robots* a_robot = *i;
-		a_robot->exit_search(*a_robot, mymaze);
+		// a_robot->exit_search(*a_robot, mymaze);
+        // a_robot->PrintRobot(*a_robot, mymaze);
+
+        int rc;
+        int j = 1;
+        // int num_threads = robot_numbers.size();
+        int num_threads = 2;
+
+        pthread_t threads[num_threads];
+        struct thread_data td[num_threads];
+        td[j].thread_id = j;
+        td[j].robot = *a_robot;
+        td[j].this_maze = mymaze;
+
+        cout << "main() : creating thread, " << j << endl;
+        rc = pthread_create(&threads[j], NULL,
+                          PrintRobot, (void *)&td[j]);
+
+        if (rc){
+             cout << "Error:unable to create thread," << rc << endl;
+             exit(-1);
+        }
 	}
 }
 

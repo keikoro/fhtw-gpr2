@@ -171,7 +171,6 @@ void Mazes::traverse_robots(Mazes mymaze)
 
         temp_arg[count] = count;
 
-        td[count].thread_id = count;
         td[count].robot = *a_robot;
         td[count].this_maze = mymaze;
 

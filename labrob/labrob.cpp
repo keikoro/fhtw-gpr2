@@ -36,10 +36,11 @@
 using namespace std;
 
 struct thread_data{
-    int thread_id;
+    int tid;
     Robots robot;
     Mazes this_maze;
-    string hello;
+    string message;
+    char msgchar;
 };
 
 void checkuserinput(int argc, char *argv[], string *mazefile,
@@ -60,7 +61,8 @@ void *PrintRobot(void *threadarg)
 
 //    my_data->robot.exit_search(my_data->robot, my_data->this_maze);
 
-    cout << "Thread ID : " << my_data->thread_id << endl;
+    cout << "Thread ID: " << my_data->tid << endl;
+    cout << "String hello: " << my_data->message << endl;
 
     pthread_exit(NULL);
 }
@@ -156,13 +158,13 @@ void Mazes::add_robot(Robots *a_robot, Mazes maze)
 
 void Mazes::traverse_robots(Mazes mymaze)
 {
-    int count = 1;
+    int count = 0;
     int rc;
     // int num_threads = robot_numbers.size();
     pthread_t threads[3];
     struct thread_data td[3];
     int temp_arg[3];
-    Robots *a_robot;
+    Robots *a_robot = 0;
 
 	for(vector<Robots*>::iterator i=robot_list.begin();
 		  i != robot_list.end(); i++)
@@ -171,25 +173,24 @@ void Mazes::traverse_robots(Mazes mymaze)
         // a_robot->PrintRobot(*a_robot, mymaze);
         a_robot = *i;
 
-        cout << "robot x: " << a_robot->v << endl;
-
-        count++;
-	}
-
+        cout << "count: " << count << endl;
         temp_arg[count] = count;
-
         td[count].robot = *a_robot;
         // td[count].this_maze = mymaze;
-        td[count].hello = "hello";
+        td[count].message = "hello";
 
-        cout << "main() : creating thread, " << count << endl;
+
+        cout << "thread message: " << td[count].message << endl;
+
+        cout << "main(): creating thread, " << threads[count] << endl;
         rc = pthread_create(&threads[count], NULL,
-                          PrintRobot,  static_cast<void*>(&temp_arg[count]));
-
+                          PrintRobot, static_cast<void*>(&temp_arg[count]));
         if (rc!=0){
              cout << "Error:unable to create thread," << rc << endl;
              exit(-1);
         }
+        count++;
+	}
 }
 
 void Robots::exit_search(Robots robot, Mazes this_maze)

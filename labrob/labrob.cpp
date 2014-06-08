@@ -61,6 +61,9 @@ void *PrintRobot(void *threadarg)
 
     cout << "Thread ID : " << my_data->thread_id << endl;
 
+    int bla = pthread_self();
+    cout << bla << endl;
+
     pthread_exit(NULL);
 }
 
@@ -177,6 +180,9 @@ void Mazes::traverse_robots(Mazes mymaze)
         cout << "main() : creating thread, " << count << endl;
         rc = pthread_create(&threads[count], NULL,
                           PrintRobot,  static_cast<void*>(&temp_arg[count]));
+
+        int bla = pthread_self();
+        cout << bla << endl;
 
         if (rc!=0){
              cout << "Error:unable to create thread," << rc << endl;

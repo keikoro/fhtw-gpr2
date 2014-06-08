@@ -39,6 +39,7 @@ struct thread_data{
     int thread_id;
     Robots robot;
     Mazes this_maze;
+    string hello;
 };
 
 void checkuserinput(int argc, char *argv[], string *mazefile,
@@ -57,7 +58,7 @@ void *PrintRobot(void *threadarg)
     struct thread_data *my_data;
     my_data = (struct thread_data *) threadarg;
 
-    // my_data->robot.exit_search(my_data->robot, my_data->this_maze);
+//    my_data->robot.exit_search(my_data->robot, my_data->this_maze);
 
     cout << "Thread ID : " << my_data->thread_id << endl;
 
@@ -161,18 +162,25 @@ void Mazes::traverse_robots(Mazes mymaze)
     pthread_t threads[3];
     struct thread_data td[3];
     int temp_arg[3];
+    Robots *a_robot;
 
 	for(vector<Robots*>::iterator i=robot_list.begin();
 		  i != robot_list.end(); i++)
 	{
 		// a_robot->exit_search(*a_robot, mymaze);
         // a_robot->PrintRobot(*a_robot, mymaze);
-        Robots *a_robot = *i;
+        a_robot = *i;
+
+        cout << "robot x: " << a_robot->v << endl;
+
+        count++;
+	}
 
         temp_arg[count] = count;
 
         td[count].robot = *a_robot;
-        td[count].this_maze = mymaze;
+        // td[count].this_maze = mymaze;
+        td[count].hello = "hello";
 
         cout << "main() : creating thread, " << count << endl;
         rc = pthread_create(&threads[count], NULL,
@@ -183,8 +191,7 @@ void Mazes::traverse_robots(Mazes mymaze)
              exit(-1);
         }
 
-        count++;
-	}
+
 }
 
 void Robots::exit_search(Robots robot, Mazes this_maze)

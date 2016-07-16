@@ -1,6 +1,16 @@
+# ----- Mac
+.DS_Store
+*dSYM
+
+# ----- Files PROJECT
 *.zip
 *.o
 *.s
-sortnames-1.1
-sortnames
+
+# ----- Executables
 a.out
+labrob/labrob
+sortnames/sortnames
+griddisplay
+gridserver
+vehicleclient

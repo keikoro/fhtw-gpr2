@@ -24,7 +24,7 @@ sortnames.o: sortnames.c
 dist:
 	mkdir sortnames-1.1
 	cp sortnames.c sortnames-1.1/
-	cp *.n sortnames-1.1/
+	cp *.txt sortnames-1.1/
 	cp Makefile sortnames-1.1/
 	tar -cvzf sortnames-1.1.tgz sortnames-1.1
 distclean:

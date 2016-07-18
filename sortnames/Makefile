@@ -32,3 +32,6 @@ distclean:
 	rm -r sortnames-1.1
 clean:
 	rm -f sortnames.o sortnames
+# remove dSYM dir created on Mac due to -g flag
+	@rm -f -r sortnames.dSYM
+
